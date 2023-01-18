@@ -11,7 +11,7 @@
     export let collate: boolean;
 
     let tweenHeights= [45, 100]
-    let yShift = buildTween(tweenHeights, 250);
+    let yShift = buildTween(tweenHeights, 150);
 
     let isOpen = false;
     let index: Index = 0;

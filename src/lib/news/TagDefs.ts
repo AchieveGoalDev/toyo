@@ -31,8 +31,9 @@ export const newsTags: TagArray = [
     new Tag("お申込みについて", "bg-sky-700", 1),
     new Tag("イベントのお知らせ", "bg-teal-700", 2),
     new Tag("授業について", "bg-red-700", 3),
-    new Tag("次学期の募集について", "bg-green-700", 4),
-    new Tag("その他", "bg-black", 5)
+    new Tag("休講について", "bg-purple-700",4),
+    new Tag("次学期の募集について", "bg-green-700", 5),
+    new Tag("その他", "bg-black", 6),
 ]
 
 export const campusTags: TagArray = [

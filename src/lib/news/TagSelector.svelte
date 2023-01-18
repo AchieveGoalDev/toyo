@@ -21,7 +21,7 @@
 </script>
 
 {#if !toUpdate}
-<div transition:fly="{{y:10, duration: 250, delay:100}}" >
+<div transition:fly="{{y:10, duration: 150, delay:100}}" >
     <div class="flex flex-row">
         <select class="hover:cursor-pointer border-2 border-black min-w-[200px] bg-slate-100 p-1" bind:value={currentSelection}>
             {#each tags as tag}
