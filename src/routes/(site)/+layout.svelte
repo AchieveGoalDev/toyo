@@ -1,11 +1,30 @@
 <script lang="ts">
 	import '../../app.css';
 	import Nav from '$lib/navbar/nav.svelte';
+	import Hamburger from '$lib/navbar/mobile/Hamburger.svelte';
 	import Social from '$lib/social-components/social.svelte';
 	import Footer from '$lib/footer/Footer.svelte';
+	import { windowWidth, scrollHeight } from '$lib/store/windowData';
+
+	let width: number;
+	let scroll: number;
+
+	$: windowWidth.update((v) => {
+		return width;
+	});
+
+	$: scrollHeight.update((v) => {
+		return scroll;
+	});
 </script>
 
-<Nav />
+<svelte:window bind:innerWidth={width} bind:scrollY={scroll} />
+
+{#if width > 900}
+	<Nav />
+{:else if width <= 900}
+	<Hamburger />
+{/if}
 <main class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto shadow-md">
 	<slot />
 	<Social />

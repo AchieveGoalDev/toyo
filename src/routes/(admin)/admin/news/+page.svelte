@@ -22,11 +22,11 @@
 
 <div class="w-2/3 my-10 mx-auto">
 	<form action="?/post" method="POST">
-		<div class="border-2 border-slate-500 rounded-sm">
+		<div class="border-2 border-slate-500 rounded-sm bg-white">
 			<div class="flex flex-row w-[100%] place-content-around p-3">
 				<div>
 					<label class="w-full" for="title"> Post Title </label>
-					<input class="w-full" type="text" name="title" />
+					<input class="border-2 border-black w-full bg-slate-200" type="text" name="title" />
 				</div>
 			</div>
 			<TagBox checkText={'タグを追加'} tags={newsTags} bind:collate />
