@@ -13,7 +13,7 @@
     class="mx-autoplace">
     {#if display}
     <h2
-        style:grid-row={"1"}
+        style:grid-row={"\about1"}
         style:grid-column={"1"}
         class={`
             whitespace-nowrap 

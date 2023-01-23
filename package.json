@@ -40,6 +40,7 @@
 		"@tiptap/extension-paragraph": "^2.0.0-beta.209",
 		"@tiptap/extension-text-style": "^2.0.0-beta.209",
 		"@tiptap/starter-kit": "^2.0.0-beta.209",
+		"@types/d3-interpolate": "^3.0.1",
 		"bcrypt": "^5.1.0",
 		"bson": "^4.7.0",
 		"d3-interpolate": "^3.0.1"
