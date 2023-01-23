@@ -26,7 +26,7 @@
 {/if}
 <div class="flex flex-col my-10 max-w-[1000px] mx-auto">
 	<SectionWrapper>
-		<Title slot="title" highlight="東洋Achieve English" posttext="とは" />
+		<Title slot="title" highlight="東洋Achieve English" pretext="" posttext="とは" />
 		<div class="mb-24">
 			<MediaWrapper description="鶴ヶ島キャンパスの先生">
 				<img
