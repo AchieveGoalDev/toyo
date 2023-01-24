@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div
-				class="flex- flex-col ml-5 text-white text-lg sm:text-xl font-bold content-center justify-center text-center"
+				class="flex-col ml-5 text-white text-lg sm:text-xl font-bold content-center justify-center text-center"
 			>
 				<h2>Toyo Achieve English</h2>
 				<h2 class="text:xl sm:text-2xl text-2xl">英語講座</h2>
