@@ -9,7 +9,7 @@
 	let page = navbarData.page;
 </script>
 
-{#if $page.url.pathname === location}
+{#if $page.url.pathname === linkData.href}
 	<a
 		on:mouseover={() => (hovered = true)}
 		on:focus={() => (hovered = true)}

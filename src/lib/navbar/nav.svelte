@@ -5,12 +5,11 @@
 	import { links } from '$lib/navbar/LinkDefs';
 
 	import Link from '$lib/navbar/nav-button.svelte';
-	import Mail from '$lib/navbar/sliding-icon-nav.svelte';
 	import { scrollHeight } from '$lib/store/windowData';
 	import type { NavbarData } from './NavTypes.svelte';
 
 	let tweenHeights = [64, 80];
-	let tweenColors: string[] = ['rgb(255,255,255)', 'rgb(190, 18, 60)'];
+	let tweenColors: any = ['rgb(255,255,255)', 'rgb(190, 18, 60)'];
 	let barShift = buildTween(tweenColors, 250);
 	let yShift = buildTween(tweenHeights, 250);
 	let navbarData: NavbarData;
@@ -39,7 +38,7 @@
 
 <nav
 	style:height={`${$yShift}px`}
-	style:background-color={$barShift}
+	style:background-color={`${$barShift}`}
 	class="backdrop-blur-lg
 		flex 
 		flex-row 
@@ -62,9 +61,6 @@
 				{#each links as link}
 					<Link {navbarData} linkData={link} />
 				{/each}
-			</div>
-			<div>
-				<Mail />
 			</div>
 		</div>
 	</div>
