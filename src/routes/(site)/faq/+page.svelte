@@ -1,20 +1,21 @@
 <script lang="ts">
   import HighlightTitle from "$lib/highlightTitle.svelte";
   import { collections } from "$lib/faq/FaqDefs";
-  import Collection from "$lib/faq/Collection.svelte";
+
+  import CollectionLink from "$lib/faq/CollectionLink.svelte";
   import LinkList from "$lib/faq/LinkList.svelte";
-  import Question from "$lib/faq/Question.svelte";
   import ToTop from "$lib/buttons/ToTop.svelte";
 </script>
 
-<div class="w-[full] px-5 pt-10">
-  <HighlightTitle pretext="よくある" highlight="質問" posttext="" />
-  <LinkList {collections} />
-  {#each collections as collection}
-    <h1 id={"id" + collection.id}>{collection.title}</h1>
-    {#each collection.questions as question}
-      <Question {question} />
+<div
+  class="sm:w-[600px] md:w-[800px] lg:w-[1200px] lg:max-w-[1200px] max-w-[325px] pt-10 mx-auto"
+>
+  <div class="w-full">
+    <HighlightTitle pretext="よくある" highlight="質問" posttext="" />
+    <LinkList {collections} />
+    {#each collections as collection}
+      <CollectionLink {collection} />
     {/each}
-  {/each}
+  </div>
 </div>
 <ToTop />
