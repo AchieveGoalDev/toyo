@@ -61,13 +61,13 @@
 				<div
 					class="flex flex-row my-auto content-center bg-green-700 p-2 rounded-lg transition-all active:bg-green-600"
 				>
-					<img src="/Icons/call.svg" class="h-[20px] mr-1" />
+					<img src="/Icons/call.svg" class="h-[20px] mr-1" alt="電話のアイコン"/>
 					<a href="tel:03-5302-2239">03-5302-2239</a>
 				</div>
 				<div
 					class="flex flex-row my-auto content-center bg-sky-800 p-2 rounded-lg transition-all active:bg-sky-600"
 				>
-					<img src="/Icons/mail.svg" class="h-[20px] mr-1" />
+					<img src="/Icons/mail.svg" class="h-[20px] mr-1" alt="メールのアイコン"/>
 					<a href="mailto:info@achieve-english.jp">info@achieve-english.jp</a>
 				</div>
 			</div>
