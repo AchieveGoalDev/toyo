@@ -38,7 +38,7 @@
           slot="media"
           src="/teachers.jpg"
           alt="東洋大学の先生４人"
-          class="sm:h-[300px] rounded-md"
+          class="w-[full] sm:w-auto sm:h-[300px] rounded-md"
         />
       </MediaWrapper>
       <p class="text-2xl mb-5 mx-auto">
@@ -54,7 +54,9 @@
         est.
       </p>
     </div>
-    <div class="flex flex-row justify-around align-items-center mt-5 mb-24">
+    <div
+      class="flex flex-col mx-5 sm:mx-0 sm:flex-row justify-around align-items-center mt-5 mb-24"
+    >
       <BlueCTA text="詳細はこちら" />
       <RedCTA text="今すぐお問い合わせ" />
     </div>
@@ -75,6 +77,5 @@
   </SectionWrapper>
   <SectionWrapper>
     <Title pretext="もうしこみの" highlight="流れ" posttext="" />
-    <ApplicationProcess />
   </SectionWrapper>
 </div>

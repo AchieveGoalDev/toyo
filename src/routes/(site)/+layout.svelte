@@ -26,7 +26,7 @@
   <Hamburger />
 {/if}
 <main
-  class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto shadow-md"
+  class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto px-3 shadow-md"
 >
   <slot />
   <Social />

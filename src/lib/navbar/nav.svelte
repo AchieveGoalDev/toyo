@@ -5,10 +5,11 @@
   import { links } from "$lib/navbar/LinkDefs";
 
   import Link from "$lib/navbar/nav-button.svelte";
+  import LogoWrapper from "$lib/media-wrappers/LogoWrapper.svelte";
   import { scrollHeight } from "$lib/store/windowData";
   import type { NavbarData } from "./NavTypes.svelte";
 
-  let yShiftValue: any
+  let yShiftValue: any;
   let tweenHeights = [64, 80];
   let tweenColors: any = ["rgb(255,255,255)", "rgb(190, 18, 60)"];
   let barShift = buildTween(tweenColors, 250);
@@ -60,12 +61,7 @@
       <div
         class="h-full flex flex-row justify-center content-center items-center my-auto"
       >
-        <img
-          class="h-full bg-white rounded-full p-1 ml-5 my-2"
-          style:height={`${yShiftValue - 10}px`}
-          src="/TAENavLogo.svg"
-          alt="東洋アチーブイングリッシュのロゴ"
-        />
+        <LogoWrapper height={yShiftValue - 10} source={"/TAENavLogo.svg"} />
         {#if scrolled}
           <div
             class="flex-col ml-5 font-bold content-center items-center justify-center text-2xl text-center text-white"
