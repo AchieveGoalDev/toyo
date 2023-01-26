@@ -36,6 +36,6 @@
     <Footer />
   </div>
   <div class="bg-slate-700 text-white w-full">
-    <p class="mx-auto w-fit py-2">Copyright 2023 Achieve Goal</p>
+    <p class="mx-auto w-fit py-2">© Achievegoal Co.,Ltd. All rights reserved.</p>
   </div>
 </footer>
