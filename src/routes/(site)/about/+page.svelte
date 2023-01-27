@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { windowWidth } from '$lib/store/windowData';
+  import { windowWidth } from "$lib/store/windowData";
 
-	let width: number;
-	$: console.log(width);
+  let width: number;
 
-	windowWidth.subscribe((v) => {
-		width = v;
-	});
+  windowWidth.subscribe((v) => {
+    width = v;
+  });
 </script>
 
 <div>
-	<h2>About Us</h2>
-	<p>
-		Here is some information about us. Here is some information about us.Here is some information
-		about us.Here is some information about us.Here is some information about us.Here is some
-		information about us.Here is some information about us.Here is some information about us.Here is
-		some information about us.Here is some information about us.Here is some information about
-		us.Here is some information about us.Here is some information about us.Here is some information
-		about us.
-	</p>
+  <h2>About Us</h2>
+  <p>
+    Here is some information about us. Here is some information about us.Here is
+    some information about us.Here is some information about us.Here is some
+    information about us.Here is some information about us.Here is some
+    information about us.Here is some information about us.Here is some
+    information about us.Here is some information about us.Here is some
+    information about us.Here is some information about us.Here is some
+    information about us.Here is some information about us.
+  </p>
 </div>

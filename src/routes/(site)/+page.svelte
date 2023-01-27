@@ -15,6 +15,7 @@
   windowWidth.subscribe((v) => {
     width = v;
   });
+
 </script>
 
 {#if width > 1200}

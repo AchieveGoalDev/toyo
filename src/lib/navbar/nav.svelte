@@ -64,21 +64,21 @@
         <LogoWrapper height={yShiftValue - 10} source={"/TAENavLogo.svg"} />
         {#if scrolled}
           <div
-            class="flex-col ml-5 font-bold content-center items-center justify-center text-2xl text-center text-white"
+            class="flex-col ml-5 font-bold content-center items-center justify-center sm:text-lg lg:text-xl xl:text-2xl text-center text-white whitespace-nowrap"
           >
             <h2>Toyo Achieve English</h2>
             <h2>英語講座</h2>
           </div>
         {:else}
           <div
-            class="flex-col ml-5 font-bold content-center items-center justify-center text-2xl text-center text-slate-800"
+            class="flex-col ml-5 font-bold content-center items-center justify-center sm:text-lg lg:text-xl xl:text-2xl text-center text-slate-800 whitespace-nowrap"
           >
-            <h2>Toyo Achieve English</h2>
+            <h2 class="break-keep">Toyo Achieve English</h2>
             <h2>英語講座</h2>
           </div>
         {/if}
       </div>
-      <div class="flex flex-row mx-auto pr-[300px]">
+      <div class="flex flex-row mx-auto lg:pr-[50px] xl:pr-[200px]">
         {#each links as link}
           <Link {navbarData} linkData={link} />
         {/each}

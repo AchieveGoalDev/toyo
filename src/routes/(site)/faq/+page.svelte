@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="sm:w-[600px] md:w-[800px] lg:w-[1200px] lg:max-w-[1200px] max-w-[325px] pt-10 mx-auto"
+  class="sm:w-[600px] md:w-[700px] lg:w-[1000px] lg:max-w-[1000px] sm:max-w-[600px] md:max-w-[700px] max-w-[325px] pt-10 mx-auto"
 >
   <div class="w-full">
     <HighlightTitle pretext="よくある" highlight="質問" posttext="" />

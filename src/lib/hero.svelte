@@ -1,34 +1,36 @@
 <script lang="ts">
+  import {PUBLIC_BUCKET_URL} from '$env/static/public'
   import HeroImageCarousel from "$lib/hero/HeroImageCarousel.svelte";
   import HeroTitle from "$lib/hero/HeroTitle.svelte";
   import HeroScroller from "$lib/hero/HeroScroller.svelte";
-  import Pip from "$lib/hero/Pip.svelte";
 
-  import { fly } from "svelte/transition";
   import CTA from "$lib/buttons/redCtaButton.svelte";
+
+  let url = PUBLIC_BUCKET_URL;
 
   let scrollWords = ["各キャンパスで", "オンラインでも", "毎日にも"];
   let imgPaths = [
-    "/michelle-cutout.png",
-    "/joy-cutout.png",
-    "michelle-cutout.png",
+    url + "people/michelle-cutout.png",
+    url + "people/joy-cutout.png",
+    url + "people/teach-cutout.png",
   ];
 
   let imgData = [
-    { path: "/michelle-cutout.png", alt: "michelle", size: "h-full" },
-    { path: "/joy-cutout.png", alt: "joy", size: "h-5/6" },
-    { path: "teach-cutout.png", alt: "teach", size: "h-[800px]" },
+    {
+      path: url + "people/michelle-cutout.png",
+      alt: "michelle",
+      size: "h-full",
+    },
+    { path: url + "people/joy-cutout.png", alt: "joy", size: "h-5/6" },
+    { path: url + "people/teach-cutout.png", alt: "teach", size: "h-[800px]" },
   ];
-
-  let flyIn = "{{y:-300, duration:500}}";
-  let flyOut = "{{y:300, duration:500}}";
 
   let display = true;
   $: index = 0;
   $: imgPaths = [
-    "/michelle-cutout.png",
-    "/joy-cutout.png",
-    "michelle-cutout.png",
+    url + "people/michelle-cutout.png",
+    url + "people/joy-cutout.png",
+    url + "people/teach-cutout.png",
   ];
 
   const cycler = () => {

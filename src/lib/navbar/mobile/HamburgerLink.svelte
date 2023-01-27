@@ -8,7 +8,6 @@
 		iconAlt: string;
 	};
 
-	$: console.log($page.url.pathname);
 
 	let classText: string =
 		'block py-4 px-4 border-b-2 flex flex-row transition transition-all active:bg-rose-500';
@@ -16,7 +15,6 @@
 	$: if (linkData.href === $page.url.pathname) {
 		classText =
 			'block py-4 px-4 border-b-2 flex flex-row transition transition-all active:bg-rose-500 bg-rose-500';
-		console.log($page.url.pathname);
 	} else {
 		classText =
 			'block py-4 px-4 border-b-2 flex flex-row transition transition-all active:bg-rose-500 bg-rose-600';

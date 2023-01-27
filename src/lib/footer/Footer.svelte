@@ -3,7 +3,7 @@
 </script>
 
 <div
-  class="flex flex-col sm:flex-row px-3 mt-3 w-full place-content-around text-white"
+  class="flex flex-col md:flex-row px-3 mt-3 w-full place-content-around text-white md:items-center md:py-5"
 >
   <div class="flex flex-col text-center sm:text-left">
     <div class="flex items-center">
@@ -32,7 +32,7 @@
     <p class="mt-2">株式会社アチーブゴール</p>
     <p>キャンパス内留学サポートデスク</p>
   </div>
-  <hr class="my-5" />
+  <hr class="md:hidden my-5" />
   <div class="flex flex-row place-content-around">
     <div>
       <h3 class="font-bold text-md">サイトのナビゲーション</h3>
@@ -55,11 +55,11 @@
       </div>
     </div>
   </div>
-  <hr class="my-5" />
+  <hr class="md:hidden my-5" />
   <div class="flex flex-row place-content-around mb-5">
     <div class="flex flex-col place-content-around">
-      <h3 class="font-bold text-lg mb-2">公式SNS</h3>
-      <div class="ml-3 font-bold underline">
+      <div class="ml-3 font-bold underline sm:mr-2">
+        <h3 class="font-bold text-lg mb-2">公式SNS</h3>
         <a href="#" class="flex items-center"
           ><img src="icons8-facebook.svg" class="h-[30px]" />Facebook</a
         >
