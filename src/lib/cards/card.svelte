@@ -1,6 +1,7 @@
 <script lang="ts">
   export let imgPath = "";
   export let heading: string;
+  export let altText: string;
 </script>
 
 <div
@@ -14,7 +15,7 @@
     </h2>
   </div>
   <div class="py-2 px-3">
-    <img src={imgPath} class="w-full" />
+    <img src={imgPath} class="w-full" alt={altText} />
     <p class="text-2xl my-3">
       キャンパスの中で授業が受けられるので、授業の空き時間を有効に使って自分でスケジュールを組むことができます！
     </p>

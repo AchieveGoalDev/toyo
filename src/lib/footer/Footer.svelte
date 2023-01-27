@@ -17,7 +17,7 @@
       class="flex items-center place-content-center w-full bg-green-600 rounded-lg my-2 shadow-md h-[40px]"
     >
       <a href="tel:0353022239">
-        <img src="/Icons/call.svg" class="h-[30px]" />
+        <img src="/Icons/call.svg" class="h-[30px]" alt="電話ボタン" />
       </a>
     </button>
     <p>Tel: 03-5302-2239 (平日： 9:00～18:00)</p>
@@ -25,7 +25,7 @@
       class="flex items-center place-content-center w-full bg-sky-700 rounded-lg my-2 shadow-md h-[40px]"
     >
       <a href="mailto:info@achieve-english.jp">
-        <img src="Icons/mail.svg" class="h-[30px]" />
+        <img src="Icons/mail.svg" class="h-[30px]" alt="メールボタン" />
       </a>
     </button>
     <p>Mail：info@achieve-english.jp</p>
