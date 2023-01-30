@@ -1,13 +1,31 @@
 <script lang="ts">
   import HamburgerLink from "./HamburgerLink.svelte";
   import { slide, fade } from "svelte/transition";
-  import { links } from "$lib/navbar/LinkDefs";
+
+  import type { NavbarContent } from "../LinkDefs";
 
   export let isExpanded: boolean = false;
+  export let data: NavbarContent;
+
+  let bgColor = "black";
+  let highlightColor = "bg-slate-500";
+  let lightColor = "bg-slate-300";
+
+  if (data.color === "red") {
+    bgColor = "bg-rose-700";
+    highlightColor = "bg-rose-600";
+    lightColor = "bg-rose-500";
+  }
+
+  if (data.color === "blue") {
+    bgColor = "bg-blue-900";
+    highlightColor ="bg-blue-800";
+    lightColor = "bg-blue-700"
+  }
 </script>
 
 <nav
-  class="bg-rose-700 min-h-[60px] w-full justify-content-center content-center shadow-md"
+  class={`${bgColor} min-h-[60px] w-full justify-content-center content-center shadow-md`}
 >
   <div class="flex flex-row flex-auto w-full place-content-between p-2">
     <div class="flex flex-row">
@@ -20,7 +38,7 @@
         class="flex-col ml-5 text-white text-lg sm:text-xl font-bold content-center justify-center text-center"
       >
         <h2>Toyo Achieve English</h2>
-        <h2 class="text:xl sm:text-2xl text-2xl">英語講座</h2>
+        <h2 class="text:xl sm:text-2xl text-2xl">{data.navText}</h2>
       </div>
     </div>
     <div class="pr-4 my-auto">
@@ -58,8 +76,8 @@
       transition:slide={{ duration: 500 }}
       class="text-white text-center font-bold"
     >
-      {#each links as link}
-        <HamburgerLink linkData={link} />
+      {#each data.links as link}
+        <HamburgerLink linkData={link} color={highlightColor} {lightColor} />
       {/each}
       <div
         class="text-right flex flex-col items-center py-2 sm:py-0 sm:flex-row sm:h-[60px] content-center place-content-around"

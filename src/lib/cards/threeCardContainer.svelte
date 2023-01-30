@@ -1,10 +1,8 @@
 <script>
   import Card from "$lib/cards/card.svelte";
-  import Title from "$lib/highlightTitle.svelte";
 </script>
 
 <div>
-  <Title pretext={"プログラムの"} highlight={"3つ"} posttext={"の魅力"} />
   <div
     class="flex flex-col sm:flex-row md:flex-nowrap sm:flex-wrap mx-auto place-content-around"
   >
