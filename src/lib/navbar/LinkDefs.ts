@@ -38,7 +38,7 @@ export const mainNav = {
       iconAlt: "よくある質問のアイコン",
     },
     {
-      href: "/news",
+      href: "/",
       jpText: "新着情報",
       enText: "News",
       icon: "/Icons/news.svg",
