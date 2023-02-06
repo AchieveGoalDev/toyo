@@ -1,5 +1,5 @@
 <script lang="ts">
-  import HighlightTitle from "$lib/headers/HighlightTitle.svelte";
+  import HighlightTitle from "$lib/highlightTitle.svelte";
   import { collections } from "$lib/faq/FaqDefs";
 
   import CollectionLink from "$lib/faq/CollectionLink.svelte";
