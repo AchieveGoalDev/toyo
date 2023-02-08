@@ -27,7 +27,7 @@
     on:blur={() => (hovered = false)}
     style:font-weight={navbarData.index === 0 ? "200" : "bold"}
     style:color="white"
-    class={`h-full sm:text-md lg:text-lg xl:text-xl mx-2 text-center font-bold px-4 scale-105 flex shadow-md break-keep ${bgColor}`}
+    class={`h-full sm:text-md lg:text-lg xl:text-xl mx-1 md:mx-2 text-center font-bold px-2 lg:px-4 scale-105 flex shadow-md break-keep ${bgColor}`}
     href={linkData.href}
   >
     <div class="my-auto">
@@ -46,7 +46,7 @@
     on:blur={() => (hovered = false)}
     style:font-weight={navbarData.index === 0 ? "200" : "bold"}
     style:color={hovered ? "white" : navbarData.scrolled ? "white" : "black"}
-    class={"h-full mx-2 sm:text-md lg:text-lg xl:text-xl text-center font-bold px-4 transition ease-in hover:cursor-pointer hover:scale-105 hover:bg-rose-600 flex break-keep"}
+    class={"h-full mx-1 lg:mx-2 sm:text-md lg:text-lg xl:text-xl text-center font-bold px-2 md:px-4 transition ease-in hover:cursor-pointer hover:scale-105 hover:bg-rose-600 flex break-keep"}
     href={linkData.href}
   >
     <div class="my-auto">

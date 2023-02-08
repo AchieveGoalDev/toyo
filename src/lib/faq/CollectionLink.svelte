@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+
   import { slide } from "svelte/transition";
 
   import type { Collection } from "./FaqDefs";
@@ -7,6 +9,7 @@
   export let collection: Collection;
 
   let expanded = false;
+  let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   if (collection.id === "0") {
     expanded = true;
@@ -16,6 +19,8 @@
     "bg-rose-700 text-white rounded-lg p-2 text-2xl md:text-3xl font-bold flex w-full items-center";
   const expandedClass =
     "bg-rose-600 text-white rounded-lg p-2 text-2xl md:text-3xl font-bold flex w-full items-center";
+
+  $: console.log(s3 + "Icons/circlePlus.svg");
 </script>
 
 <div class="my-5 text-xl flex-col shadow-md">
@@ -27,9 +32,9 @@
     class={expanded ? expandedClass : closedClass}
   >
     {#if expanded}
-      <img src="/Icons/circleMinus.svg" class="h-[30px] mr-3" />
+      <img src={s3 + "images/Icons/circleMinus.svg"} class="h-[30px] mr-3" alt="拡大"/>
     {:else}
-      <img src="/Icons/circlePlus.svg" class="h-[30px] mr-3" />
+      <img src={s3 + "images/Icons/circlePlus.svg"} class="h-[30px] mr-3" alt="縮小"/>
     {/if}
     {collection.title}
   </button>

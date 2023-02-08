@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
   import LogoWrapper from "$lib/media-wrappers/LogoWrapper.svelte";
+
+  let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   export let themeColor: string;
 
@@ -20,7 +23,7 @@
   >
     <div class="flex flex-col text-center sm:text-left">
       <div class="flex items-center">
-        <LogoWrapper height={50} source={"/TAENavLogo.svg"} />
+        <LogoWrapper height={50} source={s3 + "images/TAENavLogo.svg"} />
         <h2 class="font-bold text-2xl sm:text-3xl mb-2 ml-3">
           Toyo Achieve English
         </h2>
@@ -30,7 +33,11 @@
         class="flex items-center place-content-center w-full bg-green-600 rounded-lg my-2 shadow-md h-[40px]"
       >
         <a href="tel:0353022239">
-          <img src="/Icons/call.svg" class="h-[30px]" alt="電話ボタン" />
+          <img
+            src={s3 + "images/Icons/call.svg"}
+            class="h-[30px]"
+            alt="電話ボタン"
+          />
         </a>
       </button>
       <p>Tel: 03-5302-2239 (平日： 9:00～18:00)</p>
@@ -38,7 +45,11 @@
         class="flex items-center place-content-center w-full bg-sky-700 rounded-lg my-2 shadow-md h-[40px]"
       >
         <a href="mailto:info@achieve-english.jp">
-          <img src="Icons/mail.svg" class="h-[30px]" alt="メールボタン" />
+          <img
+            src={s3 + "images/Icons/mail.svg"}
+            class="h-[30px]"
+            alt="メールボタン"
+          />
         </a>
       </button>
       <p>Mail：info@achieve-english.jp</p>
@@ -74,22 +85,23 @@
         <div class="ml-3 font-bold underline sm:mr-2">
           <h3 class="font-bold text-lg mb-2">公式SNS</h3>
           <a href="#" class="flex items-center"
-            ><img src="icons8-facebook.svg" class="h-[30px]" />Facebook</a
+            ><img src={s3 + "images/icons8-facebook.svg"} class="h-[30px]" alt="フェースブックのアイコン"/>Facebook</a
           >
           <a href="#" class="flex items-center">
-            <img src="icons8-twitter.svg" class="h-[30px] my-2" />
+            <img src={s3 + "images/icons8-twitter.svg"} class="h-[30px] my-2" alt="ツイッターのアイコン"/>
             Twitter
           </a>
           <a href="#" class="flex">
-            <img src="icons8-youtube.svg" class="h-[30px]" />
+            <img src={s3 + "images/icons8-youtube.svg"} class="h-[30px]" alt="ユーチューブのアイコン"/>
             Youtube
           </a>
         </div>
       </div>
       <div class="flex flex-col my-auto">
-        <img src="/images/tugs-banner.jpg" />
-        <img src="images/toyo-banner.jpg" class="my-2" />
-        <img src="images/tguj-banner.jpg" />
+        <!--TODO add links to banner images https://tgu.mext.go.jp/-->
+        <img src={s3 + "images/images/tugs-banner.jpg"} alt="東洋大学グローバルサービス"/>
+        <img src={s3 + "images/images/toyo-banner.jpg"} class="my-2" alt="東洋大学"/>
+        <img src={s3 + "images/images/tguj-banner.jpg"} alt="スーパーグローバル大学"/>
       </div>
     </div>
   </div>

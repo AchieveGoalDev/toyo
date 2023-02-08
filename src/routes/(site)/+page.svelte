@@ -87,6 +87,6 @@
     themeColor="red"
     titleData={{ pretext: "申し込みの", highlight: "流れ", posttext: "" }}
   >
-    Stoof
+    <ApplicationProcess />
   </SectionWrapper>
 </div>

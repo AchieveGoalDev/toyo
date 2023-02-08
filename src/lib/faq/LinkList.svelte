@@ -1,7 +1,11 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+
   //@ts-ignore
   import * as animateScroll from "svelte-scrollto";
   import type { Collection } from "./FaqDefs";
+
+  let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   export let collections: Collection[];
 </script>
@@ -20,7 +24,7 @@
           })}
       >
         <img
-          src="/Icons/link.svg"
+          src={s3 + "images/Icons/link.svg"}
           alt=""
           class="h-[20px] rounded-full bg-rose-700"
         />

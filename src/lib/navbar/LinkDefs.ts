@@ -1,3 +1,7 @@
+import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+
+const s3 = PUBLIC_IMAGE_BUCKET_URL;
+
 export type LinkData = {
   href: string;
   jpText: string;
@@ -20,28 +24,28 @@ export const mainNav = {
       href: "/",
       jpText: "ホーム",
       enText: "Home",
-      icon: "/Icons/home.svg",
+      icon: s3 + "images/Icons/home.svg",
       iconAlt: "ホームリンクのアイコン",
     },
     {
       href: "/about",
       jpText: "キャンパス内留学とは？",
       enText: "About TAE",
-      icon: "/Icons/info.svg",
+      icon: s3 + "images/Icons/info.svg",
       iconAlt: "キャンパス内留学についてのアイコン",
     },
     {
       href: "/faq",
       jpText: "よくある質問",
       enText: "Q&A",
-      icon: "/Icons/question.svg",
+      icon: s3 + "images/Icons/question.svg",
       iconAlt: "よくある質問のアイコン",
     },
     {
       href: "/news",
       jpText: "新着情報",
       enText: "News",
-      icon: "/Icons/news.svg",
+      icon: s3 + "images/Icons/news.svg",
       iconAlt: "新着情報のアイコン",
     },
     {
@@ -62,14 +66,14 @@ export const specialNav = {
       href: "/special",
       jpText: "学外特別講座",
       enText: "Home",
-      icon: "Icons/home.svg",
+      icon: s3 + "images/Icons/home.svg",
       iconAlt: "ホームリンクのアイコン",
     },
     {
       href: "#",
       jpText: "新着情報",
       enText: "News",
-      icon: "/Icons/news.svg",
+      icon: s3 + "images/Icons/news.svg",
       iconAlt: "新着情報のアイコン",
     },
     {

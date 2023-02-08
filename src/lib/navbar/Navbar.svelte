@@ -1,14 +1,16 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
   import { page } from "$app/stores";
   import { buildTween } from "$lib/tweens/buildTween.js";
 
   import Link from "$lib/navbar/NavButton.svelte";
   import LogoWrapper from "$lib/media-wrappers/LogoWrapper.svelte";
   import { scrollHeight } from "$lib/store/windowData";
-  import type { NavbarData } from "./NavTypes.svelte";
   import type { NavbarContent } from "./LinkDefs";
 
   export let data: NavbarContent;
+
+  const s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   let yShiftValue: any;
   let tweenColors: any;
@@ -73,10 +75,13 @@
       <div
         class="h-full flex flex-row justify-center content-center items-center my-auto"
       >
-        <LogoWrapper height={yShiftValue - 10} source={"/TAENavLogo.svg"} />
+        <LogoWrapper
+          height={yShiftValue - 10}
+          source={s3 + "images/TAENavLogo.svg"}
+        />
         {#if scrolled}
           <div
-            class="flex-col ml-5 font-bold content-center items-center justify-center sm:text-lg lg:text-xl xl:text-2xl text-center text-white whitespace-nowrap"
+            class="flex-col ml-5 font-bold content-center items-center justify-center sm:text-lg lg:text-xl xl:text-2xl text-center text-white whitespace-nowrap md:mr-3 lg:mr-0"
           >
             <h2>Toyo Achieve English</h2>
             <h2>{data.navText}</h2>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
   import HamburgerLink from "./HamburgerLink.svelte";
   import { slide, fade } from "svelte/transition";
 
@@ -6,6 +7,8 @@
 
   export let isExpanded: boolean = false;
   export let data: NavbarContent;
+
+  const s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   let bgColor = "black";
   let highlightColor = "bg-slate-500";
@@ -19,8 +22,8 @@
 
   if (data.color === "blue") {
     bgColor = "bg-blue-900";
-    highlightColor ="bg-blue-800";
-    lightColor = "bg-blue-700"
+    highlightColor = "bg-blue-800";
+    lightColor = "bg-blue-700";
   }
 </script>
 
@@ -31,7 +34,10 @@
     <div class="flex flex-row">
       <div class="pl-4">
         <div class="bg-white rounded-full p-1 shadow-md min-w-[55px]">
-          <img src="/TAENavLogo.svg" alt="東洋アチーブイングリッシュのロゴ:" />
+          <img
+            src={s3 + "images/TAENavLogo.svg"}
+            alt="東洋アチーブイングリッシュのロゴ:"
+          />
         </div>
       </div>
       <div
@@ -54,7 +60,7 @@
             style:grid-row={"1"}
             style:grid-column={"1"}
             transition:fade={{ duration: 150 }}
-            src="/Icons/menu.svg"
+            src={s3 + "images/Icons/menu.svg"}
             alt="ナビゲーションメニューの展開アイコン"
             class="h-[35px] w-[35px]"
           />
@@ -63,7 +69,7 @@
             style:grid-row={"1"}
             style:grid-column={"1"}
             transition:fade={{ duration: 150 }}
-            src="/Icons/close.svg"
+            src={s3 + "images/Icons/close.svg"}
             alt="ナビゲーションメニューの展開アイコン"
             class="h-[35px] w-[35px]"
           />
@@ -86,7 +92,7 @@
           class="flex flex-row my-auto place-content-evenly bg-green-700 p-2 rounded-lg transition-all active:bg-green-600 w-[250px] items-center shadow-md"
         >
           <img
-            src="/Icons/call.svg"
+            src={s3 + "images/Icons/call.svg"}
             class="h-[20px] mr-[5px]"
             alt="電話のアイコン"
           />
@@ -96,7 +102,7 @@
           class="flex flex-row sm:my-auto items-center place-content-evenly bg-sky-800 p-2 rounded-lg transition-all active:bg-sky-600 w-[250px] mt-2 shadow-md"
         >
           <img
-            src="/Icons/mail.svg"
+            src={s3 + "images/Icons/mail.svg"}
             class="h-[20px] mr-1"
             alt="メールのアイコン"
           />

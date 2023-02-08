@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+
   export let direction: string;
   export let resetInterval: any;
   export let display: boolean;
   export let cycleIndex: number;
   export let arraySize: number;
   export let interval: any;
+
+  let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   function handleScroller(direction: string) {
     display = false;
@@ -59,6 +63,8 @@
 >
   <img
     alt={direction === "left" ? "前へ" : "次へ"}
-    src={direction === "left" ? "/chevron_left.svg" : "chevron_right.svg"}
+    src={direction === "left"
+      ? s3 + "images/chevron_left.svg"
+      : s3 + "images/chevron_right.svg"}
   />
 </button>
