@@ -62,7 +62,7 @@
         <h3 class="font-bold text-md">サイトのナビゲーション</h3>
         <div class="ml-3 underline">
           <a href="/" class="block">トップページ</a>
-          <a href="/news" class="block">新着情報</a>
+          <a href="#" class="block">新着情報</a>
           <a href="about" class="block">キャンパス内留学とは?</a>
           <a href="#" class="block">講座情報</a>
           <a href="#" class="block">オンライン申込み</a>
@@ -85,23 +85,45 @@
         <div class="ml-3 font-bold underline sm:mr-2">
           <h3 class="font-bold text-lg mb-2">公式SNS</h3>
           <a href="#" class="flex items-center"
-            ><img src={s3 + "images/icons8-facebook.svg"} class="h-[30px]" alt="フェースブックのアイコン"/>Facebook</a
+            ><img
+              src={s3 + "images/icons8-facebook.svg"}
+              class="h-[30px]"
+              alt="フェースブックのアイコン"
+            />Facebook</a
           >
           <a href="#" class="flex items-center">
-            <img src={s3 + "images/icons8-twitter.svg"} class="h-[30px] my-2" alt="ツイッターのアイコン"/>
+            <img
+              src={s3 + "images/icons8-twitter.svg"}
+              class="h-[30px] my-2"
+              alt="ツイッターのアイコン"
+            />
             Twitter
           </a>
           <a href="#" class="flex">
-            <img src={s3 + "images/icons8-youtube.svg"} class="h-[30px]" alt="ユーチューブのアイコン"/>
+            <img
+              src={s3 + "images/icons8-youtube.svg"}
+              class="h-[30px]"
+              alt="ユーチューブのアイコン"
+            />
             Youtube
           </a>
         </div>
       </div>
       <div class="flex flex-col my-auto">
         <!--TODO add links to banner images https://tgu.mext.go.jp/-->
-        <img src={s3 + "images/images/tugs-banner.jpg"} alt="東洋大学グローバルサービス"/>
-        <img src={s3 + "images/images/toyo-banner.jpg"} class="my-2" alt="東洋大学"/>
-        <img src={s3 + "images/images/tguj-banner.jpg"} alt="スーパーグローバル大学"/>
+        <img
+          src={s3 + "images/images/tugs-banner.jpg"}
+          alt="東洋大学グローバルサービス"
+        />
+        <img
+          src={s3 + "images/images/toyo-banner.jpg"}
+          class="my-2"
+          alt="東洋大学"
+        />
+        <img
+          src={s3 + "images/images/tguj-banner.jpg"}
+          alt="スーパーグローバル大学"
+        />
       </div>
     </div>
   </div>
