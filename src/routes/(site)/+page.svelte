@@ -7,6 +7,7 @@
   import RedCTA from "$lib/buttons/redCtaButton.svelte";
   import MediaWrapper from "$lib/wrappers/media-wrapper.svelte";
   import SectionWrapper from "$lib/wrappers/SectionWrapper.svelte";
+  import Testimonial from "$lib/testimonials/Testimonial.svelte";
   import ApplicationProcess from "$lib/homepage/ApplicationProcess.svelte";
   import { windowWidth } from "$lib/store/windowData";
 
@@ -88,5 +89,11 @@
     titleData={{ pretext: "申し込みの", highlight: "流れ", posttext: "" }}
   >
     <ApplicationProcess />
+  </SectionWrapper>
+  <SectionWrapper
+    themeColor= "red"
+    titleData={{pretext:"学生の", highlight: "声", posttext: ""}}
+  >
+    <Testimonial data={{}}/>
   </SectionWrapper>
 </div>
