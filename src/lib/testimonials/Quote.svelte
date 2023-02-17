@@ -11,15 +11,15 @@
   transition:slide
   class="flex flex-col sm:flex-row items-center justify-items-center place-content-around py-2 px-[50px] sm:px-[20px]"
 >
-  <figure class="flex flex-col items-center">
+<figure class="flex flex-col items-center">
+    <figcaption class="text-2xl mb-[20px] sm:mb-0">
+      <strong>{data.name}</strong>さん
+    </figcaption>
     <img
       src={data.img}
       alt={data.imgAlt}
       class="h-[200px] p-2 bg-yellow-50 rounded-full shadow-md mb-[20px] sm:mb-0"
     />
-    <figcaption class="text-2xl mb-[20px] sm:mb-0">
-      <strong>{data.name}</strong>さん
-    </figcaption>
     <strong class="text-xl sm:text-2xl"
       >TOEICスコア<span class="text-sky-800 text-2xl sm:text-3xl">{data.scoreUp}</span>点アップ!</strong
     >
