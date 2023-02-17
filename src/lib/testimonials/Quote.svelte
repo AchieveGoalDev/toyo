@@ -5,53 +5,26 @@
   export let data: TestimonialProfile;
   export let expanded: boolean
 
-  $: console.log(data);
 </script>
 
-
-{#if !expanded}
 <div
   transition:slide
-  class="flex flex-row items-center justify-items-center place-content-around py-2 px-[50px]"
+  class="flex flex-col sm:flex-row items-center justify-items-center place-content-around py-2 px-[50px] sm:px-[20px]"
 >
   <figure class="flex flex-col items-center">
     <img
       src={data.img}
       alt={data.imgAlt}
-      class="h-[200px] p-2 bg-yellow-50 rounded-full shadow-md"
+      class="h-[200px] p-2 bg-yellow-50 rounded-full shadow-md mb-[20px] sm:mb-0"
     />
-    <figcaption class="text-2xl">
+    <figcaption class="text-2xl mb-[20px] sm:mb-0">
       <strong>{data.name}</strong>さん
     </figcaption>
-    <strong class="text-2xl text-rose-900"
-      >{"TOEICスコア" + data.scoreUp + "点アップ!"}</strong
+    <strong class="text-xl sm:text-2xl"
+      >TOEICスコア<span class="text-sky-800 text-2xl sm:text-3xl">{data.scoreUp}</span>点アップ!</strong
     >
   </figure>
-  <blockquote class="text-5xl text-rose-800 font-bold max-w-[75%]">
+  <blockquote class="text-3xl sm:text-5xl text-rose-800 font-bold max-w-[75%] my-5 sm:my-0">
     {data.quote}
   </blockquote>
 </div>
-{:else }
-<div
-  transition:fly
-  class="flex flex-row items-center justify-items-center place-content-around py-2 px-[50px]"
->
-  <figure class="flex flex-col items-center">
-    <img
-      src={data.img}
-      alt={data.imgAlt}
-      class="h-[200px] p-2 bg-yellow-50 rounded-full shadow-md"
-    />
-    <figcaption class="text-2xl">
-      <strong>{data.name}</strong>さん
-    </figcaption>
-    <strong class="text-2xl text-rose-900"
-      >{"TOEICスコア" + data.scoreUp + "点アップ!"}</strong
-    >
-  </figure>
-  <blockquote class="text-5xl text-rose-800 font-bold max-w-[75%]">
-    {data.quote}
-  </blockquote>
-</div>
-{/if}
-

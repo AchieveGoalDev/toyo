@@ -9,6 +9,7 @@
   import SectionWrapper from "$lib/wrappers/SectionWrapper.svelte";
   import Testimonial from "$lib/testimonials/Testimonial.svelte";
   import ApplicationProcess from "$lib/homepage/ApplicationProcess.svelte";
+  import TextWrapper from "$lib/wrappers/TextWrapper.svelte";
   import { windowWidth } from "$lib/store/windowData";
 
   let width: number;
@@ -94,6 +95,9 @@
     themeColor= "red"
     titleData={{pretext:"学生の", highlight: "声", posttext: ""}}
   >
-    <Testimonial data={{}}/>
+    <TextWrapper>
+      Toyo Achieve Englishの受講生の方に講座や英語学習のことを伺いました！
+    </TextWrapper>
+    <Testimonial/>
   </SectionWrapper>
 </div>

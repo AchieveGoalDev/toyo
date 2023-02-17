@@ -19,7 +19,6 @@
     } else {
       index--;
     }
-    display = true;
   }
 
   function handleRight() {
@@ -47,7 +46,7 @@
   };
 </script>
 
-<div class="w-full shadow-lg bg-slate-10 relative min-h-[250px]">
+<div class="w-full shadow-lg bg-slate-10 relative min-h-[300px]">
   <div>
     {#if !expanded}
       <button
@@ -62,7 +61,6 @@
         />
       </button>
       <button
-        disabled={!display}
         on:click={() => cycler("right")}
         transition:fade
         class="absolute right-0 top-1/3 text-xl rounded-tl-full rounded-bl-full bg-rose-800 text-white text-xl py-2 pl-1 transition-all opacity-50 hover:bg-rose-700 hover:opacity-100 h-[100px]"
@@ -87,7 +85,6 @@
       {/key}
     {/if}
     <button
-      disabled={!display}
       on:click={() => (expanded = !expanded)}
       class="font-bold text-2xl pb-2 w-full bg-rose-800 text-white transition-all ease-in hover:bg-rose-700 hover:scale-[102%]"
       >{expanded ? "閉じる" : "詳細を見る"}</button

@@ -12,8 +12,8 @@ export type TestimonialProfile = {
 
 const 西野: TestimonialProfile = {
   img: "西野T.png",
-  imgAlt: "西野 傑しんさん",
-  name: "西野傑しん",
+  imgAlt: "西野傑しんさん",
+  name: "西野 傑しん",
   scoreUp: "370",
   course: "2021～2022年　グループレッスン受講",
   results: "TOEICスコア495点⇒850点",
@@ -34,8 +34,8 @@ const 西野: TestimonialProfile = {
 
 const 池田: TestimonialProfile = {
   img: "池田T.png",
-  imgAlt: "池田 優香さん",
-  name: "池田優香",
+  imgAlt: "池田優香さん",
+  name: "池田 優香",
   scoreUp: "160",
   course: "2021～2022年　マンツーマンレッスン受講",
   results: "TOEICスコア460点⇒625点、IELTS4.5⇒5.0",
