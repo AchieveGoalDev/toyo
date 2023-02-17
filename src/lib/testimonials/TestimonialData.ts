@@ -1,4 +1,4 @@
-type TestimonialProfile = {
+export type TestimonialProfile = {
   img: string;
   imgAlt: string;
   name: string;

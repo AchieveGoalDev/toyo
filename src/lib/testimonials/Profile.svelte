@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let data;
+  import type { TestimonialProfile } from "$lib/testimonials/TestimonialData";
+  export let data: TestimonialProfile;
 
   $: console.log(data);
 </script>
@@ -14,12 +15,10 @@
         <span class="font-bold">氏名：</span><span>{data.name}</span>さん
       </div>
       <div>
-          <span class="font-bold">学部：</span><span>経営学部２年</span>
+        <span class="font-bold">学部：</span><span>経営学部２年</span>
       </div>
       <div>
-        <span class="font-bold">受講コース：</span><span
-          >{data.course}</span
-        >
+        <span class="font-bold">受講コース：</span><span>{data.course}</span>
       </div>
       <div>
         <span class="font-bold">学習成果：</span><span
