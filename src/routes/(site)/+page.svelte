@@ -96,7 +96,9 @@
     titleData={{pretext:"学生の", highlight: "声", posttext: ""}}
   >
     <TextWrapper>
-      Toyo Achieve Englishの受講生の方に講座や英語学習のことを伺いました！
+      Toyo Achieve Englishの受講生の方に、講座についてインタビュー！
+英語学習のことや、この講座を受講した後の目標など、
+この講座を受講して英語力が<strong class="text-rose-800">ぐんぐん</strong>上がった方の声をご紹介します
     </TextWrapper>
     <Testimonial/>
   </SectionWrapper>

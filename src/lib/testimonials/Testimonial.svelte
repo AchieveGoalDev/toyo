@@ -79,7 +79,7 @@
           class="mx-auto text-center shadow-lg"
         >
           {#if display && currentData}
-            <Quote data={currentData} bind:expanded />
+            <Quote data={currentData}/>
           {/if}
         </div>
       {/key}
