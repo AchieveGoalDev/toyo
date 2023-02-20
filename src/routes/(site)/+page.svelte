@@ -19,6 +19,10 @@
   });
 </script>
 
+<head>
+  
+</head>
+
 {#if width > 1200}
   <Hero />
 {:else if width > 500 && width <= 1400}
