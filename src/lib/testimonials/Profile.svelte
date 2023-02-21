@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { TestimonialProfile } from "$lib/testimonials/TestimonialData";
   export let data: TestimonialProfile;
-
-  $: console.log(data);
 </script>
 
 <div>
@@ -21,17 +19,15 @@
         <span class="font-bold">受講コース：</span><span>{data.course}</span>
       </div>
       <div>
-        <span class="font-bold">学習成果：</span><span
-          >{data.results}</span
-        >
+        <span class="font-bold">学習成果：</span><span>{data.results}</span>
       </div>
     </div>
   </div>
   <div class="text-xl p-5">
     {#each data.fullQuote as quote}
-    <p class="my-1">
-      {quote}
-    </p>
+      <p class="my-1">
+        {quote}
+      </p>
     {/each}
   </div>
 </div>

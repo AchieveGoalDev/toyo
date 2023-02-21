@@ -1,6 +1,7 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
 
+  import ProgressBar from "$lib/forms/input/ProgressBar.svelte";
   import CampusSelector from "$lib/forms/CampusSelector.svelte";
   import LevelSelector from "$lib/forms/LevelSelector.svelte";
   import CourseTypeSelector from "$lib/forms/CourseTypeSelector.svelte";
@@ -34,6 +35,8 @@
 </script>
 
 <form class="flex flex-col bg-slate-50 w-2/3 mx-auto grow-0 items-center">
+  <ProgressBar />
+
   <div>
     <CampusSelector bind:campus />
   </div>

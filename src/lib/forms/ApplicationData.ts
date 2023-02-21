@@ -1,3 +1,5 @@
+//**********TYPE DATA ***************/
+
 export type Campus = {
   name: string;
   group: string[];
@@ -18,6 +20,13 @@ export type TextInput = {
 export type RadioInput = {
   thing: string;
 };
+
+export type SelectInput = {
+  placeholder: string;
+  options: string[];
+};
+
+// ************CAMPUS DATA ************/
 
 export const 川越: Campus = {
   name: "川越",
@@ -64,6 +73,8 @@ export const オンライン: Campus = {
 };
 
 export const campuses: Campus[] = [川越, 板倉, WELLB, INIAD, 白山, オンライン];
+
+//*****************TEXT INPUT DATA **********/
 
 export const 学籍番号Data: TextInput = {
   isNecessary: true,
@@ -234,6 +245,7 @@ export const 英字名LastData: TextInput = {
 };
 
 
+//********************SELECT INPUT DATA *********/
 //   export const 氏名Data: TextInput = {
 //     isNecessary: true,
 //     label: "氏名",

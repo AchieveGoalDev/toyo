@@ -20,9 +20,12 @@
 
 <button on:click|preventDefault={toggle}>toggle</button>
 
-<div
-  style:opacity={`${$opacity}`}
-  class="text-2xl rounded-full transitions-all bg-rose-800 h-[80px] w-[80px]"
->
-  <slot />
+<div class="flex flex-col items-center">
+  <div
+    style:opacity={`${$opacity}`}
+    class="text-2xl rounded-full transitions-all bg-rose-800 h-[80px] w-[80px] flex flex-col justify-center items-center"
+  >
+    <slot name="number" />
+  </div>
+  <slot name="description" />
 </div>
