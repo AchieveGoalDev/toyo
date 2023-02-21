@@ -2,7 +2,7 @@
   export let campus: any;
 </script>
 
-<select bind:value={campus} class="inline">
+<select bind:value={campus} class="w-[300px] text-xl my-10 mx-auto">
   <option value="">--キャンパス--</option>
   <option value="白山">白山キャンパス</option>
   <option value="川越">川越キャンパス</option>

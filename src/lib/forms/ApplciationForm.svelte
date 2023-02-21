@@ -23,7 +23,6 @@
 
     campuses.forEach((selected) => {
       if (selected.name === name) {
-        console.log(selected);
         returnVal = selected;
       }
     });
@@ -34,7 +33,7 @@
   $: selectedCampus = handleSelectCampus(campus);
 </script>
 
-<form class="flex flex-col bg-slate-50 w-2/3 mx-auto grow-0">
+<form class="flex flex-col bg-slate-50 w-2/3 mx-auto grow-0 items-center">
   <div>
     <CampusSelector bind:campus />
   </div>

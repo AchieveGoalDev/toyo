@@ -1,34 +1,39 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
 
-  export let isNecessary: boolean;
-  export let label: string;
-  export let inputVal: string;
-  export let placeholder: string;
-  export let alt: string;
-  export let desc: string[];
-  export let validateInput: any;
+  import type { TextInput } from "$lib/forms/ApplicationData";
+
+  export let data: TextInput;
 
   let errorMessage: string[];
 
   export let isValid: boolean;
+  export let inputVal: string;
 
-  $: errorMessage = validateInput(inputVal);
-  $: console.log(errorMessage);
+  $: errorMessage = data.validator(inputVal);
+  $: if (data.isUpper && inputVal) {
+    inputVal = inputVal.toUpperCase();
+  }
+  $: if (errorMessage.length > 0) {
+    isValid = false;
+  } else {
+    isValid = true;
+  }
 </script>
 
-<div class="flex flex-col sm:flex-row my-3">
-  <label class="font-bold mr-10" for={label}>
-    {#if isNecessary}
-      <span class="text-red-500">*</span>
-    {/if}
-    {label}
-  </label>
-  <div class="flex flex-col w-[200px]">
-    <input
-      name={alt}
-      type="text"
-      class="shadow-md 
+<label class="font-bold mr-10 text-right w-20 col-span-4" for={data.label}>
+  {#if data.isNecessary}
+    <span class="text-red-500">*</span>
+  {/if}
+  {data.label}
+</label>
+<div class="flex flex-col my-2 col-span-8">
+  <input
+    name={data.alt}
+    type="text"
+    style:background-color={isValid ? "white" : "#fef2f2"}
+    style:outline-color={isValid ? "" : "#b91c1c"}
+    class={`shadow-md 
         rounded-sm 
         transitions-all 
         ease-in 
@@ -40,20 +45,21 @@
         pl-2
         py-1
         my-2
-        "
-      {alt}
-      {placeholder}
-      bind:value={inputVal}
-    />
-    {#if !isValid}
-      {#each errorMessage as error}
-        <p transition:slide class="text-red-600">{error}</p>
-      {/each}
-    {/if}
-    {#each desc as line}
-      <p class="text-slate-600 text-sm my-1">
-        {line}
-      </p>
+        w-[200px]
+      `}
+    alt={data.alt}
+    placeholder={data.placeholder}
+    bind:value={inputVal}
+    maxlength={data.length}
+  />
+  {#if !isValid}
+    {#each errorMessage as error}
+      <p transition:slide class="text-red-600 my-2">{error}</p>
     {/each}
-  </div>
+  {/if}
+  {#each data.desc as line}
+    <p class="text-slate-600 text-sm my-1">
+      {line}
+    </p>
+  {/each}
 </div>
