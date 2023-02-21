@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TextInput from "$lib/forms/TextInput.svelte";
+  import TextInput from "$lib/forms/input/TextInput.svelte";
   import {
     学籍番号Data,
     氏名Data,

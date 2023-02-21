@@ -239,7 +239,7 @@ export const 英字名LastData: TextInput = {
 //     label: "氏名",
 //     desc: [],
 //     alt: "氏名の入力",
-//     placeholder: "山田　太郎",
+//     placeholder: "山田太郎",
 //     length: 100,
 //     isUpper: false,
 //     validator: (name: string) => {
