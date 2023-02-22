@@ -1,9 +1,29 @@
+//************CLASS DEFINITIONS  *****/
+
+class ImageArrayItem {
+  img: string;
+  text: string;
+  name: string;
+
+  constructor(img: string, text: string, name: string) {
+    this.img = img;
+    this.text = text;
+    this.name = name;
+  }
+}
+
 //**********TYPE DATA ***************/
 
 export type Campus = {
   name: string;
   group: string[];
   mtm: string[];
+};
+
+export type FormSection = {
+  requiredInputs: number;
+  name: string;
+  inputs: [TextInput | SelectInput | RadioInput];
 };
 
 export type TextInput = {
@@ -25,6 +45,17 @@ export type SelectInput = {
   placeholder: string;
   options: string[];
 };
+
+export type ImageArray = ImageArrayItem[];
+
+export type ImageSelectInput = {
+  isNecessary: boolean;
+  placeholder: string;
+  options: string[];
+  images: ImageArray;
+};
+
+//**********FORM SECTION DATA **********/
 
 // ************CAMPUS DATA ************/
 
@@ -244,22 +275,41 @@ export const 英字名LastData: TextInput = {
   },
 };
 
-
 //********************SELECT INPUT DATA *********/
-//   export const 氏名Data: TextInput = {
-//     isNecessary: true,
-//     label: "氏名",
-//     desc: [],
-//     alt: "氏名の入力",
-//     placeholder: "山田太郎",
-//     length: 100,
-//     isUpper: false,
-//     validator: (name: string) => {
-//       const errors: string[] = [];
-//       if (!name) {
-//         errors.push("必要項目です");
-//       }
+export const levelSelector: SelectInput = {
+  placeholder: "--レベルを選択--",
+  options: [
+    "初級コース　（TOEIC～395）",
+    "中級コース　（TOEIC 400～585）",
+    "上級コース　（TOEIC 590～）",
+  ],
+};
 
-//       return errors;
-//     },
-//   };
+export const courseSelector: SelectInput = {
+  placeholder: "--講座スタイルを選択--",
+  options: ["グループレッスン", "マンツーマンレッスン"],
+};
+
+export const mtmSelector: SelectInput = {
+  placeholder: "--講座スタイルを選択--",
+  options: [
+    "平日講座　マンツーマンレッスン",
+    "土曜日講座　マンツーマンレッスン",
+  ],
+};
+
+//*********************IMAGE SELECT INPUT DATA *********/
+
+export const campusSelector: ImageSelectInput = {
+  placeholder: "--キャンパスを選択--",
+  isNecessary: true,
+  options: campuses.map((campus) => campus.name),
+  images: [
+    new ImageArrayItem("Unselected.webp", "", ""),
+    new ImageArrayItem("/INIAD.webp", "INIAD", "INIAD"),
+    new ImageArrayItem("/WELLB.webp", "WELLB", "WELLB"),
+    new ImageArrayItem("/HAKUSAN.webp", "白山", "白山"),
+    new ImageArrayItem("/ITAKURA.webp", "板倉", "板倉"),
+    new ImageArrayItem("/ONLINE.webp", "オンライン", "オンライン"),
+  ],
+};
