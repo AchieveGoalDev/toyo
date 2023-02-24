@@ -1,27 +1,47 @@
 <script lang="ts">
-  export let isNecessary: boolean;
-  export let label: string;
-  export let inputVal: string;
-  export let placeholder: string;
-  export let alt: string;
-  export let desc: string[];
-  export let validateInput: any;
-  export let choices;
+  import { slide } from "svelte/transition";
+  import type { RadioInput } from "$lib/forms/ApplicationData";
 
-  let errorMessage: string[];
+  export let data: RadioInput;
 
   export let isValid: boolean;
+  export let selection: string;
+
+  let errorMessage: string[] = [];
+
+  $: if (!isValid) {
+    errorMessage.push("必要項目です");
+  } else {
+    errorMessage = [];
+  }
+
+  $: if (!selection) {
+    isValid = false;
+  } else {
+    isValid = true;
+  }
 </script>
 
+<legend>
+  {#if data.isNecessary}
+    <span class="text-red-500">*</span>
+  {/if}
+  {data.label}</legend
+>
 <fieldset>
-  <legend>
-    {#if isNecessary}
-      <span class="text-red-500">*</span>
-    {/if}
-    {label}</legend
-  >
-  <label for="はい">はい</label>
-  <input type="radio" name="はい" />
-  <label for="いいえ">いいえ</label>
-  <input type="radio" name="はい" />
+  {#each data.choices as choice}
+    <label for={choice}>{choice}</label>
+    <input
+      bind:group={selection}
+      value={choice}
+      id={choice}
+      type="radio"
+      name={data.label}
+    />
+  {/each}
+  {#if !isValid}
+    {#each errorMessage as error}
+      <p transition:slide class="text-red-500">{error}</p>
+    {/each}
+  {/if}
 </fieldset>

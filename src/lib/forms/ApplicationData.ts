@@ -38,7 +38,10 @@ export type TextInput = {
 };
 
 export type RadioInput = {
-  thing: string;
+  isNecessary: boolean;
+  label: string;
+  alt: string;
+  choices: string[];
 };
 
 export type SelectInput = {
@@ -296,6 +299,15 @@ export const mtmSelector: SelectInput = {
     "平日講座　マンツーマンレッスン",
     "土曜日講座　マンツーマンレッスン",
   ],
+};
+
+//************************ RADIO INPUT DATA *************/
+
+export const prevSemester: RadioInput = {
+  isNecessary: true,
+  label: "2022年度通年受講生 ",
+  alt: "",
+  choices: ["はい", "いいえ"],
 };
 
 //*********************IMAGE SELECT INPUT DATA *********/

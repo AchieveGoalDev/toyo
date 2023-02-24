@@ -10,12 +10,15 @@
 
 <div>
   <div
-    class="flex mb-s2 justify-center items-center w-full place-content-between bg-rose-50 px-3"
+    class="flex mb-s2 justify-center items-center w-full place-content-between px-3 my-2"
   >
     <div class="mr-3">
-      <SubHeading>キャンパスを選択してください</SubHeading>
+      <slot />
     </div>
-    <select bind:value class="w-[300px] text-xl my-4 mx-auto">
+    <select
+      bind:value
+      class="w-[300px] text-xl my-4 mx-auto shadow-md bg-sky-50 p-1"
+    >
       <option value="">{data.placeholder}</option>
       {#each data.options as option}
         <option value={option}>{option}</option>
