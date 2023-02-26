@@ -8,6 +8,17 @@
     英字名LastData,
   } from "$lib/forms/ApplicationData";
 
+  function calculatePercentValid(validArray: boolean[]) {
+    let validTotal = 0;
+    validArray.forEach((item) => {
+      if (item) {
+        validTotal++;
+      }
+    });
+
+    return (validArray.length / validTotal) * 100;
+  }
+
   let 学籍番号: string;
   let 学籍番号isValid: boolean = false;
 
@@ -42,6 +53,8 @@
       allValid = true;
     }
   });
+
+  $: console.log(calculatePercentValid(toValidate), "percent valid");
 
   $: console.log(toValidate);
 </script>

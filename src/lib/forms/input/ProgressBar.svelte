@@ -3,28 +3,44 @@
 
   export let progress: {
     current: number;
+    max: number;
     status: string;
   };
 </script>
 
-<div class="flex w-full place-content-between items-center">
+<div class="flex w-full place-content-between items-center relative z-5">
+  <div class="h-[10px] bg-slate-600 w-full rounded-md absolute z-[3]">
+    <div
+      style:width="20%"
+      class="h-[10px] bg-rose-700 w-1/2 rounded-md absolute z-[4]"
+    />
+  </div>
   <ProgressIndicatorWrapper {progress} number={1}>
-    <div slot="number">1.</div>
-    <strong slot="description">Thing</strong>
+    <div slot="number" class="mx-auto my-auto">1</div>
+    <strong
+      class="absolute translate-y-[-100%] translate-x-[-25%] break-keep overflow-visible whitespace-nowrap"
+      slot="description">キャンパス情報</strong
+    >
   </ProgressIndicatorWrapper>
-  <div class="h-[10px] bg-rose-500 w-full rounded-md" />
   <ProgressIndicatorWrapper {progress} number={2}>
-    <div slot="number">2.</div>
-    <strong slot="description">Thing</strong>
+    <strong
+      class="absolute translate-y-[-100%] translate-x-[-25%] break-keep overflow-visible whitespace-nowrap"
+      slot="description">個人情報</strong
+    >
+    <div slot="number" class="mx-auto my-auto">2</div>
   </ProgressIndicatorWrapper>
-  <div class="h-[20px] bg-rose-500 w-full" />
   <ProgressIndicatorWrapper {progress} number={3}>
-    <div slot="number">3.</div>
-    <strong slot="description">Thing</strong>
+    <div slot="number" class="mx-auto my-auto">3</div>
+    <strong
+      class="absolute translate-y-[-100%] translate-x-[-25%] break-keep overflow-visible whitespace-nowrap"
+      slot="description">スケジュール</strong
+    >
   </ProgressIndicatorWrapper>
-  <div class="h-[20px] bg-rose-500 w-full" />
   <ProgressIndicatorWrapper {progress} number={4}>
-    <div slot="number">4.</div>
-    <strong slot="description">Thing</strong>
+    <strong
+      class="absolute translate-y-[-100%] translate-x-[-25%] break-keep overflow-visible whitespace-nowrap"
+      slot="description">同意・送信</strong
+    >
+    <div slot="number">4</div>
   </ProgressIndicatorWrapper>
 </div>

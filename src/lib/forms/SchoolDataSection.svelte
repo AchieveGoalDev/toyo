@@ -12,10 +12,18 @@
     prevSemester,
   } from "$lib/forms/ApplicationData";
 
-  let campus: string;
-  let level: string;
-  let course: string;
-  let mtm: string;
+  function calculatePercentValid(validArray: boolean[]) {
+    let validTotal = 0;
+    validArray.forEach((item) => {
+      if (item) {
+        validTotal++;
+      }
+    });
+
+  let campus = ""
+  let level = ""
+  let course = ""
+  let mtm = ""
 
   export let data: {
     campus: string;
@@ -23,6 +31,8 @@
     course: string;
     mtm: string;
   };
+
+  let validSelections: boolean[] = [] 
 
   let forcedCourse: string = "";
   let forcedLevel: string = "";
@@ -33,6 +43,9 @@
   let forcedMtmMsg: string;
 
   export let isValid;
+
+  $: let validSelections = [
+  ]
 
   $: if (campus === "オンライン") {
     forcedCourse = "マンツーマンレッスン";
