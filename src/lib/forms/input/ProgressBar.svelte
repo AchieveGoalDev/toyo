@@ -1,20 +1,32 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
+  import { buildTween } from "$lib/tweens/buildTween";
   import ProgressIndicatorWrapper from "$lib/forms/ProgressIndicatorWrapper.svelte";
 
   export let progress: {
     current: number;
-    max: number;
-    status: string;
+    latest: number;
+    latestStatus: string;
+    barwidth: number;
   };
+
+  let barTween: any;
+
+  $: barTween = buildTween([0, 100], 200);
+
+  $: barTween.set(progress.barwidth);
+
+  $: console.log($barTween);
 </script>
 
 <div class="flex w-full place-content-between items-center relative z-5">
-  <div class="h-[10px] bg-slate-600 w-full rounded-md absolute z-[3]">
+  <div class="h-[10px] bg-slate-600 inset-x-0 rounded-md absolute z-[3]">
     <div
-      style:width="20%"
+      style:width={`${$barTween}%`}
       class="h-[10px] bg-rose-700 w-1/2 rounded-md absolute z-[4]"
     />
   </div>
+
   <ProgressIndicatorWrapper {progress} number={1}>
     <div slot="number" class="mx-auto my-auto">1</div>
     <strong

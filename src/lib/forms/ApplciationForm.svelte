@@ -1,63 +1,146 @@
 <script lang="ts">
-  import { slide } from "svelte/transition";
-
-  import SchoolDataSection from "./SchoolDataSection.svelte";
+  //import SchoolDataSection from "./SchoolDataSection.svelte";
+  import TestSection from "./TestSection.svelte";
   import ProgressBar from "$lib/forms/input/ProgressBar.svelte";
 
-  import { campuses } from "$lib/forms/ApplicationData";
+  let currentHeight: number;
+  let indexHistory: number[] = [];
+  let canProgress = false;
 
-  let campus: string;
+  let test1ValidPercent = 0;
+  let test2ValidPercent = 0;
+  let test3ValidPercent = 0;
+  let test4ValidPercent = 0;
 
-  let schoolData: {
-    campus: string;
-    level: string;
-    course: string;
-    mtm: string;
+  let index = 0;
+
+  let test1Data;
+  let test2Data;
+  let test3Data;
+  let test4Data;
+
+  let testSectionData = [test1Data, test2Data, test3Data, test4Data];
+
+  let testSections = [true, true, true, true];
+
+  let testSectionValidity = [
+    test1ValidPercent,
+    test2ValidPercent,
+    test3ValidPercent,
+    test4ValidPercent,
+  ];
+
+  let progressData: {
+    current: number;
+    latest: number;
+    latestStatus: string;
+    barwidth: number;
   };
 
-  let schoolDataIsValid: boolean;
-
-  let progressData = {
-    current: 1,
-    status: "incomplete",
-  };
-
-  function handleSelectCampus(name: string) {
-    let returnVal: any;
-
-    campuses.forEach((selected) => {
-      if (selected.name === name) {
-        returnVal = selected;
-      }
-    });
-
-    return returnVal;
-  }
-
-  function handleNext() {
-    if (schoolDataIsValid) {
-      progressData.current++;
-      progressData.status = "incomplete";
+  function handlePrevious() {
+    if (index >= 0) {
+      index--;
     }
   }
 
-  $: selectedCampus = handleSelectCampus(campus);
-  $: console.log(schoolData, schoolDataIsValid);
-  $: if (schoolDataIsValid) {
-    progressData.status = "complete";
+  function handleNext() {
+    if (index <= testSectionData.length - 1) {
+      index++;
+    }
   }
 
-  $: console.log(progressData);
+  function handleLatest(indexArray: number[]) {
+    console.log("indexarray", indexArray);
+    let largest = 0;
+    if (indexArray.length > 0) {
+      console.log("reducing");
+      indexArray.forEach((number) => {
+        if (number > largest) {
+          largest = number;
+        }
+      });
+      return largest;
+    } else {
+      return 0;
+    }
+  }
+
+  function handleProgressBarWidth(validityData: number[]) {
+    const segmentWidth = (1 / (validityData.length - 1)) * 100;
+    let totalWidth = 0;
+
+    validityData.forEach((percentage, i) => {
+      if (i < validityData.length - 1) {
+        totalWidth += (percentage / 100) * segmentWidth;
+      }
+    });
+
+    return totalWidth;
+  }
+
+  function detectReady(sectionValidity: number) {
+    if (sectionValidity === 100) {
+      return "ready";
+    } else {
+      return "incomplete";
+    }
+  }
+
+  function canMove(validity: number[], index: number) {
+    if (validity[index] !== 100) {
+      return false;
+    } else if (index === validity.length - 1) {
+      console.log("max");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  $: indexHistory = [...indexHistory, index];
+  $: latest = handleLatest(indexHistory);
+  $: progressData = {
+    current: index,
+    latest: latest,
+    latestStatus: detectReady(testSectionValidity[latest]),
+    barwidth: handleProgressBarWidth(testSectionValidity),
+  };
+
+  $: canProgress = canMove(testSectionValidity, index);
+  $: console.log(canProgress);
 </script>
 
-<form class="flex flex-col bg-slate-50 w-2/3 mx-auto grow-0 items-center">
+<form
+  class="flex flex-col bg-slate-50 w-2/3 mx-auto grow-0 items-center relative"
+>
   <ProgressBar progress={progressData} />
 
-  <SchoolDataSection bind:data={schoolData} bind:isValid={schoolDataIsValid} />
-  <button
-    on:click|preventDefault={handleNext}
-    class="disabled:bg-slate-500 disabled:text-white: transition-all ease-in bg-sky-800 text-white rounded-md hover:bg-sky-600 p-2 text-xl"
-    disabled={!schoolDataIsValid}>次へ</button
-  >
+  <!--
+    <SchoolDataSection bind:data={schoolData} bind:isValid={schoolDataIsValid} />
+  -->
+
+  <div style:height={`${currentHeight}px`} class="my-16">
+    {#each [testSections[index]] as section (index)}
+      <TestSection
+        bind:selfHeight={currentHeight}
+        bind:data={testSectionData[index]}
+        bind:percentValid={testSectionValidity[index]}
+      />
+    {/each}
+  </div>
+
+  <div class="flex w-full place-content-around absolute bottom-0">
+    <button
+      on:click|preventDefault={handlePrevious}
+      class="disabled:bg-slate-500 disabled:text-white: transition-all ease-in bg-sky-800 text-white rounded-md hover:bg-sky-600 p-2 text-xl shadow-md"
+      disabled={index === 0}>前へ</button
+    >
+
+    <button
+      on:click|preventDefault={handleNext}
+      class="disabled:bg-slate-500 disabled:text-white: transition-all ease-in bg-sky-800 text-white rounded-md hover:bg-sky-600 p-2 text-xl shadow-md"
+      disabled={!canProgress}>次へ</button
+    >
+  </div>
 </form>
 //Campus Selector //Lesson Type Selector //Course Selector //Main

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { slide } from "svelte/transition";
   import type { SelectInput } from "$lib/forms/ApplicationData";
 
   export let value: string;
@@ -17,7 +16,7 @@
   }
 </script>
 
-<div transition:slide>
+<div>
   <slot />
   <div
     class="flex mb-2 justify-center items-center w-full place-content-between px-3"
@@ -35,7 +34,7 @@
   </div>
   {#if forced}
     <div class="w-full">
-      <p transition:slide class="text-blue-500 mx-auto text-center mb-2">
+      <p class="text-blue-500 mx-auto text-center mb-2">
         ※{forcedMessage}
       </p>
     </div>
