@@ -1,7 +1,7 @@
 <script lang="ts">
-  //import SchoolDataSection from "./SchoolDataSection.svelte";
   import TestSection from "./TestSection.svelte";
   import ProgressBar from "$lib/forms/input/ProgressBar.svelte";
+  import SchoolSubform from "$lib/forms/subforms/SchoolSubform.svelte";
 
   let currentHeight: number;
   let indexHistory: number[] = [];
@@ -13,6 +13,7 @@
   let test4ValidPercent = 0;
 
   let index = 0;
+  let transitionsLocked = false;
 
   let test1Data;
   let test2Data;
@@ -21,7 +22,7 @@
 
   let testSectionData = [test1Data, test2Data, test3Data, test4Data];
 
-  let testSections = [true, true, true, true];
+  let testSections = ["school", true, true, true];
 
   let testSectionValidity = [
     test1ValidPercent,
@@ -53,7 +54,6 @@
     console.log("indexarray", indexArray);
     let largest = 0;
     if (indexArray.length > 0) {
-      console.log("reducing");
       indexArray.forEach((number) => {
         if (number > largest) {
           largest = number;
@@ -107,11 +107,10 @@
   };
 
   $: canProgress = canMove(testSectionValidity, index);
-  $: console.log(canProgress);
 </script>
 
 <form
-  class="flex flex-col bg-slate-50 w-2/3 mx-auto grow-0 items-center relative"
+  class="flex flex-col bg-slate-50 w-full sm:w-2/3 mx-auto grow-0 items-center relative"
 >
   <ProgressBar progress={progressData} />
 
@@ -121,11 +120,22 @@
 
   <div style:height={`${currentHeight}px`} class="my-16">
     {#each [testSections[index]] as section (index)}
-      <TestSection
-        bind:selfHeight={currentHeight}
-        bind:data={testSectionData[index]}
-        bind:percentValid={testSectionValidity[index]}
-      />
+      {#if section === "school"}
+        <SchoolSubform
+          bind:percentValid={testSectionValidity[index]}
+          bind:selfHeight={currentHeight}
+          bind:data={testSectionData[index]}
+          id={"school"}
+        />
+      {:else}
+        <TestSection
+          previousData={undefined}
+          bind:selfHeight={currentHeight}
+          bind:data={testSectionData[index]}
+          bind:percentValid={testSectionValidity[index]}
+          id={`test${index}`}
+        />
+      {/if}
     {/each}
   </div>
 
@@ -143,4 +153,3 @@
     >
   </div>
 </form>
-//Campus Selector //Lesson Type Selector //Course Selector //Main

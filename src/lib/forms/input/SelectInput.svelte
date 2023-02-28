@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { SelectInput } from "$lib/forms/ApplicationData";
+  import { slide } from "svelte/transition";
 
   export let value: string;
   export let data: SelectInput;
   export let forced: string;
   export let forcedMessage: string;
+  export let isValid: boolean;
 
   let disabled: boolean;
 
@@ -14,9 +16,15 @@
   } else if (!forced) {
     disabled = false;
   }
+
+  $: if (value === "") {
+    isValid = false;
+  } else {
+    isValid = true;
+  }
 </script>
 
-<div>
+<div transition:slide|local>
   <slot />
   <div
     class="flex mb-2 justify-center items-center w-full place-content-between px-3"

@@ -15,8 +15,6 @@
   $: barTween = buildTween([0, 100], 200);
 
   $: barTween.set(progress.barwidth);
-
-  $: console.log($barTween);
 </script>
 
 <div class="flex w-full place-content-between items-center relative z-5">

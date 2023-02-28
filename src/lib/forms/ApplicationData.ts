@@ -1,6 +1,6 @@
 //************CLASS DEFINITIONS  *****/
 
-class ImageArrayItem {
+export class ImageArrayItem {
   img: string;
   text: string;
   name: string;

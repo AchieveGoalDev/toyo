@@ -8,18 +8,14 @@
   let index = 0;
 
   function handleIndex(currentSelection: string) {
-    console.log("Current selection:", currentSelection);
     if (currentSelection) {
       images.forEach((image) => {
-        console.log(image.name, currentSelection);
-        console.log(image.name === currentSelection);
         if (image.name === currentSelection) {
           index = images.indexOf(image);
         }
       });
     }
     if (!currentSelection) {
-      console.log("fired");
       index = 0;
     }
   }
@@ -27,13 +23,13 @@
   $: handleIndex(selection);
 </script>
 
-<div class="relative w-full h-[180px] bg-rose-50">
+<div class="relative w-full h-[75px] sm:h-[150px] flex flex-col-reverse">
   {#each [images[index]] as src (index)}
     <img
       transition:fly
       src={src.img}
       alt=""
-      class="absolute z-1 bottom-0 shrink-0 h-auto w-auto"
+      class="absolute z-1 bottom-0 shrink-0 w-auto"
     />
     {#if src.text}
       <div

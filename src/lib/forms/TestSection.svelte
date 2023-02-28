@@ -1,27 +1,61 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { fly } from "svelte/transition";
+
   import SelectInput from "$lib/forms/input/SelectInput.svelte";
 
-  export let selfHeight: number;
+  import {
+    campuses,
+    levelSelector,
+    courseSelector,
+    mtmSelector,
+  } from "$lib/forms/subforms/SchoolSubformData";
 
-  export let percentValid = 0;
-  export let data = {
-    test1: "",
-    test2: "",
-    test3: "",
+  type Nullable<T> = T | undefined;
+  type TestSectionData = {
+    select1: string;
+    select2: string;
+    select3: string;
   };
+
+  export let id: string;
+  export let percentValid: number;
+  export let selfHeight: number;
+  export let previousData: Nullable<TestSectionData>;
+  export let data: Nullable<TestSectionData>;
+  data = {
+    select1: "",
+    select2: "",
+    select3: "",
+  };
+
+  onMount(() => {
+    if (previousData) {
+      data = previousData;
+    }
+  });
 
   let testOneIsValid = false;
   let testTwoIsValid = false;
   let testThreeIsValid = false;
 
-  function validateSelect(value: string) {
-    if (value !== "") {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  const testSelector1 = {
+    placeholder: `--${id}--1`,
+    options: ["Option1", "Option2", "Option3"],
+  };
+
+  const testSelector2 = {
+    placeholder: `--${id}--2`,
+    options: ["Option1", "Option2", "Option3"],
+  };
+
+  const testSelector3 = {
+    placeholder: `--${id}--3`,
+    options: ["Option1", "Option2", "Option3"],
+  };
+
+  const forced = "";
+  const forcedMessage = "";
 
   function calculatePercentValid(inputsAreValid: boolean[]) {
     let validCount = 0;
@@ -40,41 +74,9 @@
     }
   }
 
-  let testSelector1Value: string = "";
-  let testSelector2Value: string = "";
-  let testSelector3Value: string = "";
-
-  const testSelector1 = {
-    placeholder: "--Test1--",
-    options: ["Option1", "Option2", "Option3"],
-  };
-
-  const testSelector2 = {
-    placeholder: "--Test2--",
-    options: ["Option1", "Option2", "Option3"],
-  };
-
-  const testSelector3 = {
-    placeholder: "--Test3--",
-    options: ["Option1", "Option2", "Option3"],
-  };
-
-  let forced = "";
-  let forcedMessage = "";
-
-  $: inputsValid = [
-    validateSelect(testSelector1Value),
-    validateSelect(testSelector2Value),
-    validateSelect(testSelector3Value),
-  ];
+  $: inputsValid = [testOneIsValid, testTwoIsValid, testThreeIsValid];
 
   $: percentValid = calculatePercentValid(inputsValid);
-
-  $: data = {
-    test1: testSelector1Value,
-    test2: testSelector2Value,
-    test3: testSelector3Value,
-  };
 </script>
 
 <div
@@ -84,19 +86,22 @@
   class="my-20 bg-white shadow-md px-5 absolute top-0 inset-x-0"
 >
   <SelectInput
-    bind:value={testSelector1Value}
+    bind:value={data.select1}
     data={testSelector1}
+    bind:isValid={testOneIsValid}
     {forced}
     {forcedMessage}
   />
   <SelectInput
-    bind:value={testSelector2Value}
+    bind:value={data.select2}
+    bind:isValid={testTwoIsValid}
     data={testSelector2}
     {forced}
     {forcedMessage}
   />
   <SelectInput
-    bind:value={testSelector3Value}
+    bind:value={data.select3}
+    bind:isValid={testThreeIsValid}
     data={testSelector3}
     {forced}
     {forcedMessage}

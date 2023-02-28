@@ -41,10 +41,9 @@
     }
   }
 
-  $: console.log($outlineColor, outlineW);
+  //@ts-ignore
   $: backgroundColor.set(handleBackgroundColor(progress));
   $: scale.set(handleScale(progress));
-  $: console.log(progress);
 </script>
 
 <div class="relative z-[5]">
