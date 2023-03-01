@@ -46,70 +46,59 @@
   let course: string;
   let mtm: string;
 
-  let mounted = false;
+  let cacheready = false;
 
   onMount(() => {
+    console.log("mounted");
     if ($formData) {
-      let parsed = JSON.parse($formData);
-      if (parsed[id]) {
-        data = parsed[id];
+      console.log("formdataDetected");
+      console.log(JSON.parse($formData));
+    }
 
-        console.log("detected data:");
-        console.log(data);
+    if (data && $formData) {
+      let parsedData = JSON.parse($formData);
 
-        if (data) {
-          campus = data.campus;
-          level = data.level;
-          course = data.course;
-          mtm = data.mtm;
-        } else {
-          console.log("reformatting data");
-          campus = "";
-          level = "";
-          course = "";
-          mtm = "";
-        }
+      if (parsedData.school) {
+        let schoolData = parsedData.school;
+        data.campus = schoolData.campus;
+        data.level = schoolData.level;
+        data.course = schoolData.course;
+        data.mtm = schoolData.mtm;
       }
     }
-    mounted = true;
   });
 
-  function cacheData(data: Nullable<SchoolSubformData>, id: string) {
-    let updateData: {
-      campus: string;
-      level: string;
-      course: string;
-      mtm: string;
-    };
-    
-    if (mounted && data) {
-      let dataKeys = Object.keys(data);
-      let dataValues = Object.values(data);
-
-      for (let i = 0; i < dataKeys.length - 1; i++) {
-        if (dataValues[i]) {
-          let dataKey = dataKeys[i];
-          updateData[dataKey] = dataValues[i];
-
-          console.log("update values");
-          console.log(updateData);
-        }
-      }
-
-      if ($formData) {
-        console.log("formData detected");
-        let parsed = JSON.parse($formData);
-        console.log(parsed);
-        let updated = { ...parsed, [id]: updateData };
-        console.log("caching");
-        console.log(updated);
-        console.log("cached");
-        formData.set(JSON.stringify(updated));
-      }
-    } else {
-      console.log("No formdata detected");
-      formData.set(JSON.stringify({ [id]: { ...updateData } }));
+  function checkCache(data: Nullable<SchoolSubformData>) {
+    if (cacheready) {
+      cacheData(data, id);
     }
+  }
+
+  function cacheData(data: Nullable<SchoolSubformData>, id: string) {
+    let updateData = {
+      campus: data?.campus,
+      level: data?.level,
+      course: data?.course,
+      mtm: data?.mtm,
+    };
+
+    console.log(updateData);
+
+    let parsedFormData: any;
+
+    if ($formData) {
+      parsedFormData = JSON.parse($formData);
+    } else {
+      parsedFormData = {};
+    }
+
+    parsedFormData = { ...parsedFormData, [id]: updateData };
+
+    console.log("cached data");
+    console.log(parsedFormData);
+    parsedFormData = JSON.stringify(parsedFormData);
+    formData.set(parsedFormData);
+    console.log($formData);
   }
 
   function calculatePercentValid(
@@ -143,12 +132,6 @@
     forcedCourse = "";
   }
 
-  $: if (campus) {
-    course = "";
-    mtm = "";
-    level = "";
-  }
-
   $: data = {
     campus: campus,
     course: course,
@@ -163,9 +146,7 @@
     mtmIsValid
   );
 
-  $: cacheData(data, id);
-
-  $: console.log(data);
+  $: checkCache(data);
 </script>
 
 {#if data}
@@ -176,9 +157,12 @@
     class="my-20 bg-white shadow-md px-5 absolute top-0 inset-x-0"
   >
     <ImageSelect
+      initialData={data.campus}
+      on:updateSelect={() => (cacheready = true)}
       bind:isValid={campusIsValid}
       data={campusSelector}
       bind:value={campus}
+      on:change
     >
       <FormSectionHeading>キャンパスを選択してください</FormSectionHeading>
     </ImageSelect>
@@ -186,6 +170,8 @@
     <div class="w-full h-[20px]" />
     {#if data.campus}
       <SelectInput
+        initialData={data.course}
+        on:updateSelect={() => (cacheready = true)}
         bind:isValid={courseIsValid}
         bind:value={course}
         data={courseSelector}
@@ -196,6 +182,8 @@
       </SelectInput>
       {#if data.course === "グループレッスン"}
         <SelectInput
+          initialData={data.level}
+          on:updateSelect={() => (cacheready = true)}
           bind:isValid={levelIsValid}
           data={levelSelector}
           bind:value={level}
@@ -206,6 +194,8 @@
         </SelectInput>
       {:else if data.course === "マンツーマンレッスン"}
         <SelectInput
+          initialData={data.mtm}
+          on:updateSelect={() => (cacheready = true)}
           bind:isValid={mtmIsValid}
           data={mtmSelector}
           bind:value={mtm}

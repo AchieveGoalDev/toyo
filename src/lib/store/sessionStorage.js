@@ -3,5 +3,10 @@ import { browser } from "$app/environment";
 
 export const formData = writable(browser && sessionStorage.getItem("formdata"));
 
-//@ts-expect-error Argument of type 'string | null' is not assignable to parameter of type 'string'
-formData.subscribe((val) => browser && sessionStorage.setItem("formdata", val));
+formData.subscribe((val) => {
+  if (browser) {
+    console.log("storing", val);
+    //@ts-expect-error Argument of type 'string | null' is not assignable to parameter of type 'string'
+    sessionStorage.setItem("formdata", val);
+  }
+});

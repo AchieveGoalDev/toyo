@@ -1,12 +1,28 @@
 <script lang="ts">
-  import SubHeading from "$lib/headers/SubHeading.svelte";
   import ChoiceScroller from "$lib/forms/ChoiceScroller.svelte";
 
   import type { ImageSelectInput } from "$lib/forms/ApplicationData";
+  import { createEventDispatcher } from "svelte";
+  import { onMount } from "svelte";
+
+  let dispatch = createEventDispatcher();
 
   export let value: string;
   export let isValid: boolean;
   export let data: ImageSelectInput;
+  export let initialData: string;
+
+  function handleChange(value: string) {
+    dispatch("updateSelect", value);
+  }
+
+  function matchDefault(valueOne: string, valueTwo: string) {
+    if (valueOne === valueTwo) {
+      console.log("matched");
+      console.log(valueOne, valueTwo);
+      return true;
+    }
+  }
 
   $: if (!value) {
     isValid = false;
@@ -25,12 +41,17 @@
   >
     <div class="mr-3" />
     <select
+      on:change={() => handleChange(value)}
       bind:value
       class="w-[300px] text-xl my-4 mx-auto shadow-md bg-sky-50 p-1"
     >
-      <option value="">{data.placeholder}</option>
+      <option selected={matchDefault(initialData, "")} value=""
+        >{data.placeholder}</option
+      >
       {#each data.options as option}
-        <option value={option}>{option}</option>
+        <option selected={matchDefault(initialData, option)} value={option}
+          >{option}</option
+        >
       {/each}
     </select>
   </div>
