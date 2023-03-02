@@ -11,6 +11,14 @@
   export let value: string;
   export let initialData: string;
 
+  function handleSize(size: string) {
+    if (size === "short") {
+      return "w-[100px]";
+    } else if (size === "long") {
+      return "w-[200px]";
+    }
+  }
+
   $: errorMessage = data.validator(value);
   $: if (data.isUpper && value) {
     value = value.toUpperCase();
@@ -51,7 +59,7 @@
           pl-2
           py-1
           my-2
-          w-[200px]
+          ${handleSize(data.size)}
         `}
         alt={data.alt}
         placeholder={data.placeholder}
@@ -69,7 +77,7 @@
     {/each}
     {#if !isValid}
       {#each errorMessage as error}
-        <p transition:slide|local class="text-red-600 my-2">{error}</p>
+        <p transition:slide|local class="text-red-600 my-1">{error}</p>
       {/each}
     {/if}
   </div>

@@ -21,20 +21,21 @@ export type PhoneInput = {
 };
 
 export type AddressInput = {
-
-}
+  isNecessary: boolean;
+  label: string;
+  desc: string[];
+};
 
 export type LargeTextInput = {
-
-}
-
-export type FormSection = {
-  requiredInputs: number;
-  name: string;
-  inputs: [TextInput | SelectInput | RadioInput];
+  isNecessary: boolean;
+  size: string;
+  label: string;
+  desc: string[];
+  placeholder: string;
 };
 
 export type TextInput = {
+  size: string;
   isNecessary: boolean;
   isUpper: boolean;
   label: string;
@@ -51,11 +52,29 @@ export type RadioInput = {
   label: string;
   alt: string;
   choices: string[];
+  desc: string[];
+};
+
+export type CheckboxInput = {
+  isNecessary: boolean;
+  label: string;
+  alt: string;
+  choices: string[];
+  desc: string[];
 };
 
 export type SelectInput = {
   placeholder: string;
   options: string[];
+};
+
+export type SelectInputWithLabel = {
+  isNecessary: boolean;
+  placeholder: string;
+  alt: string;
+  options: string[];
+  label: string;
+  desc: string[];
 };
 
 export type ImageArray = ImageArrayItem[];
@@ -86,4 +105,5 @@ export const prevSemester: RadioInput = {
   label: "2022年度通年受講生 ",
   alt: "",
   choices: ["はい", "いいえ"],
+  desc: [],
 };

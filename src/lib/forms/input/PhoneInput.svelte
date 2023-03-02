@@ -27,12 +27,14 @@
 
     let errorMessage: string[] = [];
 
-    if (
-      !checkDigits(phoneOne) ||
-      !checkDigits(phoneTwo) ||
-      !checkDigits(phoneThree)
-    ) {
-      errorMessage.push("半角数字で入力してください");
+    if (phoneOne || phoneTwo || phoneThree) {
+      if (
+        !checkDigits(phoneOne) ||
+        !checkDigits(phoneTwo) ||
+        !checkDigits(phoneThree)
+      ) {
+        errorMessage.push("半角数字で入力してください");
+      }
     }
 
     if (phoneOne) {
@@ -42,7 +44,7 @@
       } else if (!phoneTwo || phoneTwo?.split("").length < 3) {
         console.log("two");
         errorMessage.push("有効な電話番号を入力してください");
-      } else if (!phoneThree || phoneThree?.split("").length < 4) {
+      } else if (!phoneThree || phoneThree?.split("").length < 3) {
         console.log("three");
         errorMessage.push("有効な電話番号を入力してください");
       }

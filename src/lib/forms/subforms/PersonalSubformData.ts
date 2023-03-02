@@ -1,6 +1,16 @@
-import type { EmailInput, PhoneInput, TextInput } from "../ApplicationData";
+import type {
+  AddressInput,
+  CheckboxInput,
+  EmailInput,
+  LargeTextInput,
+  PhoneInput,
+  RadioInput,
+  SelectInputWithLabel,
+  TextInput,
+} from "../ApplicationData";
 
 export const 学籍番号Data: TextInput = {
+  size: "short",
   isNecessary: true,
   label: "学籍番号",
   desc: [
@@ -46,6 +56,7 @@ export const 学籍番号Data: TextInput = {
 };
 
 export const 氏名Data: TextInput = {
+  size: "long",
   isNecessary: true,
   label: "氏名",
   desc: [],
@@ -65,6 +76,7 @@ export const 氏名Data: TextInput = {
 };
 
 export const フリガナData: TextInput = {
+  size: "long",
   isNecessary: true,
   label: "フリガナ",
   desc: [],
@@ -104,6 +116,7 @@ export const フリガナData: TextInput = {
 };
 
 export const 英字名FirstData: TextInput = {
+  size: "long",
   isNecessary: true,
   label: "英字名 First Name (名前)",
   desc: ["頭文字のみ大文字で入力してください。"],
@@ -139,6 +152,7 @@ export const 英字名FirstData: TextInput = {
 };
 
 export const 英字名LastData: TextInput = {
+  size: "long",
   isNecessary: true,
   label: "英字名 Last Name (名字)",
   desc: [],
@@ -174,6 +188,7 @@ export const 英字名LastData: TextInput = {
 };
 
 export const 学年Data: TextInput = {
+  size: "short",
   isNecessary: true,
   label: "学年",
   desc: ["教職員の方は「教員」「職員」等と記載してください。"],
@@ -196,6 +211,7 @@ export const 学年Data: TextInput = {
 //************************TO INTEGRATE */
 
 export const 学部Data: TextInput = {
+  size: "short",
   isNecessary: true,
   label: "学部",
   desc: [],
@@ -216,6 +232,7 @@ export const 学部Data: TextInput = {
 };
 
 export const 学科Data: TextInput = {
+  size: "short",
   isNecessary: true,
   label: "学科",
   desc: [],
@@ -236,6 +253,7 @@ export const 学科Data: TextInput = {
 };
 
 export const 英検Data: TextInput = {
+  size: "short",
   isNecessary: false,
   label: "英検",
   desc: [],
@@ -252,6 +270,7 @@ export const 英検Data: TextInput = {
 };
 
 export const TOEFLData: TextInput = {
+  size: "short",
   isNecessary: false,
   label: "TOEFL",
   desc: [],
@@ -268,6 +287,7 @@ export const TOEFLData: TextInput = {
 };
 
 export const IELTSData: TextInput = {
+  size: "short",
   isNecessary: false,
   label: "IELTS",
   desc: [],
@@ -284,6 +304,7 @@ export const IELTSData: TextInput = {
 };
 
 export const きっかけData: TextInput = {
+  size: "long",
   isNecessary: true,
   label: "本プログラムを知ったきっかけ",
   desc: ["本プログラムを知ったきっかけ記載してください。"],
@@ -329,6 +350,72 @@ export const 個人メールData: EmailInput = {
 
 export const 電話番号Data: PhoneInput = {
   isNecessary: true,
-  desc: ["携帯電話等、日中に連絡のとれる番号を入力ください。"],
+  desc: ["携帯電話等、日中に連絡のとれる番号を入力ください"],
   label: "電話番号",
+};
+
+//**********LARGE TEXT DATA +*******/
+
+export const その他Data: LargeTextInput = {
+  isNecessary: false,
+  size: "small",
+  label: "その他",
+  desc: [],
+  placeholder: "",
+};
+
+export const 備考Data: LargeTextInput = {
+  isNecessary: false,
+  size: "large",
+  label: "備考",
+  desc: ["ご質問事項等ございましたら、上記へご記入ください。"],
+  placeholder: "",
+};
+
+//***************ADDRESS DATA *****/
+
+export const 住所Data: AddressInput = {
+  isNecessary: true,
+  label: "住所",
+  desc: [
+    `登録いただいた住所に教材を郵送いたしますので受け取り希望される住所を
+  建物名や部屋番号まで正確にご記入ください。`,
+  ],
+};
+
+//***************RADIO DATA ****/
+
+export const 性別Data: RadioInput = {
+  isNecessary: true,
+  label: "性別",
+  alt: "性別の入力",
+  choices: ["男性", "女性"],
+  desc: [],
+};
+
+export const 種別Data: RadioInput = {
+  isNecessary: true,
+  label: "種別",
+  alt: "種別の入力",
+  choices: ["学部生", "大学院生", "その他（通信・教職員等）"],
+  desc: [],
+};
+
+export const 試験Data: CheckboxInput = {
+  isNecessary: false,
+  label: "英語試験の受験経験あり・なし",
+  alt: "英語試験の受験経験あり・なしの入力",
+  choices: ["英語試験の受験経験なし"],
+  desc: [""],
+};
+
+export const TOEICData: SelectInputWithLabel = {
+  isNecessary: false,
+  label: "TOEIC受験経験",
+  alt: "TOEIC受験経験の入力",
+  placeholder: "--TOEIC受験経験を選択--",
+  options: ["～350点", "350～450点", "450～600点", "600～点"],
+  desc: [
+    "TOEIC受験経験がない方はその他の英語試験スコアを下記に記載してください。",
+  ],
 };

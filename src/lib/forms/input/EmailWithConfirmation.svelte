@@ -40,15 +40,15 @@
 
       if (mailOne !== mailTwo) {
         errorMessage.push(
-          "入力したメールは一致していない。確認して、もう一度入力してください。"
+          "入力したメールは一致していない。確認して、もう一度入力してください"
         );
       }
     }
 
-    if (data.isNecessary) {
+    if (data.isNecessary && mailOne) {
       if (!checkToyo(mailOne) && !checkIniad(mailOne)) {
         errorMessage.push(
-          `"@toyo.jp"、"@iniad.org"のアドレスを入力してください。`
+          `"@toyo.jp"、"@iniad.org"のアドレスを入力してください`
         );
       }
     }
@@ -139,7 +139,7 @@
     {/each}
     {#if !isValid}
       {#each errorMessage as error}
-        <p transition:slide|local class="text-red-600 my-2">{error}</p>
+        <p transition:slide|local class="text-red-600 my-1">{error}</p>
       {/each}
     {/if}
   </div>

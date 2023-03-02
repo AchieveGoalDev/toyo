@@ -3,6 +3,7 @@
   import ProgressBar from "$lib/forms/input/ProgressBar.svelte";
   import SchoolSubform from "$lib/forms/subforms/SchoolSubform.svelte";
   import PersonalSubform from "./subforms/PersonalSubform.svelte";
+  import ScheduleSubform from "$lib/forms/subforms/ScheduleSubform.svelte";
 
   let currentHeight: number;
   let indexHistory: number[] = [];
@@ -23,7 +24,7 @@
 
   let testSectionData = [test1Data, test2Data, test3Data, test4Data];
 
-  let testSections = ["school", "personal", true, true];
+  let testSections = ["school", "schedule", "personal", true];
 
   let testSectionValidity = [
     test1ValidPercent,
@@ -127,6 +128,13 @@
           bind:selfHeight={currentHeight}
           bind:data={testSectionData[index]}
           id={"school"}
+        />
+      {:else if section === "schedule"}
+        <ScheduleSubform
+          bind:percentValid={testSectionValidity[index]}
+          bind:selfHeight={currentHeight}
+          bind:data={testSectionData[index]}
+          id={"schedule"}
         />
       {:else if section === "personal"}
         <PersonalSubform

@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { fly } from "svelte/transition";
-  import { formData } from "$lib/store/sessionStorage";
+  import { fly, slide } from "svelte/transition";
 
   import {
     学籍番号Data,
@@ -19,13 +17,23 @@
     大学メールData,
     個人メールData,
     電話番号Data,
+    その他Data,
+    備考Data,
+    住所Data,
+    性別Data,
+    種別Data,
+    試験Data,
+    TOEICData,
   } from "./PersonalSubformData";
 
   import TextInput from "$lib/forms/input/TextInput.svelte";
   import EmailWithConfirmation from "$lib/forms/input/EmailWithConfirmation.svelte";
-  import PhoneInput from "../input/PhoneInput.svelte";
-  import SelectInput from "$lib/forms/input/SelectInput.svelte";
-  import ImageSelect from "$lib/forms/input/ImageSelect.svelte";
+  import PhoneInput from "$lib/forms/input/PhoneInput.svelte";
+  import LargeTextInput from "$lib/forms/input/LargeTextInput.svelte";
+  import AddressInput from "$lib/forms/input/AddressInput.svelte";
+  import RadioInput from "$lib/forms/input/RadioInput.svelte";
+  import CheckboxInput from "$lib/forms/input/CheckboxInput.svelte";
+  import SelectInputWithLabel from "$lib/forms/input/SelectInputWithLabel.svelte";
 
   import FormSectionHeading from "../text/FormSectionHeading.svelte";
 
@@ -46,6 +54,13 @@
     大学メール: string;
     個人メール: string;
     電話番号: string;
+    その他: string;
+    備考: string;
+    住所: string;
+    性別: string;
+    種別: string;
+    試験: boolean;
+    TOEIC: string;
   };
 
   export let id: string;
@@ -68,6 +83,13 @@
   let 大学メールIsValid = false;
   let 個人メールIsValid = false;
   let 電話番号IsValid = false;
+  let その他IsValid = false;
+  let 備考IsValid = false;
+  let 住所IsValid = false;
+  let 性別IsValid = false;
+  let 種別IsValid = false;
+  let 試験IsValid = false;
+  let TOEICIsValid = false;
 
   let 学籍番号: string;
   let 氏名: string;
@@ -84,6 +106,13 @@
   let 大学メール: string;
   let 個人メール: string;
   let 電話番号: string;
+  let その他: string;
+  let 備考: string;
+  let 住所: string;
+  let 性別: string;
+  let 種別: string;
+  let 試験: boolean;
+  let TOEIC: string;
 
   let cacheready = false;
 
@@ -165,6 +194,13 @@
     大学メール,
     個人メール,
     電話番号,
+    その他,
+    備考,
+    住所,
+    性別,
+    種別,
+    試験,
+    TOEIC,
   };
 
   $: percentValid = calculatePercentValid([
@@ -179,6 +215,9 @@
     きっかけIsValid,
     大学メールIsValid,
     電話番号IsValid,
+    住所IsValid,
+    性別IsValid,
+    種別IsValid,
   ]);
 
   // $: checkCache(data);
@@ -199,6 +238,12 @@
       initialData={""}
     />
     <hr />
+    <RadioInput
+      bind:value={性別}
+      bind:isValid={性別IsValid}
+      data={性別Data}
+      initialData={""}
+    />
     <TextInput
       bind:value={氏名}
       bind:isValid={氏名IsValid}
@@ -223,7 +268,19 @@
       data={英字名LastData}
       initialData={""}
     />
+    <AddressInput
+      bind:value={住所}
+      bind:isValid={住所IsValid}
+      data={住所Data}
+      initialData=""
+    />
     <hr />
+    <RadioInput
+      bind:value={種別}
+      bind:isValid={種別IsValid}
+      data={種別Data}
+      initialData={""}
+    />
     <TextInput
       bind:value={学年}
       bind:isValid={学年IsValid}
@@ -240,32 +297,6 @@
       bind:value={学科}
       bind:isValid={学科IsValid}
       data={学科Data}
-      initialData={""}
-    />
-    <hr />
-    <TextInput
-      bind:value={英検}
-      bind:isValid={英検IsValid}
-      data={英検Data}
-      initialData={""}
-    />
-    <TextInput
-      bind:value={TOEFL}
-      bind:isValid={TOEFLIsValid}
-      data={TOEFLData}
-      initialData={""}
-    />
-    <TextInput
-      bind:value={IELTS}
-      bind:isValid={IELTSIsValid}
-      data={IELTSData}
-      initialData={""}
-    />
-    <hr />
-    <TextInput
-      bind:value={きっかけ}
-      bind:isValid={きっかけIsValid}
-      data={きっかけData}
       initialData={""}
     />
     <EmailWithConfirmation
@@ -285,6 +316,61 @@
       bind:isValid={電話番号IsValid}
       data={電話番号Data}
       initialData={""}
+    />
+    <hr />
+    <CheckboxInput
+      bind:value={試験}
+      bind:isValid={試験IsValid}
+      data={試験Data}
+      initialData={""}
+    />
+    <hr />
+    {#if !試験}
+      <div transition:slide|local>
+        <SelectInputWithLabel
+          bind:value={TOEIC}
+          bind:isValid={TOEICIsValid}
+          data={TOEICData}
+          initialData={""}
+        />
+        <TextInput
+          bind:value={英検}
+          bind:isValid={英検IsValid}
+          data={英検Data}
+          initialData={""}
+        />
+        <TextInput
+          bind:value={TOEFL}
+          bind:isValid={TOEFLIsValid}
+          data={TOEFLData}
+          initialData={""}
+        />
+        <TextInput
+          bind:value={IELTS}
+          bind:isValid={IELTSIsValid}
+          data={IELTSData}
+          initialData={""}
+        />
+        <LargeTextInput
+          bind:value={その他}
+          bind:isValid={その他IsValid}
+          data={その他Data}
+          initialData=""
+        />
+      </div>
+    {/if}
+    <hr />
+    <TextInput
+      bind:value={きっかけ}
+      bind:isValid={きっかけIsValid}
+      data={きっかけData}
+      initialData={""}
+    />
+    <LargeTextInput
+      bind:value={備考}
+      bind:isValid={備考IsValid}
+      data={備考Data}
+      initialData=""
     />
   </div>
 {:else}

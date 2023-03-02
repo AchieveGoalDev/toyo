@@ -1,16 +1,16 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import type { RadioInput } from "$lib/forms/ApplicationData";
+  import type { CheckboxInput } from "$lib/forms/ApplicationData";
 
-  export let data: RadioInput;
+  export let data: CheckboxInput;
 
-  export let isValid: boolean;
-  export let value: string;
   export let initialData: string;
+  export let isValid: boolean;
+  export let value: boolean;
 
   let errorMessage: string[] = [];
 
-  $: if (!isValid) {
+  $: if (!isValid && data.isNecessary) {
     errorMessage.push("必要項目です");
   } else {
     errorMessage = [];
@@ -30,25 +30,23 @@
     {/if}
     {data.label}</legend
   >
-  <div class="w-full pl-5 col-span-8 flex flex-col">
-    <fieldset class="flex flex-row my-2 place-content-around mb-2">
-      {#each data.choices as choice}
-        <div class="flex flex-row">
-          <label class="mr-1" for={choice}>{choice}</label>
-          <input
-            bind:group={value}
-            value={choice}
-            id={choice}
-            type="radio"
-            name={data.label}
-          />
-        </div>
-      {/each}
-    </fieldset>
+  <fieldset class="pl-5 flex flex-col my-2 col-span-8">
+    {#each data.choices as choice}
+      <div>
+        <label class="mr-4" for={choice}>{choice}</label>
+        <input
+          bind:checked={value}
+          value={choice}
+          id={choice}
+          type="checkbox"
+          name={data.label}
+        />
+      </div>
+    {/each}
     {#if !isValid}
       {#each errorMessage as error}
         <p transition:slide class="text-red-500">{error}</p>
       {/each}
     {/if}
-  </div>
+  </fieldset>
 </div>
