@@ -5,21 +5,14 @@
   export let data: CheckboxInput;
 
   export let initialData: string;
-  export let isValid: boolean;
   export let value: boolean;
 
   let errorMessage: string[] = [];
 
-  $: if (!isValid && data.isNecessary) {
+  $: if (!value && data.isNecessary) {
     errorMessage.push("必要項目です");
   } else {
     errorMessage = [];
-  }
-
-  $: if (!value) {
-    isValid = false;
-  } else {
-    isValid = true;
   }
 </script>
 
@@ -32,20 +25,21 @@
   >
   <fieldset class="pl-5 flex flex-col my-2 col-span-8">
     {#each data.choices as choice}
-      <div>
-        <label class="mr-4" for={choice}>{choice}</label>
+      <div class="flex flex-row space between">
         <input
+          class="mr-3"
           bind:checked={value}
           value={choice}
           id={choice}
           type="checkbox"
           name={data.label}
         />
+        <label class="mr-4" for={choice}>{choice}</label>
       </div>
     {/each}
-    {#if !isValid}
+    {#if errorMessage.length > 0}
       {#each errorMessage as error}
-        <p transition:slide class="text-red-500">{error}</p>
+        <p transition:slide class="text-red-500 mx-auto my-1">{error}</p>
       {/each}
     {/if}
   </fieldset>

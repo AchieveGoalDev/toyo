@@ -4,6 +4,7 @@
   import SchoolSubform from "$lib/forms/subforms/SchoolSubform.svelte";
   import PersonalSubform from "./subforms/PersonalSubform.svelte";
   import ScheduleSubform from "$lib/forms/subforms/ScheduleSubform.svelte";
+  import AgreeSubform from "$lib/forms/subforms/AgreeSubform.svelte";
 
   let currentHeight: number;
   let indexHistory: number[] = [];
@@ -24,7 +25,7 @@
 
   let testSectionData = [test1Data, test2Data, test3Data, test4Data];
 
-  let testSections = ["school", "schedule", "personal", true];
+  let testSections = ["school", "agree", "personal", "personal"];
 
   let testSectionValidity = [
     test1ValidPercent,
@@ -142,6 +143,13 @@
           bind:selfHeight={currentHeight}
           bind:data={testSectionData[index]}
           id={"personal"}
+        />
+      {:else if section === "agree"}
+        <AgreeSubform
+          bind:percentValid={testSectionValidity[index]}
+          bind:selfHeight={currentHeight}
+          bind:data={testSectionData[index]}
+          id={"agree"}
         />
       {:else}
         <TestSection

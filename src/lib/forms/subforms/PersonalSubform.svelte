@@ -88,7 +88,6 @@
   let 住所IsValid = false;
   let 性別IsValid = false;
   let 種別IsValid = false;
-  let 試験IsValid = false;
   let TOEICIsValid = false;
 
   let 学籍番号: string;
@@ -318,12 +317,7 @@
       initialData={""}
     />
     <hr />
-    <CheckboxInput
-      bind:value={試験}
-      bind:isValid={試験IsValid}
-      data={試験Data}
-      initialData={""}
-    />
+    <CheckboxInput bind:value={試験} data={試験Data} initialData={""} />
     <hr />
     {#if !試験}
       <div transition:slide|local>
