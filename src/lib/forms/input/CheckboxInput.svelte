@@ -4,7 +4,6 @@
 
   export let data: CheckboxInput;
 
-  export let initialData: string;
   export let value: boolean;
 
   let errorMessage: string[] = [];

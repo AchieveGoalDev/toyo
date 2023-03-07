@@ -13,7 +13,6 @@
 
   export let isValid: boolean;
   export let value: string;
-  export let initialData: string;
 
   function checkValidPhone(
     phoneOne: string,
@@ -21,6 +20,9 @@
     phoneThree: string
   ) {
     function checkDigits(input: string) {
+      if (!input) {
+        return true;
+      }
       let regex = /^[0-9]*$/;
       return regex.test(input);
     }

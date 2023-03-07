@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
+  import { fly, slide } from "svelte/transition";
 
   import {
     変更Data,
@@ -180,113 +180,93 @@
 {#if data}
   <div
     bind:clientHeight={selfHeight}
-    in:fly={{ x: 200, opacity: 0 }}
+    in:slide
     out:fly={{ x: -200, opacity: 0 }}
-    class="my-20 bg-white shadow-md px-5 absolute top-0 inset-x-0"
+    class="my-20 bg-white shadow-md px-5 row-span-full col-span-full top-0 inset-x-0"
   >
     <FormSectionHeading>受講希望時間選択</FormSectionHeading>
 
-    <RadioInput
-      bind:value={変更}
-      bind:isValid={変更IsValid}
-      data={変更Data}
-      initialData={""}
-    />
+    <RadioInput bind:value={変更} bind:isValid={変更IsValid} data={変更Data} />
 
     <FormSectionHeading>月曜日</FormSectionHeading>
     <SelectInputWithLabel
       bind:value={月第1}
       bind:isValid={月第1IsValid}
       data={第1Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={月第2}
       bind:isValid={月第2IsValid}
       data={第1Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={月第3}
       bind:isValid={月第3IsValid}
       data={第3Data}
-      initialData={""}
     />
     <FormSectionHeading>火曜日</FormSectionHeading>
     <SelectInputWithLabel
       bind:value={火第1}
       bind:isValid={火第1IsValid}
       data={第1Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={火第2}
       bind:isValid={火第2IsValid}
       data={第2Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={火第3}
       bind:isValid={火第3IsValid}
       data={第3Data}
-      initialData={""}
     />
     <FormSectionHeading>水曜日</FormSectionHeading>
     <SelectInputWithLabel
       bind:value={水第1}
       bind:isValid={水第1IsValid}
       data={第1Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={水第2}
       bind:isValid={水第2IsValid}
       data={第2Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={水第3}
       bind:isValid={水第3IsValid}
       data={第3Data}
-      initialData={""}
     />
     <FormSectionHeading>木曜日</FormSectionHeading>
     <SelectInputWithLabel
       bind:value={木第1}
       bind:isValid={木第1IsValid}
       data={第1Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={木第2}
       bind:isValid={木第2IsValid}
       data={第2Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={木第3}
       bind:isValid={木第3IsValid}
       data={第3Data}
-      initialData={""}
     />
     <FormSectionHeading>金曜日</FormSectionHeading>
     <SelectInputWithLabel
       bind:value={金第1}
       bind:isValid={金第1IsValid}
       data={第1Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={金第2}
       bind:isValid={金第2IsValid}
       data={第2Data}
-      initialData={""}
     />
     <SelectInputWithLabel
       bind:value={金第3}
       bind:isValid={金第3IsValid}
       data={第3Data}
-      initialData={""}
     />
   </div>
 {:else}

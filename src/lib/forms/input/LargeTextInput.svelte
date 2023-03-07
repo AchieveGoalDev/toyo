@@ -9,7 +9,6 @@
 
   export let isValid: boolean;
   export let value: string;
-  export let initialData: string;
 
   $: if (errorMessage?.length > 0) {
     isValid = false;

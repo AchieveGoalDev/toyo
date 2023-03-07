@@ -6,6 +6,10 @@
   import ScheduleSubform from "$lib/forms/subforms/ScheduleSubform.svelte";
   import AgreeSubform from "$lib/forms/subforms/AgreeSubform.svelte";
 
+  //@ts-ignore
+  import * as animateScroll from "svelte-scrollto";
+
+
   let currentHeight: number;
   let indexHistory: number[] = [];
   let canProgress = false;
@@ -16,7 +20,6 @@
   let test4ValidPercent = 0;
 
   let index = 0;
-  let transitionsLocked = false;
 
   let test1Data;
   let test2Data;
@@ -25,7 +28,7 @@
 
   let testSectionData = [test1Data, test2Data, test3Data, test4Data];
 
-  let testSections = ["school", "agree", "personal", "personal"];
+  let testSections = ["school", "personal", "schedule", "agree"];
 
   let testSectionValidity = [
     test1ValidPercent,
@@ -44,12 +47,24 @@
   function handlePrevious() {
     if (index >= 0) {
       index--;
+
+      animateScroll.scrollTo({
+        element: "#formtop",
+        duration: 400,
+        offset: -80,
+      });
     }
   }
 
   function handleNext() {
     if (index <= testSectionData.length - 1) {
       index++;
+
+      animateScroll.scrollTo({
+        element: "#formtop",
+        duration: 400,
+        offset: -80,
+      });
     }
   }
 
@@ -113,7 +128,7 @@
 </script>
 
 <form
-  class="flex flex-col bg-slate-50 w-full sm:w-2/3 mx-auto grow-0 items-center relative"
+  class="flex flex-col bg-slate-50 w-full sm:w-2/3 mx-auto grow-0  grid grid-col-1 grid-row-1 items-center relative"
 >
   <ProgressBar progress={progressData} />
 
@@ -121,7 +136,7 @@
     <SchoolDataSection bind:data={schoolData} bind:isValid={schoolDataIsValid} />
   -->
 
-  <div style:height={`${currentHeight}px`} class="my-16">
+  <div id="formtop">
     {#each [testSections[index]] as section (index)}
       {#if section === "school"}
         <SchoolSubform
@@ -152,13 +167,9 @@
           id={"agree"}
         />
       {:else}
-        <TestSection
-          previousData={undefined}
-          bind:selfHeight={currentHeight}
-          bind:data={testSectionData[index]}
-          bind:percentValid={testSectionValidity[index]}
-          id={`test${index}`}
-        />
+        <p class="text-red-500 text-xl">
+          エラーが発生しました。ページをリロードしてください。
+        </p>
       {/if}
     {/each}
   </div>

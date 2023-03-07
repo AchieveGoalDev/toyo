@@ -23,13 +23,13 @@
   $: handleIndex(selection);
 </script>
 
-<div class="relative w-full h-[75px] sm:h-[150px] flex flex-col-reverse">
+<div class="grid grid-rows-1 grid-cols-1 relative">
   {#each [images[index]] as src (index)}
     <img
       transition:fly
       src={src.img}
       alt=""
-      class="absolute z-1 bottom-0 shrink-0 w-auto"
+      class="w-auto col-span-full row-span-full"
     />
     {#if src.text}
       <div

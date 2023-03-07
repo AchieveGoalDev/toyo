@@ -10,18 +10,9 @@
   export let value: string;
   export let isValid: boolean;
   export let data: ImageSelectInput;
-  export let initialData: string;
 
   function handleChange(value: string) {
     dispatch("updateSelect", value);
-  }
-
-  function matchDefault(valueOne: string, valueTwo: string) {
-    if (valueOne === valueTwo) {
-      console.log("matched");
-      console.log(valueOne, valueTwo);
-      return true;
-    }
   }
 
   $: if (!value) {
@@ -45,13 +36,9 @@
       bind:value
       class="w-[300px] text-xl my-4 mx-auto shadow-md bg-sky-50 p-1"
     >
-      <option selected={matchDefault(initialData, "")} value=""
-        >{data.placeholder}</option
-      >
+      <option value="">{data.placeholder}</option>
       {#each data.options as option}
-        <option selected={matchDefault(initialData, option)} value={option}
-          >{option}</option
-        >
+        <option value={option}>{option}</option>
       {/each}
     </select>
   </div>

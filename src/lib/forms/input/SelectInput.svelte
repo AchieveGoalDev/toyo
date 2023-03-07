@@ -11,7 +11,6 @@
   export let forced: string;
   export let forcedMessage: string;
   export let isValid: boolean;
-  export let initialData: string;
 
   let disabled: boolean;
 
@@ -51,15 +50,9 @@
       class="w-[300px] text-xl my-4 mx-auto shadow-md transition-all ease-in disabled:bg-slate-400 bg-sky-50 disabled:shadow-none"
       {disabled}
     >
-      <option
-        selected={matchDefault(initialData, "")}
-        value=""
-        class="bg-sky-100">{data.placeholder}</option
-      >
+      <option value="" class="bg-sky-100">{data.placeholder}</option>
       {#each data.options as option}
-        <option selected={matchDefault(initialData, option)} value={option}
-          >{option}</option
-        >
+        <option value={option}>{option}</option>
       {/each}
     </select>
   </div>

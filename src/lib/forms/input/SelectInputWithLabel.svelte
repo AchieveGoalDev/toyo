@@ -5,7 +5,6 @@
   export let value: string;
   export let data: SelectInputWithLabel;
   export let isValid: boolean;
-  export let initialData: string;
 
   let disabled: boolean;
 
@@ -38,7 +37,7 @@
   <div class="ml-4 w-full col-span-9">
     <select
       bind:value
-      class="w-[300px] p-1 text-xl my-4 mx-auto shadow-md transition-all ease-in disabled:bg-slate-400 bg-sky-50 disabled:shadow-none"
+      class="w-[200px] sm:w-[300px] p-1 text-md sm:text-xl my-4 mx-auto shadow-md transition-all ease-in disabled:bg-slate-400 bg-sky-50 disabled:shadow-none"
       {disabled}
     >
       <option value="" class="bg-sky-100">{data.placeholder}</option>

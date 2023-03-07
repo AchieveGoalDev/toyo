@@ -9,7 +9,6 @@
 
   export let isValid: boolean;
   export let value: string;
-  export let initialData: string;
 
   function handleSize(size: string) {
     if (size === "short") {

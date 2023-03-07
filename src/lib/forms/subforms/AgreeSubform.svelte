@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
+  import { fly, slide } from "svelte/transition";
 
   import {
     キャンセル,
@@ -126,9 +126,9 @@
 {#if data}
   <div
     bind:clientHeight={selfHeight}
-    in:fly={{ x: 200, opacity: 0 }}
+    in:slide
     out:fly={{ x: -200, opacity: 0 }}
-    class="my-20 bg-white shadow-md px-5 absolute top-0 inset-x-0"
+    class="my-20 bg-white shadow-md px-5 row-span-full col-span-full top-0 inset-x-0"
   >
     <FormSectionHeading>承諾事項</FormSectionHeading>
     <FormSectionDescription>
@@ -139,7 +139,6 @@
     {#each 受講Array as input, i}
       <CheckboxInput
         data={new AgreeInput(受講Short[i] + "に関して", 受講に関して[i])}
-        initialData={""}
         bind:value={受講Array[i]}
       />
     {/each}
@@ -148,7 +147,6 @@
     {#each キャンセルArray as input, i}
       <CheckboxInput
         data={new AgreeInput(キャンセルShort[i] + "に関して", キャンセル[i])}
-        initialData={""}
         bind:value={キャンセルArray[i]}
       />
     {/each}

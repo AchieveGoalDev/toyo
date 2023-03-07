@@ -1,4 +1,3 @@
-//@ts-ignore
 {
   "extends": "./.svelte-kit/tsconfig.json",
   "ignoreDeprications": "5.0",
@@ -11,7 +10,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "strictPropertyInitialization": false
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //

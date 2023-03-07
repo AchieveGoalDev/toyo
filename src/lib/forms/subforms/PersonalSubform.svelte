@@ -26,6 +26,31 @@
     TOEICData,
   } from "./PersonalSubformData";
 
+  import {
+    学籍番号,
+    氏名,
+    フリガナ,
+    英字名First,
+    英字名Last,
+    学年,
+    学部,
+    学科,
+    英検,
+    TOEFL,
+    IELTS,
+    きっかけ,
+    大学メール,
+    個人メール,
+    電話番号,
+    その他,
+    備考,
+    住所,
+    性別,
+    種別,
+    試験,
+    TOEIC,
+  } from "$lib/store/personalSubform";
+
   import TextInput from "$lib/forms/input/TextInput.svelte";
   import EmailWithConfirmation from "$lib/forms/input/EmailWithConfirmation.svelte";
   import PhoneInput from "$lib/forms/input/PhoneInput.svelte";
@@ -90,84 +115,6 @@
   let 種別IsValid = false;
   let TOEICIsValid = false;
 
-  let 学籍番号: string;
-  let 氏名: string;
-  let フリガナ: string;
-  let 英字名First: string;
-  let 英字名Last: string;
-  let 学年: string;
-  let 学部: string;
-  let 学科: string;
-  let 英検: string;
-  let TOEFL: string;
-  let IELTS: string;
-  let きっかけ: string;
-  let 大学メール: string;
-  let 個人メール: string;
-  let 電話番号: string;
-  let その他: string;
-  let 備考: string;
-  let 住所: string;
-  let 性別: string;
-  let 種別: string;
-  let 試験: boolean;
-  let TOEIC: string;
-
-  let cacheready = false;
-
-  // onMount(() => {
-  // console.log("mounted");
-  // if ($formData) {
-  //   console.log("formdataDetected");
-  //   console.log(JSON.parse($formData));
-  // }
-
-  // if (data && $formData) {
-  //   let parsedData = JSON.parse($formData);
-
-  //   if (parsedData.school) {
-  //     let schoolData = parsedData.school;
-  //     data.campus = schoolData.campus;
-  //     data.level = schoolData.level;
-  //     data.course = schoolData.course;
-  //     data.mtm = schoolData.mtm;
-  //   }
-  // }
-  // });
-
-  // function checkCache(data: Nullable<SchoolSubformData>) {
-  //   if (cacheready) {
-  //     cacheData(data, id);
-  //   }
-  // }
-
-  // function cacheData(data: Nullable<SchoolSubformData>, id: string) {
-  //   let updateData = {
-  //     campus: data?.campus,
-  //     level: data?.level,
-  //     course: data?.course,
-  //     mtm: data?.mtm,
-  //   };
-
-  //   console.log(updateData);
-
-  //   let parsedFormData: any;
-
-  //   if ($formData) {
-  //     parsedFormData = JSON.parse($formData);
-  //   } else {
-  //     parsedFormData = {};
-  //   }
-
-  //   parsedFormData = { ...parsedFormData, [id]: updateData };
-
-  //   console.log("cached data");
-  //   console.log(parsedFormData);
-  //   parsedFormData = JSON.stringify(parsedFormData);
-  //   formData.set(parsedFormData);
-  //   console.log($formData);
-  // }
-
   function calculatePercentValid(toCheck: boolean[]) {
     let toValidate = toCheck.length;
     let validTotal = 0;
@@ -176,31 +123,6 @@
 
     return (validTotal / toValidate) * 100;
   }
-
-  $: data = {
-    学籍番号,
-    氏名,
-    フリガナ,
-    英字名First,
-    英字名Last,
-    学年,
-    学部,
-    学科,
-    英検,
-    TOEFL,
-    IELTS,
-    きっかけ,
-    大学メール,
-    個人メール,
-    電話番号,
-    その他,
-    備考,
-    住所,
-    性別,
-    種別,
-    試験,
-    TOEIC,
-  };
 
   $: percentValid = calculatePercentValid([
     学籍番号IsValid,
@@ -222,151 +144,105 @@
   // $: checkCache(data);
 </script>
 
-{#if data}
   <div
     bind:clientHeight={selfHeight}
-    in:fly={{ x: 200, opacity: 0 }}
+    in:slide
     out:fly={{ x: -200, opacity: 0 }}
-    class="my-20 bg-white shadow-md px-5 absolute top-0 inset-x-0"
+    class="my-20 bg-white shadow-md px-5 col-span-full row-span-full top-0 inset-x-0"
   >
     <FormSectionHeading>申込者情報</FormSectionHeading>
     <TextInput
-      bind:value={学籍番号}
+      bind:value={$学籍番号}
       bind:isValid={学籍番号IsValid}
       data={学籍番号Data}
-      initialData={""}
     />
     <hr />
-    <RadioInput
-      bind:value={性別}
-      bind:isValid={性別IsValid}
-      data={性別Data}
-      initialData={""}
-    />
+    <RadioInput bind:value={$性別} bind:isValid={性別IsValid} data={性別Data} />
+    <TextInput bind:value={$氏名} bind:isValid={氏名IsValid} data={氏名Data} />
     <TextInput
-      bind:value={氏名}
-      bind:isValid={氏名IsValid}
-      data={氏名Data}
-      initialData={""}
-    />
-    <TextInput
-      bind:value={フリガナ}
+      bind:value={$フリガナ}
       bind:isValid={フリガナIsValid}
       data={フリガナData}
-      initialData={""}
     />
     <TextInput
-      bind:value={英字名First}
+      bind:value={$英字名First}
       bind:isValid={英字名FirstIsValid}
       data={英字名FirstData}
-      initialData={""}
     />
     <TextInput
-      bind:value={英字名Last}
+      bind:value={$英字名Last}
       bind:isValid={英字名LastIsValid}
       data={英字名LastData}
-      initialData={""}
     />
     <AddressInput
-      bind:value={住所}
+      bind:value={$住所}
       bind:isValid={住所IsValid}
       data={住所Data}
       initialData=""
     />
     <hr />
-    <RadioInput
-      bind:value={種別}
-      bind:isValid={種別IsValid}
-      data={種別Data}
-      initialData={""}
-    />
-    <TextInput
-      bind:value={学年}
-      bind:isValid={学年IsValid}
-      data={学年Data}
-      initialData={""}
-    />
-    <TextInput
-      bind:value={学部}
-      bind:isValid={学部IsValid}
-      data={学部Data}
-      initialData={""}
-    />
-    <TextInput
-      bind:value={学科}
-      bind:isValid={学科IsValid}
-      data={学科Data}
-      initialData={""}
-    />
+    <RadioInput bind:value={$種別} bind:isValid={種別IsValid} data={種別Data} />
+    <TextInput bind:value={$学年} bind:isValid={学年IsValid} data={学年Data} />
+    <TextInput bind:value={$学部} bind:isValid={学部IsValid} data={学部Data} />
+    <TextInput bind:value={$学科} bind:isValid={学科IsValid} data={学科Data} />
     <EmailWithConfirmation
-      bind:value={大学メール}
+      bind:value={$大学メール}
       bind:isValid={大学メールIsValid}
       data={大学メールData}
       initialData={""}
     />
     <EmailWithConfirmation
-      bind:value={個人メール}
+      bind:value={$個人メール}
       bind:isValid={個人メールIsValid}
       data={個人メールData}
       initialData={""}
     />
     <PhoneInput
-      bind:value={電話番号}
+      bind:value={$電話番号}
       bind:isValid={電話番号IsValid}
       data={電話番号Data}
-      initialData={""}
     />
     <hr />
-    <CheckboxInput bind:value={試験} data={試験Data} initialData={""} />
+    <CheckboxInput bind:value={$試験} data={試験Data} />
     <hr />
-    {#if !試験}
+    {#if !$試験}
       <div transition:slide|local>
         <SelectInputWithLabel
-          bind:value={TOEIC}
+          bind:value={$TOEIC}
           bind:isValid={TOEICIsValid}
           data={TOEICData}
-          initialData={""}
         />
         <TextInput
-          bind:value={英検}
+          bind:value={$英検}
           bind:isValid={英検IsValid}
           data={英検Data}
-          initialData={""}
         />
         <TextInput
-          bind:value={TOEFL}
+          bind:value={$TOEFL}
           bind:isValid={TOEFLIsValid}
           data={TOEFLData}
-          initialData={""}
         />
         <TextInput
-          bind:value={IELTS}
+          bind:value={$IELTS}
           bind:isValid={IELTSIsValid}
           data={IELTSData}
-          initialData={""}
         />
         <LargeTextInput
-          bind:value={その他}
+          bind:value={$その他}
           bind:isValid={その他IsValid}
           data={その他Data}
-          initialData=""
         />
       </div>
     {/if}
     <hr />
     <TextInput
-      bind:value={きっかけ}
+      bind:value={$きっかけ}
       bind:isValid={きっかけIsValid}
       data={きっかけData}
-      initialData={""}
     />
     <LargeTextInput
-      bind:value={備考}
+      bind:value={$備考}
       bind:isValid={備考IsValid}
       data={備考Data}
-      initialData=""
     />
   </div>
-{:else}
-  <p>フォームデータを読み込み中</p>
-{/if}

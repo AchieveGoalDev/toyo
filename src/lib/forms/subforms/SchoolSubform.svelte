@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { fly } from "svelte/transition";
-  import { formData } from "$lib/store/sessionStorage";
+  import { campus, level, course, mtm } from "$lib/store/schoolSubform";
+
+  import { fly, slide } from "svelte/transition";
 
   import SelectInput from "$lib/forms/input/SelectInput.svelte";
   import ImageSelect from "$lib/forms/input/ImageSelect.svelte";
@@ -14,6 +14,9 @@
     courseSelector,
     mtmSelector,
   } from "$lib/forms/subforms/SchoolSubformData";
+
+  import { campuses } from "$lib/forms/ApplicationData";
+  import type { CampusOfferings } from "/forms/ApplicationData";
 
   type Nullable<T> = T | undefined;
   type SchoolSubformData = {
@@ -41,64 +44,29 @@
   let courseIsValid = false;
   let mtmIsValid = false;
 
-  let campus: string;
-  let level: string;
-  let course: string;
-  let mtm: string;
-
-  let cacheready = false;
-
-  onMount(() => {
-    console.log("mounted");
-    if ($formData) {
-      console.log("formdataDetected");
-      console.log(JSON.parse($formData));
-    }
-
-    if (data && $formData) {
-      let parsedData = JSON.parse($formData);
-
-      if (parsedData.school) {
-        let schoolData = parsedData.school;
-        data.campus = schoolData.campus;
-        data.level = schoolData.level;
-        data.course = schoolData.course;
-        data.mtm = schoolData.mtm;
-      }
-    }
-  });
-
-  function checkCache(data: Nullable<SchoolSubformData>) {
-    if (cacheready) {
-      cacheData(data, id);
+  function handleCourseName(course: string) {
+    if (course === "MTM") {
+      return "マンツーマンレッスン";
+    } else if (course === "GROUP") {
+      return "グループレッスン";
     }
   }
 
-  function cacheData(data: Nullable<SchoolSubformData>, id: string) {
-    let updateData = {
-      campus: data?.campus,
-      level: data?.level,
-      course: data?.course,
-      mtm: data?.mtm,
-    };
-
-    console.log(updateData);
-
-    let parsedFormData: any;
-
-    if ($formData) {
-      parsedFormData = JSON.parse($formData);
-    } else {
-      parsedFormData = {};
+  function updateCampus(choice: string) {
+    if (choice) {
+      $course = "";
+      $level = "";
+      $mtm = "";
+      campuses.forEach((campus) => {
+        if (campus.name === choice) {
+          //@ts-ignore
+          courseSelector.options = campus.courses.map((course) =>
+            handleCourseName(course)
+          );
+          levelSelector.options = campus.levels;
+        }
+      });
     }
-
-    parsedFormData = { ...parsedFormData, [id]: updateData };
-
-    console.log("cached data");
-    console.log(parsedFormData);
-    parsedFormData = JSON.stringify(parsedFormData);
-    formData.set(parsedFormData);
-    console.log($formData);
   }
 
   function calculatePercentValid(
@@ -132,13 +100,6 @@
     forcedCourse = "";
   }
 
-  $: data = {
-    campus: campus,
-    course: course,
-    level: level,
-    mtm: mtm,
-  };
-
   $: percentValid = calculatePercentValid(
     campusIsValid,
     levelIsValid,
@@ -146,67 +107,44 @@
     mtmIsValid
   );
 
-  $: checkCache(data);
+  $: updateCampus($campus);
 </script>
 
-{#if data}
-  <div
-    bind:clientHeight={selfHeight}
-    in:fly={{ x: 200, opacity: 0 }}
-    out:fly={{ x: -200, opacity: 0 }}
-    class="my-20 bg-white shadow-md px-5 absolute top-0 inset-x-0"
+<div
+  bind:clientHeight={selfHeight}
+  transition:slide
+  class="my-20 bg-white shadow-md px-5 row-span-full col-span-full top-0 inset-x-0"
+>
+  <ImageSelect
+    bind:isValid={campusIsValid}
+    data={campusSelector}
+    bind:value={$campus}
+    on:change
   >
-    <ImageSelect
-      initialData={data.campus}
-      on:updateSelect={() => (cacheready = true)}
-      bind:isValid={campusIsValid}
-      data={campusSelector}
-      bind:value={campus}
-      on:change
-    >
-      <FormSectionHeading>キャンパスを選択してください</FormSectionHeading>
-    </ImageSelect>
+    <FormSectionHeading>キャンパスを選択してください</FormSectionHeading>
+  </ImageSelect>
 
-    <div class="w-full h-[20px]" />
-    {#if data.campus}
+  <div class="w-full h-[20px]" />
+  {#if $campus}
+    <SelectInput
+      bind:isValid={courseIsValid}
+      bind:value={$course}
+      data={courseSelector}
+      forced={forcedCourse}
+      forcedMessage={forcedCourseMsg}
+    >
+      <FormSectionHeading>受講スタイルを選択してください</FormSectionHeading>
+    </SelectInput>
+    {#if $course }
       <SelectInput
-        initialData={data.course}
-        on:updateSelect={() => (cacheready = true)}
-        bind:isValid={courseIsValid}
-        bind:value={course}
-        data={courseSelector}
-        forced={forcedCourse}
-        forcedMessage={forcedCourseMsg}
+        bind:isValid={levelIsValid}
+        data={levelSelector}
+        bind:value={$level}
+        forced={forcedLevel}
+        forcedMessage={forcedLevelMsg}
       >
-        <FormSectionHeading>受講スタイルを選択してください</FormSectionHeading>
+        <FormSectionHeading>受講コースを選択してください</FormSectionHeading>
       </SelectInput>
-      {#if data.course === "グループレッスン"}
-        <SelectInput
-          initialData={data.level}
-          on:updateSelect={() => (cacheready = true)}
-          bind:isValid={levelIsValid}
-          data={levelSelector}
-          bind:value={level}
-          forced={forcedLevel}
-          forcedMessage={forcedLevelMsg}
-        >
-          <FormSectionHeading>受講コースを選択してください</FormSectionHeading>
-        </SelectInput>
-      {:else if data.course === "マンツーマンレッスン"}
-        <SelectInput
-          initialData={data.mtm}
-          on:updateSelect={() => (cacheready = true)}
-          bind:isValid={mtmIsValid}
-          data={mtmSelector}
-          bind:value={mtm}
-          forced={focredMtm}
-          forcedMessage={forcedMtmMsg}
-        >
-          <FormSectionHeading>受講コースを選択してください</FormSectionHeading>
-        </SelectInput>
-      {/if}
     {/if}
-  </div>
-{:else}
-  <p>フォームデータを読み込み中</p>
-{/if}
+  {/if}
+</div>

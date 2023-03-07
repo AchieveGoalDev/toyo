@@ -6,7 +6,6 @@
 
   export let isValid: boolean;
   export let value: string;
-  export let initialData: string;
 
   let errorMessage: string[] = [];
 
@@ -31,9 +30,9 @@
     {data.label}</legend
   >
   <div class="w-full pl-5 col-span-8 flex flex-col">
-    <fieldset class="flex flex-row my-2 place-content-around mb-2">
+    <fieldset class="flex flex-col sm:flex-row my-2 place-content-around mb-2">
       {#each data.choices as choice}
-        <div class="flex flex-row">
+        <div class="flex flex-row my-1 sm:my-0">
           <label class="mr-1" for={choice}>{choice}</label>
           <input
             bind:group={value}
