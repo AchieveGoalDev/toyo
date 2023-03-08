@@ -1,10 +1,6 @@
 <script lang="ts">
   import type { SelectInput } from "$lib/forms/ApplicationData";
-  import { onMount } from "svelte";
   import { slide } from "svelte/transition";
-  import { createEventDispatcher } from "svelte";
-
-  let dispatch = createEventDispatcher();
 
   export let value: string;
   export let data: SelectInput;
@@ -14,17 +10,6 @@
 
   let disabled: boolean;
 
-  function matchDefault(valueOne: string, valueTwo: string) {
-    if (valueOne === valueTwo) {
-      console.log("matched");
-      return true;
-    }
-  }
-
-  function handleChange(value: string) {
-    dispatch("updateSelect", value);
-  }
-
   $: if (forced) {
     disabled = true;
     value = forced;
@@ -33,8 +18,11 @@
   }
 
   $: if (value === "") {
+    console.log("invalid");
+    console.log(value);
     isValid = false;
   } else {
+    console.log("valid", value);
     isValid = true;
   }
 </script>
@@ -45,7 +33,6 @@
     class="flex mb-2 justify-center items-center w-full place-content-between px-3"
   >
     <select
-      on:change={() => handleChange(value)}
       bind:value
       class="w-[300px] text-xl my-4 mx-auto shadow-md transition-all ease-in disabled:bg-slate-400 bg-sky-50 disabled:shadow-none"
       {disabled}

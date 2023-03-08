@@ -2,11 +2,10 @@ import type {
   SelectInputWithLabel,
   RadioInput,
 } from "$lib/forms/ApplicationData";
-import { level } from "$lib/store/schoolSubform";
 
 ///********************TIMES ***********/
 
-type Level = "初級" | "初中級" | "中級" | "上級" | "MTM";
+export type Level = "初級" | "初中級" | "中級" | "上級" | "MTM";
 
 export class GroupTimeSlot {
   start: string;
@@ -165,7 +164,7 @@ export const 第1Data: SelectInputWithLabel = {
   label: "第1希望",
   alt: "第1希望の入力",
   placeholder: "--第1希望を選択--",
-  options: 白山Times,
+  options: [],
   desc: [],
 };
 
@@ -174,7 +173,7 @@ export const 第2Data: SelectInputWithLabel = {
   label: "第2希望",
   alt: "第2希望の入力",
   placeholder: "--第2希望を選択--",
-  options: 白山Times,
+  options: [],
   desc: [],
 };
 
@@ -183,7 +182,7 @@ export const 第3Data: SelectInputWithLabel = {
   label: "第3希望",
   alt: "第3希望の入力",
   placeholder: "--第3希望を選択--",
-  options: 白山Times,
+  options: [],
   desc: [],
 };
 

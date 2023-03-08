@@ -1,5 +1,4 @@
 <script lang="ts">
-  import TestSection from "./TestSection.svelte";
   import ProgressBar from "$lib/forms/input/ProgressBar.svelte";
   import SchoolSubform from "$lib/forms/subforms/SchoolSubform.svelte";
   import PersonalSubform from "./subforms/PersonalSubform.svelte";
@@ -8,7 +7,6 @@
 
   //@ts-ignore
   import * as animateScroll from "svelte-scrollto";
-
 
   let currentHeight: number;
   let indexHistory: number[] = [];
@@ -28,7 +26,7 @@
 
   let testSectionData = [test1Data, test2Data, test3Data, test4Data];
 
-  let testSections = ["school", "personal", "schedule", "agree"];
+  let testSections = ["school", "schedule", "agree", "agree"];
 
   let testSectionValidity = [
     test1ValidPercent,

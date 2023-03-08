@@ -16,7 +16,7 @@
   } from "$lib/forms/subforms/SchoolSubformData";
 
   import { campuses } from "$lib/forms/ApplicationData";
-  import type { CampusOfferings } from "/forms/ApplicationData";
+  import type { CampusOfferings } from "$lib/forms/ApplicationData";
 
   type Nullable<T> = T | undefined;
   type SchoolSubformData = {
@@ -30,6 +30,8 @@
   export let percentValid: number;
   export let selfHeight: number;
   export let data: Nullable<SchoolSubformData>;
+
+  let allLevels = ["初級", "初中級", "中級", "上級"];
 
   let forcedCourse: string = "";
   let forcedLevel: string = "";
@@ -69,6 +71,25 @@
     }
   }
 
+  function updateLevel(choice: string) {
+    if (choice) {
+      if (choice === "マンツーマンレッスン") {
+        levelSelector.options = allLevels;
+      } else if (choice === "グループレッスン") {
+        campuses.forEach((campus) => {
+          if (campus.name === $campus) {
+            //@ts-ignore
+            courseSelector.options = campus.courses.map((course) =>
+              handleCourseName(course)
+            );
+            levelSelector.options = campus.levels;
+          }
+        });
+      }
+      $level = "";
+    }
+  }
+
   function calculatePercentValid(
     campus: boolean,
     level: boolean,
@@ -89,7 +110,15 @@
       validTotal++;
     }
 
+    console.log(validTotal);
+
     return (validTotal / toValidate) * 100;
+  }
+
+
+  if (testMe) {
+    updateCampus($campus);
+    testMe = false;
   }
 
   $: if (data?.campus === "オンライン") {
@@ -101,13 +130,17 @@
   }
 
   $: percentValid = calculatePercentValid(
-    campusIsValid,
-    levelIsValid,
-    courseIsValid,
-    mtmIsValid
+    Boolean($campus),
+    Boolean($level),
+    Boolean($course),
+    Boolean($mtm)
   );
 
-  $: updateCampus($campus);
+  // $: updateCampus($campus);
+
+  $: updateLevel($course);
+
+  $: console.log($level);
 </script>
 
 <div
@@ -119,7 +152,7 @@
     bind:isValid={campusIsValid}
     data={campusSelector}
     bind:value={$campus}
-    on:change
+    on:select(() => {testMe = true;})
   >
     <FormSectionHeading>キャンパスを選択してください</FormSectionHeading>
   </ImageSelect>
@@ -130,18 +163,14 @@
       bind:isValid={courseIsValid}
       bind:value={$course}
       data={courseSelector}
-      forced={forcedCourse}
-      forcedMessage={forcedCourseMsg}
     >
       <FormSectionHeading>受講スタイルを選択してください</FormSectionHeading>
     </SelectInput>
-    {#if $course }
+    {#if $course}
       <SelectInput
         bind:isValid={levelIsValid}
         data={levelSelector}
         bind:value={$level}
-        forced={forcedLevel}
-        forcedMessage={forcedLevelMsg}
       >
         <FormSectionHeading>受講コースを選択してください</FormSectionHeading>
       </SelectInput>
