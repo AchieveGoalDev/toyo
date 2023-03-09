@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
   import { buildTween } from "$lib/tweens/buildTween";
   import ProgressIndicatorWrapper from "$lib/forms/ProgressIndicatorWrapper.svelte";
 

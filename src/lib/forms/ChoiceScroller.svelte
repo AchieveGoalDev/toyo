@@ -37,7 +37,7 @@
         class="flex h-[30px] absolute inset-x-0 bottom-0 w-full z-30"
       >
         <div
-          class="pl-4 bg-rose-800 h-full opacity-100 color-white text-center text-white font-bold text-2xl w-1/4"
+          class="pl-4 bg-rose-800 h-full opacity-100 color-white text-center text-white font-bold text-lg sm:text-2xl w-1/4"
         >
           <p>{src.text}</p>
         </div>

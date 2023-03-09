@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import type {
     GroupTimeSlot,
     Level,
@@ -6,7 +8,7 @@
 
   import { fly, slide } from "svelte/transition";
 
-  import { campus, mtm, level, course } from "$lib/store/schoolSubform";
+  import { campus, level, course } from "$lib/store/schoolSubform";
 
   import {
     変更,
@@ -26,6 +28,23 @@
     金第1,
     金第2,
     金第3,
+    変更IsValid,
+    テキストIsValid,
+    月第1IsValid,
+    月第2IsValid,
+    月第3IsValid,
+    火第1IsValid,
+    火第2IsValid,
+    火第3IsValid,
+    水第1IsValid,
+    水第2IsValid,
+    水第3IsValid,
+    木第1IsValid,
+    木第2IsValid,
+    木第3IsValid,
+    金第1IsValid,
+    金第2IsValid,
+    金第3IsValid,
   } from "$lib/store/scheduleSubform";
 
   import {
@@ -76,34 +95,25 @@
 
   let テキストData: any;
 
-  let 変更IsValid = false;
-  let テキストIsValid = false;
-  let 月第1IsValid = false;
-  let 月第2IsValid = false;
-  let 月第3IsValid = false;
-  let 火第1IsValid = false;
-  let 火第2IsValid = false;
-  let 火第3IsValid = false;
-  let 水第1IsValid = false;
-  let 水第2IsValid = false;
-  let 水第3IsValid = false;
-  let 木第1IsValid = false;
-  let 木第2IsValid = false;
-  let 木第3IsValid = false;
-  let 金第1IsValid = false;
-  let 金第2IsValid = false;
-  let 金第3IsValid = false;
-
   function calculatePercentValid(toCheck: boolean[]) {
     let modifiedCheck = toCheck;
     if ($course === "グループレッスン") {
       modifiedCheck = toCheck.slice(0, -1);
+    } else {
+      modifiedCheck = toCheck;
     }
 
     let toValidate = modifiedCheck.length;
     let validTotal = 0;
 
-    toCheck.forEach((value) => value && validTotal++);
+    modifiedCheck.forEach((value) => {
+      value && validTotal++;
+      console.log(validTotal);
+    });
+
+    console.log(modifiedCheck.length, toCheck.length);
+    console.log(modifiedCheck);
+    console.log((validTotal / toValidate) * 100);
 
     return (validTotal / toValidate) * 100;
   }
@@ -113,7 +123,7 @@
     let filterArray: GroupTimeSlot[];
     let returnArray: string[];
 
-    if ($mtm) {
+    if ($course === "マンツーマンレッスン") {
       sortValue = "MTM";
     } else if ($level) {
       //@ts-ignore
@@ -162,12 +172,12 @@
   }
 
   function handleTextbook(level: string) {
-    let returnData = {
+    let returnData: any = {
       isNecessary: true,
       label: "使用テキスト",
       alt: "使用テキストの入力",
       placeholder: "--使用テキストを選択--",
-      choices: [],
+      options: [],
       desc: [
         "※前回と同じレベルを受講する場合は『②』『③』を選択下さい。",
         "※各レベルを初めて受講いただく場合は『①』を選択下さい。",
@@ -187,25 +197,28 @@
     return returnData;
   }
 
-  function resetForm() {
-    更新 = null;
-    月第1 = "";
-    月第2 = "";
-    月第3 = "";
-    火第1 = "";
-    火第2 = "";
-    火第3 = "";
-    水第1 = "";
-    水第2 = "";
-    水第3 = "";
-    木第1 = "";
-    木第2 = "";
-    木第3 = "";
-    金第1 = "";
-    金第2 = "";
-    金第3 = "";
-    テキスト = "";
-  }
+  onMount(() => {
+    handleSchedule($campus);
+    percentValid = calculatePercentValid([
+      $変更IsValid,
+      $月第1IsValid,
+      $月第2IsValid,
+      $月第3IsValid,
+      $火第1IsValid,
+      $火第2IsValid,
+      $火第3IsValid,
+      $水第1IsValid,
+      $水第2IsValid,
+      $水第3IsValid,
+      $木第1IsValid,
+      $木第2IsValid,
+      $木第3IsValid,
+      $金第1IsValid,
+      $金第2IsValid,
+      $金第3IsValid,
+      $テキストIsValid,
+    ]);
+  });
 
   $: テキストData = handleTextbook($level);
 
@@ -213,54 +226,32 @@
     handleSchedule($campus);
   }
 
-  $: data = {
-    変更,
-    月第1,
-    月第2,
-    月第3,
-    火第1,
-    火第2,
-    火第3,
-    水第1,
-    水第2,
-    水第3,
-    木第1,
-    木第2,
-    木第3,
-    金第1,
-    金第2,
-    金第3,
-    テキスト,
-  };
-
   $: percentValid = calculatePercentValid([
-    変更IsValid,
-    テキストIsValid,
-    月第1IsValid,
-    月第2IsValid,
-    月第3IsValid,
-    火第1IsValid,
-    火第2IsValid,
-    火第3IsValid,
-    水第1IsValid,
-    水第2IsValid,
-    水第3IsValid,
-    木第1IsValid,
-    木第2IsValid,
-    木第3IsValid,
-    金第1IsValid,
-    金第2IsValid,
-    金第3IsValid,
+    $変更IsValid,
+    $月第1IsValid,
+    $月第2IsValid,
+    $月第3IsValid,
+    $火第1IsValid,
+    $火第2IsValid,
+    $火第3IsValid,
+    $水第1IsValid,
+    $水第2IsValid,
+    $水第3IsValid,
+    $木第1IsValid,
+    $木第2IsValid,
+    $木第3IsValid,
+    $金第1IsValid,
+    $金第2IsValid,
+    $金第3IsValid,
+    $テキストIsValid,
   ]);
-
-  $: console.log(data);
 </script>
 
 <div
   bind:clientHeight={selfHeight}
   in:slide
   out:fly={{ x: -200, opacity: 0 }}
-  class="my-20 bg-white shadow-md px-5 row-span-full col-span-full top-0 inset-x-0"
+  class="bg-white shadow-md px-5 row-span-full col-span-full"
 >
   <FormSectionHeading>
     {#if $course === "マンツーマンレッスン"}
@@ -271,91 +262,91 @@
   {#if テキストData.options && $course === "マンツーマンレッスン"}
     <SelectInputWithLabel
       bind:value={$テキスト}
-      bind:isValid={テキストIsValid}
+      bind:isValid={$テキストIsValid}
       data={テキストData}
     />
   {/if}
 
-  <RadioInput bind:value={$変更} bind:isValid={変更IsValid} data={変更Data} />
+  <RadioInput bind:value={$変更} bind:isValid={$変更IsValid} data={変更Data} />
 
   <FormSectionHeading>月曜日</FormSectionHeading>
   <SelectInputWithLabel
     bind:value={$月第1}
-    bind:isValid={月第1IsValid}
+    bind:isValid={$月第1IsValid}
     data={第1Data}
   />
   <SelectInputWithLabel
     bind:value={$月第2}
-    bind:isValid={月第2IsValid}
+    bind:isValid={$月第2IsValid}
     data={第2Data}
   />
   <SelectInputWithLabel
     bind:value={$月第3}
-    bind:isValid={月第3IsValid}
+    bind:isValid={$月第3IsValid}
     data={第3Data}
   />
   <FormSectionHeading>火曜日</FormSectionHeading>
   <SelectInputWithLabel
     bind:value={$火第1}
-    bind:isValid={火第1IsValid}
+    bind:isValid={$火第1IsValid}
     data={第1Data}
   />
   <SelectInputWithLabel
     bind:value={$火第2}
-    bind:isValid={火第2IsValid}
+    bind:isValid={$火第2IsValid}
     data={第2Data}
   />
   <SelectInputWithLabel
     bind:value={$火第3}
-    bind:isValid={火第3IsValid}
+    bind:isValid={$火第3IsValid}
     data={第3Data}
   />
   <FormSectionHeading>水曜日</FormSectionHeading>
   <SelectInputWithLabel
     bind:value={$水第1}
-    bind:isValid={水第1IsValid}
+    bind:isValid={$水第1IsValid}
     data={第1Data}
   />
   <SelectInputWithLabel
     bind:value={$水第2}
-    bind:isValid={水第2IsValid}
+    bind:isValid={$水第2IsValid}
     data={第2Data}
   />
   <SelectInputWithLabel
     bind:value={$水第3}
-    bind:isValid={水第3IsValid}
+    bind:isValid={$水第3IsValid}
     data={第3Data}
   />
   <FormSectionHeading>木曜日</FormSectionHeading>
   <SelectInputWithLabel
     bind:value={$木第1}
-    bind:isValid={木第1IsValid}
+    bind:isValid={$木第1IsValid}
     data={第1Data}
   />
   <SelectInputWithLabel
     bind:value={$木第2}
-    bind:isValid={木第2IsValid}
+    bind:isValid={$木第2IsValid}
     data={第2Data}
   />
   <SelectInputWithLabel
     bind:value={$木第3}
-    bind:isValid={木第3IsValid}
+    bind:isValid={$木第3IsValid}
     data={第3Data}
   />
   <FormSectionHeading>金曜日</FormSectionHeading>
   <SelectInputWithLabel
     bind:value={$金第1}
-    bind:isValid={金第1IsValid}
+    bind:isValid={$金第1IsValid}
     data={第1Data}
   />
   <SelectInputWithLabel
     bind:value={$金第2}
-    bind:isValid={金第2IsValid}
+    bind:isValid={$金第2IsValid}
     data={第2Data}
   />
   <SelectInputWithLabel
     bind:value={$金第3}
-    bind:isValid={金第3IsValid}
+    bind:isValid={$金第3IsValid}
     data={第3Data}
   />
 </div>

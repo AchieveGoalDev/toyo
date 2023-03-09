@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SelectInputWithLabel } from "$lib/forms/ApplicationData";
   import { slide } from "svelte/transition";
+  import { onMount } from "svelte";
 
   export let value: string;
   export let data: SelectInputWithLabel;
@@ -10,7 +11,15 @@
 
   let errorMessage: string[] = [];
 
-  $: if (errorMessage.length !== 0) {
+  onMount(() => {
+    if (!value && errorMessage.length !== 0) {
+  isValid = false;              
+    } else {
+      isValid = true;
+    }
+  });
+
+  $: if (!value && errorMessage.length !== 0) {
     isValid = false;
   } else {
     isValid = true;
@@ -26,7 +35,7 @@
 
 <div class="my-2 w-full grid grid-cols-12 gap-0">
   <label
-    class="font-bold text-right col-span-3 border-r pr-4 w-full h-full"
+    class="font-bold text-right col-span-4 sm:col-span-3 border-r pr-4 w-full h-full text-sm sm:text-md md:text-lg"
     for={data.label}
   >
     {#if data.isNecessary}
@@ -34,10 +43,10 @@
     {/if}
     {data.label}
   </label>
-  <div class="ml-4 w-full col-span-9">
+  <div class="ml-4 w-full col-span-8 sm:col-span-9">
     <select
       bind:value
-      class="w-[200px] sm:w-[300px] p-1 text-md sm:text-xl my-4 mx-auto shadow-md transition-all ease-in disabled:bg-slate-400 bg-sky-50 disabled:shadow-none"
+      class="w-[150px] sm:w-[300px] p-1 text-md sm:text-xl my-4 mx-auto shadow-md transition-all ease-in disabled:bg-slate-400 bg-sky-50 disabled:shadow-none"
       {disabled}
     >
       <option value="" class="bg-sky-100">{data.placeholder}</option>

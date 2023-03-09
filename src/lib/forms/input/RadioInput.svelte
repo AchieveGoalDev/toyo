@@ -1,6 +1,7 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
   import type { RadioInput } from "$lib/forms/ApplicationData";
+  import { onMount } from "svelte";
 
   export let data: RadioInput;
 
@@ -9,17 +10,25 @@
 
   let errorMessage: string[] = [];
 
+  onMount(() => {
+    checkValidity(value);
+  });
+
+  function checkValidity(value: string) {
+    if (!value) {
+      isValid = false;
+    } else {
+      isValid = true;
+    }
+  }
+
   $: if (!isValid) {
     errorMessage.push("必要項目です");
   } else {
     errorMessage = [];
   }
 
-  $: if (!value) {
-    isValid = false;
-  } else {
-    isValid = true;
-  }
+  $: checkValidity(value);
 </script>
 
 <div class="my-2 w-full grid grid-cols-12 gap-0">

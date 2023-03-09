@@ -3,6 +3,31 @@
 
   import { fly, slide } from "svelte/transition";
 
+  import {
+    triggerCampusUpdate,
+    triggerCourseUpdate,
+    triggerLevelUpdate,
+  } from "$lib/store/formUpdates";
+
+  import {
+    月第1,
+    月第2,
+    月第3,
+    火第1,
+    火第2,
+    火第3,
+    水第1,
+    水第2,
+    水第3,
+    木第1,
+    木第2,
+    木第3,
+    金第1,
+    金第2,
+    金第3,
+    テキスト,
+  } from "$lib/store/scheduleSubform";
+
   import SelectInput from "$lib/forms/input/SelectInput.svelte";
   import ImageSelect from "$lib/forms/input/ImageSelect.svelte";
 
@@ -12,7 +37,6 @@
     campusSelector,
     levelSelector,
     courseSelector,
-    mtmSelector,
   } from "$lib/forms/subforms/SchoolSubformData";
 
   import { campuses } from "$lib/forms/ApplicationData";
@@ -32,19 +56,29 @@
   export let data: Nullable<SchoolSubformData>;
 
   let allLevels = ["初級", "初中級", "中級", "上級"];
-
-  let forcedCourse: string = "";
-  let forcedLevel: string = "";
-  let focredMtm: string = "";
-
-  let forcedCourseMsg: string;
-  let forcedLevelMsg: string;
-  let forcedMtmMsg: string;
-
   let campusIsValid = false;
   let levelIsValid = false;
   let courseIsValid = false;
-  let mtmIsValid = false;
+  let updateValue: string;
+
+  function resetScheduleData() {
+    $月第1 = "";
+    $月第2 = "";
+    $月第3 = "";
+    $火第1 = "";
+    $火第2 = "";
+    $火第3 = "";
+    $水第1 = "";
+    $水第2 = "";
+    $水第3 = "";
+    $木第1 = "";
+    $木第2 = "";
+    $木第3 = "";
+    $金第1 = "";
+    $金第2 = "";
+    $金第3 = "";
+    $テキスト = "";
+  }
 
   function handleCourseName(course: string) {
     if (course === "MTM") {
@@ -54,13 +88,14 @@
     }
   }
 
-  function updateCampus(choice: string) {
-    if (choice) {
+  function updateCampus(payload: string) {
+    if ($triggerCampusUpdate && payload) {
       $course = "";
       $level = "";
       $mtm = "";
+      resetScheduleData();
       campuses.forEach((campus) => {
-        if (campus.name === choice) {
+        if (campus.name === payload) {
           //@ts-ignore
           courseSelector.options = campus.courses.map((course) =>
             handleCourseName(course)
@@ -68,25 +103,32 @@
           levelSelector.options = campus.levels;
         }
       });
+      $triggerCampusUpdate = false;
     }
   }
 
-  function updateLevel(choice: string) {
-    if (choice) {
-      if (choice === "マンツーマンレッスン") {
+  function updateCourse(payload: string) {
+    if ($triggerCourseUpdate && payload) {
+      console.log("course update", payload);
+      resetScheduleData();
+      if (payload === "マンツーマンレッスン") {
         levelSelector.options = allLevels;
-      } else if (choice === "グループレッスン") {
+      } else if (payload === "グループレッスン") {
         campuses.forEach((campus) => {
           if (campus.name === $campus) {
-            //@ts-ignore
-            courseSelector.options = campus.courses.map((course) =>
-              handleCourseName(course)
-            );
             levelSelector.options = campus.levels;
           }
         });
       }
       $level = "";
+      $triggerCourseUpdate = false;
+    }
+  }
+
+  function updateLevel(payload: string) {
+    if ($triggerLevelUpdate && payload) {
+      resetScheduleData();
+      $triggerLevelUpdate = false;
     }
   }
 
@@ -115,20 +157,6 @@
     return (validTotal / toValidate) * 100;
   }
 
-
-  if (testMe) {
-    updateCampus($campus);
-    testMe = false;
-  }
-
-  $: if (data?.campus === "オンライン") {
-    forcedCourse = "マンツーマンレッスン";
-    data.course = "マンツーマンレッスン";
-    forcedCourseMsg = "オンラインレッスンにはマンツーマンレッスンのみ選べます";
-  } else if (data?.campus !== "オンライン") {
-    forcedCourse = "";
-  }
-
   $: percentValid = calculatePercentValid(
     Boolean($campus),
     Boolean($level),
@@ -136,11 +164,11 @@
     Boolean($mtm)
   );
 
-  // $: updateCampus($campus);
+  $: updateCampus($campus);
+  $: updateCourse($course);
+  $: updateLevel($level);
 
-  $: updateLevel($course);
-
-  $: console.log($level);
+  $: console.log($campus, $course, $level);
 </script>
 
 <div
@@ -151,8 +179,10 @@
   <ImageSelect
     bind:isValid={campusIsValid}
     data={campusSelector}
+    on:updateSelect={() => {
+      $triggerCampusUpdate = true;
+    }}
     bind:value={$campus}
-    on:select(() => {testMe = true;})
   >
     <FormSectionHeading>キャンパスを選択してください</FormSectionHeading>
   </ImageSelect>
@@ -161,6 +191,10 @@
   {#if $campus}
     <SelectInput
       bind:isValid={courseIsValid}
+      on:updateSelect={() => {
+
+        $triggerCourseUpdate = true;
+      }}
       bind:value={$course}
       data={courseSelector}
     >
@@ -170,6 +204,9 @@
       <SelectInput
         bind:isValid={levelIsValid}
         data={levelSelector}
+        on:updateSelect={() => {
+          $triggerLevelUpdate = true;
+        }}
         bind:value={$level}
       >
         <FormSectionHeading>受講コースを選択してください</FormSectionHeading>

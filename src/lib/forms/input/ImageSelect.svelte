@@ -3,7 +3,6 @@
 
   import type { ImageSelectInput } from "$lib/forms/ApplicationData";
   import { createEventDispatcher } from "svelte";
-  import { onMount } from "svelte";
 
   let dispatch = createEventDispatcher();
 
@@ -11,7 +10,8 @@
   export let isValid: boolean;
   export let data: ImageSelectInput;
 
-  function handleChange(value: string) {
+  function handleChange(payload: string) {
+    value = payload;
     dispatch("updateSelect", value);
   }
 
@@ -34,7 +34,7 @@
     <select
       on:change={() => handleChange(value)}
       bind:value
-      class="w-[300px] text-xl my-4 mx-auto shadow-md bg-sky-50 p-1"
+      class="w-[250px] sm:w-[300px] text-xl my-4 mx-auto shadow-md bg-sky-50 p-1"
     >
       <option value="">{data.placeholder}</option>
       {#each data.options as option}

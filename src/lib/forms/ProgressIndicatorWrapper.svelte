@@ -36,6 +36,11 @@
       return "rgb(220, 38, 38)";
     } else if (progress.latest + 1 < number) {
       return "rgb(87, 83, 78)";
+    } else if (
+      progress.current + 1 > number &&
+      progress.barwidth < number - (1 * 1) / 3
+    ) {
+      return "rgb(87, 83, 78)";
     } else {
       return "rgb(153, 27, 27)";
     }
@@ -44,13 +49,15 @@
   //@ts-ignore
   $: backgroundColor.set(handleBackgroundColor(progress));
   $: scale.set(handleScale(progress));
+
+  $: console.log(progress);
 </script>
 
 <div class="relative z-[5]">
   <slot name="description" />
   <div
     style:background-color={`${$backgroundColor}`}
-    class="text-white text-2xl rounded-full transitions-all bg-rose-800 h-[40px] w-[40px] flex flex-col justify-center items-center shadow-md"
+    class="text-white text-lg sm:text-2xl rounded-full transitions-all bg-rose-800 h-[30px] w-[30px] sm:h-[40px] sm:w-[40px] flex flex-col justify-center items-center shadow-md"
   >
     <slot name="number" />
   </div>

@@ -128,7 +128,7 @@
     bind:clientHeight={selfHeight}
     in:slide
     out:fly={{ x: -200, opacity: 0 }}
-    class="my-20 bg-white shadow-md px-5 row-span-full col-span-full top-0 inset-x-0"
+    class="bg-white shadow-md px-5 row-span-full col-span-full top-0 inset-x-0"
   >
     <FormSectionHeading>承諾事項</FormSectionHeading>
     <FormSectionDescription>

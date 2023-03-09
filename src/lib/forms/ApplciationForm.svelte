@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
   import ProgressBar from "$lib/forms/input/ProgressBar.svelte";
   import SchoolSubform from "$lib/forms/subforms/SchoolSubform.svelte";
   import PersonalSubform from "./subforms/PersonalSubform.svelte";
   import ScheduleSubform from "$lib/forms/subforms/ScheduleSubform.svelte";
   import AgreeSubform from "$lib/forms/subforms/AgreeSubform.svelte";
+
+  import { campus, course, level } from "$lib/store/schoolSubform";
 
   //@ts-ignore
   import * as animateScroll from "svelte-scrollto";
@@ -126,15 +129,23 @@
 </script>
 
 <form
-  class="flex flex-col bg-slate-50 w-full sm:w-2/3 mx-auto grow-0  grid grid-col-1 grid-row-1 items-center relative"
+  class="flex flex-col mx-auto grow-0 grid grid-col-1 grid-row-1 items-center relative gap-0"
 >
-  <ProgressBar progress={progressData} />
+  {#if index > 0}
+    <div
+      transition:fly
+      class="py-2 bg-rose-800 text-white text-xl sm:text-2xl md:text-3xl font-bold mb-[40px] rounded-md"
+    >
+      <h1>{"キャンパス: " + $campus}</h1>
+      <h1 class="my-3">{"受講スタイル: " + $course}</h1>
+      <h1>{"受講レベル: " + $level}</h1>
+    </div>
+  {/if}
 
-  <!--
-    <SchoolDataSection bind:data={schoolData} bind:isValid={schoolDataIsValid} />
-  -->
-
-  <div id="formtop">
+  <div id="formtop" class="mx-5 sm:mx-0 mb-[30px]">
+    <ProgressBar progress={progressData} />
+  </div>
+  <div>
     {#each [testSections[index]] as section (index)}
       {#if section === "school"}
         <SchoolSubform
@@ -172,7 +183,7 @@
     {/each}
   </div>
 
-  <div class="flex w-full place-content-around absolute bottom-0">
+  <div class="flex w-full place-content-around my-[30px]">
     <button
       on:click|preventDefault={handlePrevious}
       class="disabled:bg-slate-500 disabled:text-white: transition-all ease-in bg-sky-800 text-white rounded-md hover:bg-sky-600 p-2 text-xl shadow-md"

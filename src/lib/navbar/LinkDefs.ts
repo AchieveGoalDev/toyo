@@ -42,6 +42,13 @@ export const mainNav = {
       iconAlt: "よくある質問のアイコン",
     },
     {
+      href: "/apply",
+      jpText: "講座申込",
+      enText: "Apply",
+      icon: s3 + "images/Icons/apply.svg",
+      iconAlt: "申し込みのアイコン",
+    },
+    {
       href: "#",
       jpText: "新着情報",
       enText: "News",
