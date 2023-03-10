@@ -40,13 +40,13 @@
     }
 
     if (phoneOne) {
-      if (phoneOne?.split("").length < 2) {
+      if (phoneOne.split("").length < 2) {
         errorMessage.push("有効な電話番号を入力してください");
         console.log("one");
-      } else if (!phoneTwo || phoneTwo?.split("").length < 3) {
+      } else if (!phoneTwo || phoneTwo.split("").length < 3) {
         console.log("two");
         errorMessage.push("有効な電話番号を入力してください");
-      } else if (!phoneThree || phoneThree?.split("").length < 3) {
+      } else if (!phoneThree || phoneThree.split("").length < 3) {
         console.log("three");
         errorMessage.push("有効な電話番号を入力してください");
       }

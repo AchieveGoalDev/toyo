@@ -3,7 +3,6 @@
   import { slide } from "svelte/transition";
   import { createEventDispatcher } from "svelte";
 
-  
   let dispatch = createEventDispatcher();
 
   export let value: string;

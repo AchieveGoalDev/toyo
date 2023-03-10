@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {PUBLIC_BUCKET_URL} from '$env/static/public'
+  import { PUBLIC_BUCKET_URL } from "$env/static/public";
   import HeroImageCarousel from "$lib/hero/HeroImageCarousel.svelte";
   import HeroTitle from "$lib/hero/HeroTitle.svelte";
   import HeroScroller from "$lib/hero/HeroScroller.svelte";
@@ -52,7 +52,7 @@
   $: interval = resetInterval(interval);
 </script>
 
-<div class="mx-auto relative w-4/5">
+<div class="mx-auto relative w-[90%] mt-[100px]">
   <div class="h-[80px] w-[full]" />
   <HeroScroller
     direction={"left"}

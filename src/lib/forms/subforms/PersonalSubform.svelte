@@ -141,7 +141,6 @@
     種別IsValid,
   ]);
 
-  // $: checkCache(data);
 </script>
 
   <div

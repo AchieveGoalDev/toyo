@@ -9,7 +9,6 @@
   import RedCtaButton from "$lib/buttons/redCtaButton.svelte";
   import ApplciationForm from "$lib/forms/ApplciationForm.svelte";
 
-
   let width: number;
   let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
@@ -84,9 +83,9 @@
     海外の生きた英語を学ぶチャンス！
   </TextWrapper>
 
-    <h2 class="pl-2 text-3xl font-bold border-l-4 border-rose-800">
-      「読む」「書く」「聞く」「話す」 英語の４技能を鍛える！
-    </h2>
+  <h2 class="pl-2 text-3xl font-bold border-l-4 border-rose-800">
+    「読む」「書く」「聞く」「話す」 英語の４技能を鍛える！
+  </h2>
   <TextWrapper>
     CLT(Communicative Language
     Teaching)という英語教授法を用い、スピーキング・リスニングに焦点を当てたレッスンを行います。英語でのコミュニケーション能力を備え、レッスンの会話の中で、正確な文法と綺麗な発音を身につける訓練を行います。
@@ -103,7 +102,3 @@
 >
   Stuff Here
 </SectionWrapper>
-
-<ApplciationForm>
-  
-</ApplciationForm>

@@ -86,11 +86,11 @@ export const campusSelector: ImageSelectInput = {
   isNecessary: true,
   options: campuses.map((campus) => campus.name),
   images: [
-    new ImageArrayItem("Unselected.webp", "", ""),
-    new ImageArrayItem("/INIAD.webp", "INIAD", "INIAD"),
-    new ImageArrayItem("/WELLB.webp", "WELLB", "WELLB"),
-    new ImageArrayItem("/HAKUSAN.webp", "白山", "白山"),
-    new ImageArrayItem("/ITAKURA.webp", "板倉", "板倉"),
-    new ImageArrayItem("/ONLINE.webp", "オンライン", "オンライン"),
+    new ImageArrayItem("images/images/Unselected.webp", "未選択", "未選択"),
+    new ImageArrayItem("images/images/INIAD.webp", "INIAD", "INIAD"),
+    new ImageArrayItem("images/images/WELLB.webp", "WELLB", "WELLB"),
+    new ImageArrayItem("images/images/HAKUSAN.webp", "白山", "白山"),
+    new ImageArrayItem("images/images/ITAKURA.webp", "板倉", "板倉"),
+    new ImageArrayItem("images/images/ONLINE.webp", "オンライン", "オンライン"),
   ],
 };

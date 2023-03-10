@@ -9,7 +9,7 @@
 
   export let isValid: boolean;
   export let value: string;
-  export let initialData: string;
+
 
   let mailOne: string;
   let mailTwo: string;

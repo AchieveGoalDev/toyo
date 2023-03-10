@@ -38,7 +38,7 @@
 
   export let isValid: boolean;
   export let value: string;
-  export let initialData: string;
+
 
   $: value = zip + " " + address;
 

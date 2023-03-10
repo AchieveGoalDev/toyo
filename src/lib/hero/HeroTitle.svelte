@@ -18,7 +18,8 @@
         class={`
             whitespace-nowrap 
             heading-outline-white 
-            text-8xl 
+            xl:text-8xl 
+            lg:text-6xl
             font-black 
             mx-auto 
             text-rose-700 

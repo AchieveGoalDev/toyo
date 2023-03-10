@@ -29,7 +29,7 @@
 
   let testSectionData = [test1Data, test2Data, test3Data, test4Data];
 
-  let testSections = ["school", "schedule", "agree", "agree"];
+  let testSections = ["school", "schedule", "personal", "agree"];
 
   let testSectionValidity = [
     test1ValidPercent,

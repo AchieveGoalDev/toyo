@@ -39,59 +39,6 @@
 
   let cacheready = false;
 
-  // onMount(() => {
-  // console.log("mounted");
-  // if ($formData) {
-  //   console.log("formdataDetected");
-  //   console.log(JSON.parse($formData));
-  // }
-
-  // if (data && $formData) {
-  //   let parsedData = JSON.parse($formData);
-
-  //   if (parsedData.school) {
-  //     let schoolData = parsedData.school;
-  //     data.campus = schoolData.campus;
-  //     data.level = schoolData.level;
-  //     data.course = schoolData.course;
-  //     data.mtm = schoolData.mtm;
-  //   }
-  // }
-  // });
-
-  // function checkCache(data: Nullable<SchoolSubformData>) {
-  //   if (cacheready) {
-  //     cacheData(data, id);
-  //   }
-  // }
-
-  // function cacheData(data: Nullable<SchoolSubformData>, id: string) {
-  //   let updateData = {
-  //     campus: data?.campus,
-  //     level: data?.level,
-  //     course: data?.course,
-  //     mtm: data?.mtm,
-  //   };
-
-  //   console.log(updateData);
-
-  //   let parsedFormData: any;
-
-  //   if ($formData) {
-  //     parsedFormData = JSON.parse($formData);
-  //   } else {
-  //     parsedFormData = {};
-  //   }
-
-  //   parsedFormData = { ...parsedFormData, [id]: updateData };
-
-  //   console.log("cached data");
-  //   console.log(parsedFormData);
-  //   parsedFormData = JSON.stringify(parsedFormData);
-  //   formData.set(parsedFormData);
-  //   console.log($formData);
-  // }
-
   function calculatePercentValid(toCheck: boolean[]) {
     let toValidate = toCheck.length;
     let validTotal = 0;

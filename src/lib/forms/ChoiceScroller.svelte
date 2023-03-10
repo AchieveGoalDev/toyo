@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+
   import { fly } from "svelte/transition";
   import type { ImageArray } from "$lib/forms/ApplicationData";
 
@@ -6,6 +8,7 @@
   export let images: ImageArray;
 
   let index = 0;
+  const s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   function handleIndex(currentSelection: string) {
     if (currentSelection) {
@@ -21,13 +24,14 @@
   }
 
   $: handleIndex(selection);
+  $: console.log(s3 + images[0].img);
 </script>
 
 <div class="grid grid-rows-1 grid-cols-1 relative">
   {#each [images[index]] as src (index)}
     <img
       transition:fly
-      src={src.img}
+      src={s3 + src.img}
       alt=""
       class="w-auto col-span-full row-span-full"
     />

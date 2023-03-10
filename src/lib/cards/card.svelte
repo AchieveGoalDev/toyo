@@ -5,7 +5,7 @@
 </script>
 
 <div
-  class="max-h-96 w-full sm:w-cardsmall shadow-lg sm:mx-2 rounded transition ease-in hover:scale-105 my-[50px] sm:my-4"
+  class="max-h-96 w-full m:w-cardsmall shadow-lg sm:mx-2 rounded transition ease-in hover:scale-105 my-[50px] sm:my-4"
 >
   <div
     class="flex flex-col contents-center justify-center min-h-[50px] bg-rose-700 rounded-t-md p-1"

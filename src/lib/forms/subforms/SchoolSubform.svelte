@@ -114,8 +114,9 @@
       if (payload === "マンツーマンレッスン") {
         levelSelector.options = allLevels;
       } else if (payload === "グループレッスン") {
-        campuses.forEach((campus) => {
-          if (campus.name === $campus) {
+        //Can't name the below variable 'campus' because it conflicts with the store variable
+        campuses.forEach((option) => {
+          if (option.name === $campus) {
             levelSelector.options = campus.levels;
           }
         });
@@ -192,7 +193,6 @@
     <SelectInput
       bind:isValid={courseIsValid}
       on:updateSelect={() => {
-
         $triggerCourseUpdate = true;
       }}
       bind:value={$course}
