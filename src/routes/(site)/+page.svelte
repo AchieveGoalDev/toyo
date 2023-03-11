@@ -19,9 +19,7 @@
   });
 </script>
 
-<head>
-  
-</head>
+<head />
 
 {#if width > 1200}
   <Hero />
@@ -62,10 +60,10 @@
       </p>
     </div>
     <div
-      class="flex flex-col mx-5 sm:mx-0 sm:flex-row justify-around align-items-center mt-5 mb-24"
+      class="flex flex-col mx-5 sm:mx-0 sm:flex-row place-content-around align-items-center"
     >
-      <BlueCTA text="詳細はこちら" />
-      <RedCTA text="今すぐお問い合わせ" />
+      <BlueCTA href="/about" text="詳細はこちら" />
+      <RedCTA href="/apply" text="今すぐお問い合わせ" />
     </div>
   </SectionWrapper>
   <MediaWrapper description="東洋AchieveEnglishの紹介動画">
@@ -96,14 +94,15 @@
     <ApplicationProcess />
   </SectionWrapper>
   <SectionWrapper
-    themeColor= "red"
-    titleData={{pretext:"学生の", highlight: "声", posttext: ""}}
+    themeColor="red"
+    titleData={{ pretext: "学生の", highlight: "声", posttext: "" }}
   >
     <TextWrapper>
       Toyo Achieve Englishの受講生の方に、講座についてインタビュー！
-英語学習のことや、この講座を受講した後の目標など、
-この講座を受講して英語力が<strong class="text-rose-800">ぐんぐん</strong>上がった方の声をご紹介します
+      英語学習のことや、この講座を受講した後の目標など、
+      この講座を受講して英語力が<strong class="text-rose-800">ぐんぐん</strong
+      >上がった方の声をご紹介します
     </TextWrapper>
-    <Testimonial/>
+    <Testimonial />
   </SectionWrapper>
 </div>
