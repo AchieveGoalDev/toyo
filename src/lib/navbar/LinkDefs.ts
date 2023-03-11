@@ -35,6 +35,13 @@ export const mainNav = {
       iconAlt: "キャンパス内留学についてのアイコン",
     },
     {
+      href: "/details",
+      jpText: "講座情報",
+      enText: "Details",
+      icon: s3 + "images/Icons/details.svg",
+      iconAlt: "講座情報のアイコン",
+    },
+    {
       href: "/faq",
       jpText: "よくある質問",
       enText: "Q&A",
@@ -49,7 +56,7 @@ export const mainNav = {
       iconAlt: "申し込みのアイコン",
     },
     {
-      href: "#",
+      href: "/news",
       jpText: "新着情報",
       enText: "News",
       icon: s3 + "images/Icons/news.svg",

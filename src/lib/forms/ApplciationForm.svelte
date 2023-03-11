@@ -129,7 +129,7 @@
 </script>
 
 <form
-  class="flex flex-col mx-auto grow-0 grid grid-col-1 grid-row-1 items-center relative gap-0"
+  class="flex flex-col mx-auto grow-0 grid grid-col-1 grid-row-1 items-center relative gap-0 mt-[50px]"
 >
   {#if index > 0}
     <div
