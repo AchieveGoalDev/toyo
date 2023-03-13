@@ -1,16 +1,20 @@
 <script lang="ts">
-    import {fly} from "svelte/transition"
-    import {cubicInOut} from "svelte/easing"
+  import { fly } from "svelte/transition";
+  import { cubicInOut } from "svelte/easing";
 
-    export let pathname: string ;
+  export let url: string;
+
+  $: url = url;
 </script>
 
-{#if pathname}
-{#key pathname}
+{#if url}
+  {#key url}
     <div
-        transition:fly={{x:75, duration: 250, delay: 200, easing:cubicInOut}}
+      in:fly={{ x: -50, duration: 250, delay: 300, easing: cubicInOut }}
+      out:fly={{ x: 50, duration: 250, easing: cubicInOut }}
+      class="grid grid-rows-1 grid-cols-1"
     >
-        <slot />
+      <slot />
     </div>
-{/key}
+  {/key}
 {/if}

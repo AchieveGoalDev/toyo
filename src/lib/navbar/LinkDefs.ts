@@ -78,17 +78,38 @@ export const specialNav = {
   links: [
     {
       href: "/special",
-      jpText: "学外特別講座",
+      jpText: "特別講座ホーム",
       enText: "Home",
       icon: s3 + "images/Icons/home.svg",
       iconAlt: "ホームリンクのアイコン",
     },
     {
-      href: "#",
+      href: "/special/specialnews",
       jpText: "新着情報",
       enText: "News",
       icon: s3 + "images/Icons/news.svg",
       iconAlt: "新着情報のアイコン",
+    },
+    {
+      href: "/special/public",
+      jpText: "学外向け講座",
+      enText: "Public",
+      icon: s3 + "",
+      iconAlt: "",
+    },
+    {
+      href: "/special/students",
+      jpText: "学内向け講座",
+      enText: "Students",
+      icon: s3 + "",
+      iconAlt: "",
+    },
+    {
+      href: "/special/specialfaq",
+      jpText: "よくあるご質問",
+      enText: "Q&A",
+      icon: s3 + "",
+      iconAlt: "",
     },
     {
       href: "/",
