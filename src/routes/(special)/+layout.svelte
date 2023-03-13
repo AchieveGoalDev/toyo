@@ -1,5 +1,6 @@
 <script lang="ts">
   import "../../app.css";
+  import PageTransition from "$lib/transitions/PageTransition.svelte";
   import Navbar from "$lib/navbar/Navbar.svelte";
   import Hamburger from "$lib/navbar/mobile/Hamburger.svelte";
   import Social from "$lib/social-components/social.svelte";
@@ -10,6 +11,8 @@
 
   let width: number;
   let scroll: number;
+
+  export let data;
 
   $: windowWidth.update((v) => {
     return width;
@@ -27,12 +30,15 @@
 {:else if width <= 900}
   <Hamburger data={specialNav} />
 {/if}
-<main
-  class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto px-3 shadow-md"
->
-  <slot />
-  <Social />
-</main>
+
+<PageTransition url={data.pathname}>
+  <main
+    class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto px-3 shadow-md"
+  >
+    <slot />
+    <Social />
+  </main>
+</PageTransition>
 <footer class="w-full flex flex-col justify-center content-center">
   <!--TODO add footer data seperately <Footer themeColor={"blue"} />-->
   <div class="bg-slate-700 text-white w-full">
