@@ -7,12 +7,14 @@
   export let color: string;
 
   let bgColor = "bg-black";
+  let hoverColor = "hover:bg-rose-600";
 
   if (color === "red") {
     bgColor = "bg-rose-600";
   }
   if (color === "blue") {
     bgColor = "bg-blue-700";
+    hoverColor = "hover:bg-blue-600";
   }
 
   let hovered: boolean = false;
@@ -46,7 +48,7 @@
     on:blur={() => (hovered = false)}
     style:font-weight={navbarData.index === 0 ? "200" : "bold"}
     style:color={hovered ? "white" : navbarData.scrolled ? "white" : "black"}
-    class={"h-full md:text-sm lg:text-md xl:text-lg text-center font-bold px-2 md:px-4 transition ease-in hover:cursor-pointer hover:scale-105 hover:bg-rose-600 flex break-keep"}
+    class={`h-full md:text-sm lg:text-md xl:text-lg text-center font-bold px-2 md:px-4 transition ease-in hover:cursor-pointer hover:scale-105 hover: flex break-keep ${hoverColor}`}
     href={linkData.href}
   >
     <div class="my-auto">

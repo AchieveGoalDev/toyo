@@ -34,7 +34,7 @@
   <Social />
 </main>
 <footer class="w-full flex flex-col justify-center content-center">
-  <!--<Footer themeColor={"blue"} />-->
+  <!--TODO add footer data seperately <Footer themeColor={"blue"} />-->
   <div class="bg-slate-700 text-white w-full">
     <p class="mx-auto w-fit py-2">
       © Achievegoal Co.,Ltd. All rights reserved.
