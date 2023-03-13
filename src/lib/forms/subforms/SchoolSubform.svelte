@@ -117,7 +117,7 @@
         //Can't name the below variable 'campus' because it conflicts with the store variable
         campuses.forEach((option) => {
           if (option.name === $campus) {
-            levelSelector.options = campus.levels;
+            levelSelector.options = campus?.levels;
           }
         });
       }
