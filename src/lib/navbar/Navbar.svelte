@@ -69,9 +69,9 @@
 		"
 >
   <div
-    class="flex flex-col w-full mx-auto content-center justify-center place-content-center"
+    class="flex flex-col w-full content-center justify-center place-content-center ml-3"
   >
-    <div class="flex flex-row h-full">
+    <div class="flex flex-row h-full place-content-around">
       <div
         class="h-full flex flex-row justify-center content-center items-center my-auto"
       >
@@ -81,21 +81,21 @@
         />
         {#if scrolled}
           <div
-            class="flex-col ml-5 font-bold content-center items-center justify-center sm:text-lg lg:text-xl xl:text-2xl text-center text-white whitespace-nowrap md:mr-3 lg:mr-0"
+            class="flex-col ml-5 font-bold content-center items-center justify-center md:text-md lg:text-lg xl:text-xl text-center text-white whitespace-nowrap mr-4"
           >
             <h2>Toyo Achieve English</h2>
             <h2>{data.navText}</h2>
           </div>
         {:else}
           <div
-            class="flex-col ml-5 font-bold content-center items-center justify-center sm:text-lg lg:text-xl xl:text-2xl text-center text-slate-800 whitespace-nowrap"
+            class="flex-col ml-5 font-bold content-center items-center justify-center md:text-md lg:text-lg xl:text-xl text-center text-slate-800 whitespace-nowrap mr-4"
           >
             <h2 class="break-keep">Toyo Achieve English</h2>
             <h2>英語講座</h2>
           </div>
         {/if}
       </div>
-      <div class="flex flex-row mx-auto lg:pr-[50px] xl:pr-[200px]">
+      <div class="flex flex-row lg:pr-[50px] xl:pr-[200px] mx-5">
         {#each data.links as link}
           <Link {navbarData} linkData={link} color={data.color} />
         {/each}

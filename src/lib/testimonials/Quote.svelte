@@ -6,7 +6,7 @@
 </script>
 
 <div
-  transition:slide|local
+  transition:slide
   class="flex flex-col sm:flex-row items-center justify-items-center place-content-around py-2 px-[50px] sm:px-[20px]"
 >
   <figure class="flex flex-col items-center">
