@@ -3,7 +3,7 @@
   "ignoreDeprications": "5.0",
   "compilerOptions": {
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

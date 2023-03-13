@@ -14,6 +14,8 @@
   let width: number;
   let scroll: number;
 
+  export let data;
+
   $: windowWidth.update((v) => {
     return width;
   });
@@ -30,7 +32,7 @@
 {:else if width <= 900}
   <Hamburger data={mainNav} />
 {/if}
-<PageTransition url={$page.url.pathname}>
+<PageTransition url={data.pathname}>
   <main
     class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto px-3 shadow-md col-span-full row-span-full"
   >
