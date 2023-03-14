@@ -31,6 +31,7 @@
     style:color="white"
     class={`h-full sm:text-sm md:text-md lg:text-lg xl:text-xl mx-1  text-center font-bold px-2 lg:px-4 scale-105 flex shadow-md break-keep ${bgColor}`}
     href={linkData.href}
+    data-sveltekit-replacestate={linkData.replaceState}
   >
     <div class="my-auto">
       <div>

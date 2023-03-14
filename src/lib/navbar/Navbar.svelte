@@ -100,7 +100,11 @@
       </div>
       <div class="flex flex-row lg:pr-[50px] xl:pr-[200px] mx-5">
         {#each data.links as link}
-          <Link {navbarData} linkData={link} color={data.color} />
+          <Link
+            {navbarData}
+            linkData={link}
+            color={data.color}
+          />
         {/each}
       </div>
     </div>

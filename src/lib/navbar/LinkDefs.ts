@@ -8,6 +8,7 @@ export type LinkData = {
   enText: string;
   icon: string;
   iconAlt: string;
+  replaceState: boolean;
 };
 
 export type NavbarContent = {
@@ -26,41 +27,47 @@ export const mainNav = {
       enText: "Home",
       icon: s3 + "images/Icons/home.svg",
       iconAlt: "ホームリンクのアイコン",
+      replaceState: false,
     },
     {
-      href: "/about",
+      href: "/university/about",
       jpText: "キャンパス内留学とは？",
       enText: "About TAE",
       icon: s3 + "images/Icons/info.svg",
       iconAlt: "キャンパス内留学についてのアイコン",
+      replaceState: false,
     },
     {
-      href: "/details",
+      href: "/university/details",
       jpText: "講座情報",
       enText: "Details",
       icon: s3 + "images/Icons/details.svg",
       iconAlt: "講座情報のアイコン",
+      replaceState: false,
     },
     {
-      href: "/faq",
+      href: "/university/faq",
       jpText: "よくある質問",
       enText: "Q&A",
       icon: s3 + "images/Icons/question.svg",
       iconAlt: "よくある質問のアイコン",
+      replaceState: false,
     },
     {
-      href: "/apply",
+      href: "/university/apply",
       jpText: "講座申込",
       enText: "Apply",
       icon: s3 + "images/Icons/apply.svg",
       iconAlt: "申し込みのアイコン",
+      replaceState: false,
     },
     {
-      href: "/news",
+      href: "/university/news",
       jpText: "新着情報",
       enText: "News",
       icon: s3 + "images/Icons/news.svg",
       iconAlt: "新着情報のアイコン",
+      replaceState: false,
     },
     {
       href: "/special",
@@ -68,6 +75,7 @@ export const mainNav = {
       enText: "Open",
       icon: "",
       iconAlt: "",
+      replaceState: true,
     },
   ],
 };
@@ -82,6 +90,7 @@ export const specialNav = {
       enText: "Home",
       icon: s3 + "images/Icons/home.svg",
       iconAlt: "ホームリンクのアイコン",
+      replaceState: false,
     },
     {
       href: "/special/specialnews",
@@ -89,6 +98,7 @@ export const specialNav = {
       enText: "News",
       icon: s3 + "images/Icons/news.svg",
       iconAlt: "新着情報のアイコン",
+      replaceState: false,
     },
     {
       href: "/special/public",
@@ -96,6 +106,7 @@ export const specialNav = {
       enText: "Public",
       icon: s3 + "",
       iconAlt: "",
+      replaceState: false,
     },
     {
       href: "/special/students",
@@ -103,6 +114,7 @@ export const specialNav = {
       enText: "Students",
       icon: s3 + "",
       iconAlt: "",
+      replaceState: false,
     },
     {
       href: "/special/specialfaq",
@@ -110,6 +122,7 @@ export const specialNav = {
       enText: "Q&A",
       icon: s3 + "",
       iconAlt: "",
+      replaceState: false,
     },
     {
       href: "/",
@@ -117,6 +130,7 @@ export const specialNav = {
       enText: "University",
       icon: "",
       iconAlt: "",
+      replaceState: true,
     },
   ],
 };
