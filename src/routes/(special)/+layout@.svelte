@@ -12,7 +12,7 @@
   let width: number;
   let scroll: number;
 
-  export let data;
+  export let data: any;
 
   $: windowWidth.update((v) => {
     return width;
