@@ -63,7 +63,7 @@
         <div class="ml-3 underline">
           <a href="/" class="block">トップページ</a>
           <a href="#" class="block">新着情報</a>
-          <a href="about" class="block">キャンパス内留学とは?</a>
+          <a href="#" class="block">キャンパス内留学とは?</a>
           <a href="#" class="block">講座情報</a>
           <a href="#" class="block">オンライン申込み</a>
         </div>
