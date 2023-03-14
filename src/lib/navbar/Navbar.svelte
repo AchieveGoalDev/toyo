@@ -1,5 +1,6 @@
 <script lang="ts">
   import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+  import { fly } from "svelte/transition";
   import { page } from "$app/stores";
   import { buildTween } from "$lib/tweens/buildTween.js";
 
@@ -54,6 +55,8 @@
 </script>
 
 <nav
+  in:fly={{ y: -64, duration: 200, delay: 300 }}
+  out:fly={{ y: -64, duration: 200 }}
   style:height={`${yShiftValue}px`}
   style:background-color={`${$barShift}`}
   class="backdrop-blur-lg

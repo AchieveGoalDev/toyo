@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-
   import "../../app.css";
   import Navbar from "$lib/navbar/Navbar.svelte";
   import Hamburger from "$lib/navbar/mobile/Hamburger.svelte";
@@ -34,12 +32,14 @@
 {/if}
 <PageTransition url={data.pathname}>
   <main
+    id="standard"
     class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto px-3 shadow-md col-span-full row-span-full"
   >
     <slot />
     <Social />
   </main>
 </PageTransition>
+
 <footer class="w-full flex flex-col justify-center content-center">
   <div class="min-h-[300px] bg-rose-700">
     <Footer themeColor="red" />

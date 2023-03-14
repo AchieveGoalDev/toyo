@@ -33,6 +33,7 @@
 
 <PageTransition url={data.pathname}>
   <main
+    id="special"
     class="flex flex-col justify-center pb-5 w-2xl bg-white mx-auto px-3 shadow-md"
   >
     <slot />

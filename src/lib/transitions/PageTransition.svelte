@@ -12,7 +12,7 @@
     <div
       in:fly={{ x: -10, duration: 250, delay: 300, easing: cubicInOut }}
       out:fade={{ duration: 250, easing: cubicInOut }}
-      class="grid grid-rows-1 grid-cols-1"
+      class="w-full"
     >
       <slot />
     </div>
