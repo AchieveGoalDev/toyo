@@ -273,9 +273,7 @@ export const mtmLesson: TableContainer = {
   tables: [mtmOne, mtmTwo, mtmThree],
 };
 
-export const studentAmt :TableContainer= {
+export const studentAmt: TableContainer = {
   title: "募集人数/ 枠数",
   cols: 9,
-  
-
 };

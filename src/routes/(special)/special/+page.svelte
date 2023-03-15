@@ -1,11 +1,11 @@
 <script lang="ts">
   import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
 
-  import { springSchool } from "$lib/events";
+  import { springSchool } from "$lib/events/events";
 
   import SectionWrapper from "$lib/wrappers/SectionWrapper.svelte";
   import TextWrapper from "$lib/wrappers/TextWrapper.svelte";
-  import EventPreview from "$lib/EventPreview.svelte";
+  import EventPreview from "$lib/events/EventPreview.svelte";
 
   let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
