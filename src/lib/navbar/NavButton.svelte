@@ -31,6 +31,7 @@
     style:color="white"
     class={`h-full sm:text-sm md:text-md lg:text-lg xl:text-xl mx-1  text-center font-bold px-2 lg:px-4 scale-105 flex shadow-md break-keep ${bgColor}`}
     href={linkData.href}
+    data-sveltekit-reload={linkData.reload ? "" : "off"}
   >
     <div class="my-auto">
       <div>
@@ -50,6 +51,7 @@
     style:color={hovered ? "white" : navbarData.scrolled ? "white" : "black"}
     class={`h-full md:text-sm lg:text-md xl:text-lg text-center font-bold px-2 md:px-4 transition ease-in hover:cursor-pointer hover:scale-105 hover: flex break-keep ${hoverColor}`}
     href={linkData.href}
+    data-sveltekit-reload={linkData.reload ? "" : "off"}
   >
     <div class="my-auto">
       <div>
