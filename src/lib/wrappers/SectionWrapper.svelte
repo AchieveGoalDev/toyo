@@ -11,7 +11,7 @@
 </script>
 
 <section
-  class="flex flex-col my-20 px-5 w-[50] md:w-[700px] lg:w-[1000px]  xl:w-[1200px] md:mx-auto"
+  class="flex flex-col my-5 sm:my-8 md:my-10 lg:my-13 xl:my-15 px-5 w-[50] md:w-[700px] lg:w-[1000px]  xl:w-[1200px] md:mx-auto"
 >
   <div class="mb-5">
     <HighlightTitle

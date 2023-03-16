@@ -1,5 +1,5 @@
 <script lang="ts">
-  import RedCtaButton from "$lib/buttons/redCtaButton.svelte";
+  import LongButton from "$lib/buttons/LongButton.svelte";
 
   import SectionWrapper from "$lib/wrappers/SectionWrapper.svelte";
   import TextWrapper from "$lib/wrappers/TextWrapper.svelte";
@@ -12,9 +12,9 @@
   <slot />
   <TextWrapper>
     講座内容の詳細を知りたい方は、メールもしくはお電話でお問い合わせください。
-    <div class="mx-auto">
-      <RedCtaButton text="メールでのお問い合わせはこちら" href="" />
-    </div>
+    <LongButton data={{ color: "red", href: "" }}>
+      メールでお問い合わせはこちら
+    </LongButton>
 
     <div class="font-bold">
       <p>株式会社アチーブゴール</p>

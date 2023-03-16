@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class="text-lg sm:text-xl md:text-2xl xl:text-3xl my-10 px-5">
+<div class="text-md sm:text-lg md:text-xl xl:text-2xl my-10 px-5">
   <slot />
 </div>
