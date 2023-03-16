@@ -1,5 +1,6 @@
 <script lang="ts">
   import { PUBLIC_BUCKET_URL } from "$env/static/public";
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
   import HeroImageCarousel from "$lib/hero/HeroImageCarousel.svelte";
   import HeroTitle from "$lib/hero/HeroTitle.svelte";
   import HeroScroller from "$lib/hero/HeroScroller.svelte";
@@ -7,21 +8,22 @@
   import CTA from "$lib/buttons/redCtaButton.svelte";
 
   let url = PUBLIC_BUCKET_URL;
+  let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   let scrollWords = ["各キャンパスで", "オンラインでも", "毎日にも"];
   let imgPaths = [
-    url + "people/michelle-cutout.png",
-    url + "people/joy-cutout.png",
+    s3 + "images/hero/Everyday1080.webp",
+    s3 + "images/hero/OnlineHero1080.webp",
     url + "people/teach-cutout.png",
   ];
 
   let imgData = [
     {
-      path: url + "people/michelle-cutout.png",
-      alt: "michelle",
+      path: s3 + "images/hero/Everyday1080.webp",
+      alt: "毎日",
       size: "h-full",
     },
-    { path: url + "people/joy-cutout.png", alt: "joy", size: "h-5/6" },
+    { path: s3 + "images/hero/OnlineHero1080.webp", alt: "joy", size: "h-5/6" },
     { path: url + "people/teach-cutout.png", alt: "teach", size: "h-[800px]" },
   ];
 
