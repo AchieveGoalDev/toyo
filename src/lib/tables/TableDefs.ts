@@ -93,7 +93,7 @@ const groupTwo: Table = {
       ],
     },
     {
-      cells: [new Cell(true, true, "合計"), new Cell(true, false, "46,630円")],
+      cells: [new Cell(true, true, "合計"), new Cell(true, true, "46,630円")],
     },
   ],
 };
@@ -121,7 +121,7 @@ const groupThree: Table = {
       ],
     },
     {
-      cells: [new Cell(true, true, "合計"), new Cell(true, false, "38,130円")],
+      cells: [new Cell(true, true, "合計"), new Cell(true, true, "38,130円")],
     },
   ],
 };
@@ -194,12 +194,12 @@ const mtmTwo: Table = {
     },
     {
       cells: [
-        new Cell(true, true, "受講料"),
-        new Cell(true, false, "37,150円	"),
-        new Cell(true, false, "72,150円	"),
-        new Cell(true, false, "102,150円"),
-        new Cell(true, false, "128,800円"),
-        new Cell(true, false, "143,800円"),
+        new Cell(true, true, "合計"),
+        new Cell(true, true, "37,150円	"),
+        new Cell(true, true, "72,150円	"),
+        new Cell(true, true, "102,150円"),
+        new Cell(true, true, "128,800円"),
+        new Cell(true, true, "143,800円"),
       ],
     },
   ],
@@ -241,12 +241,12 @@ const mtmThree: Table = {
     },
     {
       cells: [
-        new Cell(true, true, "受講料"),
-        new Cell(true, false, "30,150,150円	"),
-        new Cell(true, false, "85,150円	"),
-        new Cell(true, false, "82,150円"),
-        new Cell(true, false, "103,800円"),
-        new Cell(true, false, "115,800円"),
+        new Cell(true, true, "合計"),
+        new Cell(true, true, "30,150,150円	"),
+        new Cell(true, true, "85,150円	"),
+        new Cell(true, true, "82,150円"),
+        new Cell(true, true, "103,800円"),
+        new Cell(true, true, "115,800円"),
       ],
     },
   ],
