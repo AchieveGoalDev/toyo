@@ -1,25 +1,19 @@
 <script lang="ts">
-    import  {fly} from 'svelte/transition'
+  import { fly } from "svelte/transition";
 
-    export let scrollWords: string[];
-    export let cycleIndex: number;
-    export let display: boolean; 
-
+  export let scrollWords: string[];
+  export let cycleIndex: number;
 </script>
 
-<div 
-    style:display={"grid"}
-    style:place-items={"center"}
-    class="mx-autoplace">
-    {#if display}
-    <h2
-        style:grid-row={"\about1"}
-        style:grid-column={"1"}
-        class={`
+<h2
+  style:grid-row={"about1"}
+  class={`
+            col-span-full
+            row-span-full
             whitespace-nowrap 
-            heading-outline-white 
-            xl:text-8xl 
+            heading-outline-white
             lg:text-6xl
+            xl:text-7xl
             font-black 
             mx-auto 
             text-rose-700 
@@ -29,9 +23,7 @@
             p-4
             rounded-full
             `}
-            transition:fly={{y: 75, duration: 750}}
-    >
-            {scrollWords[cycleIndex]}
-    </h2>
-    {/if}
-</div>
+  transition:fly={{ y: 75, duration: 750 }}
+>
+  {scrollWords[cycleIndex]}
+</h2>

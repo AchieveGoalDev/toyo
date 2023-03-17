@@ -18,11 +18,11 @@
 </script>
 
 <!--TODO simplify nesting here-->
-<div class="w-1/2 h-full">
+<div class="w-1/2 h-full mt-[60px]">
   <div
-    class="w-2/3 mx-auto flex flex-col justify-center contents-center relative h-full w-auto"
+    class="w-2/3 h-3/4 mx-auto flex flex-col place-content-center relative h-full w-auto"
   >
-    <div class="flex flex-col relative h-5/6 overflow-visible shrink">
+    <div class="h-full mb-10 grid grid-cols-1">
       {#each imgData as img, i}
         {#if display && cycleIndex === i}
           <HeroImage imageProps={img} />
