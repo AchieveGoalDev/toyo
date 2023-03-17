@@ -16,17 +16,17 @@
   let scrollWords = [
     "全キャンパスで",
     "オンラインでも",
-    "毎日にも",
+    "毎日受講可",
     "受講スタイル",
     "お得な値段で",
   ];
 
   let scrollText = [
-    "Test text one, I will try to keep it under sixty characters",
-    "Test text two, I will try to keep it under sixty characters",
-    "Test text three, I will try to keep it under sixty characters",
-    "Test text four, I will try to keep it under sixty characters",
-    "Test text five, I will try to keep it under sixty characters",
+    "Toyo Achieve Englishは全キャンパスで開講中。空きコマに受講出来るので、時間を有効活用できます。",
+    "Toyo Achieve Englishのクオリティの高い授業はご自宅でも受講可能！帰宅後や外出前に受講出来ます。",
+    "グループレッスンは平日毎日、マンツーマンでも週に5コマまで受講可能。毎日英語を話すことによって、会話力が向上します。",
+    "マンツーマンとグループレッスン、自分に合った受講スタイルで、英語力がぐんぐん伸びる！",
+    "グループは1コマ850円、マンツーマンは3,500円と非常にお得に受講出来ます。リピーター受講生はさらに受講料20％オフ！",
   ];
 
   let imgData = [
@@ -55,11 +55,6 @@
 
   let display = true;
   $: index = 0;
-  $: imgPaths = [
-    url + "people/michelle-cutout.png",
-    url + "people/joy-cutout.png",
-    url + "people/teach-cutout.png",
-  ];
 
   const cycler = () => {
     display = false;
