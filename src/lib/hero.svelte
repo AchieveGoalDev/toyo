@@ -33,7 +33,7 @@
     {
       path: s3 + "images/hero/Everyday1080.webp",
       alt: "毎日",
-      size: "h-2/3",
+      size: "h-5/6 xl:h-2/3",
     },
     {
       path: s3 + "images/hero/Everyday1080.webp",
@@ -43,12 +43,12 @@
     {
       path: s3 + "images/hero/Everyday1080.webp",
       alt: "毎日",
-      size: "h-2/3",
+      size: "h-5/6 lg:h-2/3",
     },
     {
       path: s3 + "images/hero/OnlineHero1080.webp",
       alt: "joy",
-      size: "h-5/6",
+      size: "lg:h-5/6",
     },
     { path: url + "people/teach-cutout.png", alt: "teach", size: "h-5/6" },
   ];
@@ -74,6 +74,12 @@
   let interval: any;
   $: interval = resetInterval(interval);
 </script>
+
+<svelte:head>
+  {#each imgData as image}
+    <link rel="preload" as="image" href={image.path} />
+  {/each}
+</svelte:head>
 
 <div class="mx-auto relative w-[90%]">
   <div class="h-[20px] w-[full]" />
