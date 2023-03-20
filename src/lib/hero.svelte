@@ -31,12 +31,12 @@
 
   let imgData = [
     {
-      path: s3 + "images/hero/Everyday1080.webp",
+      path: s3 + "images/hero/AllCampus.png",
       alt: "毎日",
       size: "h-5/6 xl:h-2/3",
     },
     {
-      path: s3 + "images/hero/Everyday1080.webp",
+      path: s3 + "images/hero/OnlineHero1080.webp",
       alt: "毎日",
       size: "h-2/3",
     },
@@ -46,11 +46,15 @@
       size: "h-5/6 lg:h-2/3",
     },
     {
-      path: s3 + "images/hero/OnlineHero1080.webp",
+      path: s3 + "images/hero/Style.png",
       alt: "joy",
-      size: "lg:h-5/6",
+      size: "h-5/6 lg:h-2/3",
     },
-    { path: url + "people/teach-cutout.png", alt: "teach", size: "h-5/6" },
+    {
+      path: s3 + "images/hero/Reasonable.png",
+      alt: "teach",
+      size: "h-5/6 lg:h-2/3",
+    },
   ];
 
   let display = true;
