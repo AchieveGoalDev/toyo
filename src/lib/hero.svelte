@@ -33,27 +33,27 @@
     {
       path: s3 + "images/hero/AllCampus.png",
       alt: "毎日",
-      size: "h-5/6 xl:h-2/3",
+      size: "h-[480px] xxl:h-[720px]",
     },
     {
       path: s3 + "images/hero/OnlineHero1080.webp",
       alt: "毎日",
-      size: "h-2/3",
+      size: "h-[480px] xxl:h-[720px]",
     },
     {
       path: s3 + "images/hero/Everyday1080.webp",
       alt: "毎日",
-      size: "h-5/6 lg:h-2/3",
+      size: "h-[550px] xxl:h-[720px]",
     },
     {
       path: s3 + "images/hero/Style.png",
       alt: "joy",
-      size: "h-5/6 lg:h-2/3",
+      size: "h-[550px] xxl:h-[720px]",
     },
     {
       path: s3 + "images/hero/Reasonable.png",
       alt: "teach",
-      size: "h-5/6 lg:h-2/3",
+      size: "h-[550px] xxl:h-[720px]",
     },
   ];
 
