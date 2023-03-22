@@ -97,7 +97,7 @@
     />
   </div>
   <div
-    class="flex flex-row bg-logo bg-center bg-no-repeat bg-gray-500 col-span-10 row-span-12"
+    class="flex flex-row bg-logo bg-center bg-no-repeat col-span-10 row-span-12"
   >
     <div class="grid grid-cols-12">
       <div class="flex flex-col justify-center contents-center col-span-6">
