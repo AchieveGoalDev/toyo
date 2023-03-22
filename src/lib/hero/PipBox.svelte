@@ -5,8 +5,8 @@
   export let index: number;
 </script>
 
-<div class="flex w-full absolute -bottom-[30px] place-content-around">
+<div class="flex w-full my-auto place-content-around py-5">
   {#each imgPaths as img}
-    <Pip {imgPaths} {index} {img}/>
+    <Pip {imgPaths} {index} {img} />
   {/each}
 </div>

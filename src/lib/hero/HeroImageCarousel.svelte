@@ -18,17 +18,21 @@
 </script>
 
 <!--TODO simplify nesting here-->
-<div class="w-1/2 h-full mt-[60px]">
+<div class="grid grid-rows-12 place-content-between grid-cols-1">
+  <div class="row-span-1" />
   <div
-    class="w-2/3 h-3/4 mx-auto flex flex-col place-content-center relative h-full w-auto"
+    class=" row-span-8 mx-auto flex flex-col place-content-around relative w-auto my-auto"
   >
-    <div class="h-full mb-10 grid grid-cols-1">
+    <div class="grid grid-cols-1 grid-rows-1 my-auto gap-0 p-10">
       {#each imgData as img, i}
         {#if display && cycleIndex === i}
           <HeroImage imageProps={img} />
         {/if}
       {/each}
-      <PipBox {imgPaths} index={cycleIndex} />
     </div>
+    <div class="row-span-1" />
+  </div>
+  <div class="row-span-2 col-span-1">
+    <PipBox {imgPaths} index={cycleIndex} />
   </div>
 </div>

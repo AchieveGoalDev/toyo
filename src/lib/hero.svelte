@@ -46,12 +46,12 @@
       size: "h-[550px] xxl:h-[720px]",
     },
     {
-      path: s3 + "images/hero/Style.png",
+      path: s3 + "images/hero/Style1080.webp",
       alt: "joy",
       size: "h-[550px] xxl:h-[720px]",
     },
     {
-      path: s3 + "images/hero/Reasonable.png",
+      path: s3 + "images/hero/Reasonable1080.webp",
       alt: "teach",
       size: "h-[550px] xxl:h-[720px]",
     },
@@ -85,45 +85,52 @@
   {/each}
 </svelte:head>
 
-<div class="mx-auto relative w-[90%]">
-  <div class="h-[20px] w-[full]" />
-  <HeroScroller
-    direction={"left"}
-    {interval}
-    {resetInterval}
-    bind:display
-    bind:cycleIndex={index}
-    arraySize={imgData.length}
-  />
-  <HeroScroller
-    direction={"right"}
-    bind:interval
-    {resetInterval}
-    bind:display
-    bind:cycleIndex={index}
-    arraySize={imgData.length}
-  />
+<div class="mx-auto w-[90%] grid grid-cols-12 grid-rows-12">
+  <div class="col-span-1 row-span-12 flex">
+    <HeroScroller
+      direction={"left"}
+      {interval}
+      {resetInterval}
+      bind:display
+      bind:cycleIndex={index}
+      arraySize={imgData.length}
+    />
+  </div>
   <div
-    class="flex flex-row bg-logo bg-center bg-no-repeat h-screen px-32 mx-auto z-10"
+    class="flex flex-row bg-logo bg-center bg-no-repeat bg-gray-500 col-span-10 row-span-12"
   >
-    <div class="flex flex-col w-1/2 h-full justify-center contents-center">
-      <div
-        class="my-auto flex flex-col justify-center contents-center p-10 rounded-md"
-      >
-        <h1
-          class="xl:text-7xl lg:text-6xl md:text-5xl text-slate-700 text-center font-black mx-auto mb-10 drop-shadow"
+    <div class="grid grid-cols-12">
+      <div class="flex flex-col justify-center contents-center col-span-6">
+        <div
+          class="my-auto flex flex-col justify-center contents-center p-10 rounded-md"
         >
-          Achieve English <span class="text-rose-800">Excellence</span>
-        </h1>
-        <HeroTextScroller {display}>
-          <HeroTitle {scrollWords} cycleIndex={index} />
-          <HeroText cycleIndex={index} {scrollText} />
-        </HeroTextScroller>
-        <div class="mx-auto">
-          <CTA text="今すぐ受講" href="/apply" />
+          <h1
+            class="xl:text-7xl lg:text-6xl md:text-5xl text-slate-700 text-center font-black mx-auto mb-10 drop-shadow"
+          >
+            Achieve English <span class="text-rose-800">Excellence</span>
+          </h1>
+          <HeroTextScroller {display}>
+            <HeroTitle {scrollWords} cycleIndex={index} />
+            <HeroText cycleIndex={index} {scrollText} />
+          </HeroTextScroller>
+          <div class="mx-auto">
+            <CTA text="今すぐ受講" href="/apply" />
+          </div>
         </div>
       </div>
+      <div class="col-span-6">
+        <HeroImageCarousel cycleIndex={index} imgPaths={imgData} {display} />
+      </div>
     </div>
-    <HeroImageCarousel cycleIndex={index} imgPaths={imgData} {display} />
+  </div>
+  <div class="col-span-1 row-span-12 flex">
+    <HeroScroller
+      direction={"right"}
+      bind:interval
+      {resetInterval}
+      bind:display
+      bind:cycleIndex={index}
+      arraySize={imgData.length}
+    />
   </div>
 </div>

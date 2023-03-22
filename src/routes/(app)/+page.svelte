@@ -22,7 +22,9 @@
 <head />
 
 {#if width > 1200}
-  <Hero />
+  <div class="h-[720px]">
+    <Hero />
+  </div>
 {:else if width > 500 && width <= 1400}
   <h1>Medium/Small Hero Placeholder</h1>
 {:else if width <= 500}
