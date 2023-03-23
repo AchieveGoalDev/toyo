@@ -12,6 +12,7 @@
 
   export let isMobile: boolean;
 
+  let url = PUBLIC_BUCKET_URL;
   let s3 = PUBLIC_IMAGE_BUCKET_URL;
 
   let scrollWords = [
@@ -86,40 +87,20 @@
   {/each}
 </svelte:head>
 
-<div class="mx-auto w-[90%] grid grid-cols-12 grid-rows-12">
-  <div class="col-span-1 row-span-12 flex">
-    <HeroScroller
-      direction={"left"}
-      {interval}
-      {resetInterval}
-      bind:display
-      bind:cycleIndex={index}
-      arraySize={imgData.length}
-    />
-  </div>
-  <div
-    class="flex flex-row bg-logo bg-center bg-no-repeat col-span-10 row-span-12"
-  >
-    <div class="grid grid-cols-12">
-      <div class="flex flex-col justify-center contents-center col-span-6">
-        <div
-          class="my-auto flex flex-col justify-center contents-center p-10 rounded-md"
-        >
-          <h1
-            class="xl:text-7xl lg:text-6xl md:text-5xl text-slate-700 text-center font-black mx-auto mb-10 drop-shadow"
-          >
-            Achieve English <span class="text-rose-800">Excellence</span>
-          </h1>
-          <HeroTextScroller {display}>
-            <HeroTitle {scrollWords} cycleIndex={index} />
-            <HeroText cycleIndex={index} {scrollText} />
-          </HeroTextScroller>
-          <div class="mx-auto">
-            <CTA text="今すぐ受講" href="/apply" />
-          </div>
-        </div>
-      </div>
-      <div class="col-span-6">
+<div class="mobile-hero-container bg-logo-mobile mt-4">
+  <div class="mobile-hero-carousel grid grid-cols-8 content-center gap-0">
+    <div class="col-span-1 flex">
+      <HeroScroller
+        direction={"left"}
+        bind:interval
+        {resetInterval}
+        bind:display
+        bind:cycleIndex={index}
+        arraySize={imgData.length}
+      />
+    </div>
+    <div class="col-start-2 col-end-8 colspan-6 ">
+      <div class="mx-auto">
         <HeroImageCarousel
           cycleIndex={index}
           imgPaths={imgData}
@@ -128,15 +109,25 @@
         />
       </div>
     </div>
+    <div class="col-start-8 flex">
+      <HeroScroller
+        direction={"right"}
+        bind:interval
+        {resetInterval}
+        bind:display
+        bind:cycleIndex={index}
+        arraySize={imgData.length}
+      />
+    </div>
   </div>
-  <div class="col-span-1 row-span-12 flex">
-    <HeroScroller
-      direction={"right"}
-      bind:interval
-      {resetInterval}
-      bind:display
-      bind:cycleIndex={index}
-      arraySize={imgData.length}
-    />
+  <div class="mobile-hero-text">
+    <HeroTextScroller {display}>
+      <HeroTitle {scrollWords} cycleIndex={index} />
+      <div
+        class="bg-slate-500/[.1] flex mx-auto my-auto p-4 rounded-lg shrink mx-5"
+      >
+        <HeroText cycleIndex={index} {scrollText} />
+      </div>
+    </HeroTextScroller>
   </div>
 </div>

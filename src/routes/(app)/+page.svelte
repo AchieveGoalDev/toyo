@@ -2,6 +2,7 @@
   import { PUBLIC_BUCKET_URL } from "$env/static/public";
 
   import Hero from "$lib/hero.svelte";
+  import MobileHero from "$lib/hero/MobileHero.svelte";
   import Cards from "$lib/cards/threeCardContainer.svelte";
   import BlueCTA from "$lib/buttons/blueCtaButton.svelte";
   import RedCTA from "$lib/buttons/redCtaButton.svelte";
@@ -23,12 +24,12 @@
 
 {#if width > 1200}
   <div class="h-[720px]">
-    <Hero />
+    <Hero isMobile={false} />
   </div>
 {:else if width > 500 && width <= 1400}
-  <h1>Medium/Small Hero Placeholder</h1>
+  <MobileHero isMobile={true} />
 {:else if width <= 500}
-  <h1>Mobile Hero Placeholder</h1>
+  <MobileHero isMobile={true} />
 {/if}
 <div class="flex flex-col my-10 max-w-[1000px] mx-auto">
   <SectionWrapper

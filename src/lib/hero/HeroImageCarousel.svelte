@@ -7,6 +7,7 @@
   export let imgPaths: ImgObj[];
   export let cycleIndex: number;
   export let display: boolean;
+  export let isMobile: boolean;
 
   let imgData: CarouselImage[] = [];
 
@@ -23,7 +24,7 @@
   <div
     class=" row-span-8 mx-auto flex flex-col place-content-around relative w-auto my-auto"
   >
-    <div class="grid grid-cols-1 grid-rows-1 my-auto gap-0 p-10">
+    <div class="grid grid-cols-1 grid-rows-1 my-auto gap-0 lg:p-10">
       {#each imgData as img, i}
         {#if display && cycleIndex === i}
           <HeroImage imageProps={img} />
@@ -32,7 +33,9 @@
     </div>
     <div class="row-span-1" />
   </div>
-  <div class="row-span-2 col-span-1">
-    <PipBox {imgPaths} index={cycleIndex} />
-  </div>
+  {#if !isMobile}
+    <div class="row-span-2 col-span-1">
+      <PipBox {imgPaths} index={cycleIndex} />
+    </div>
+  {/if}
 </div>

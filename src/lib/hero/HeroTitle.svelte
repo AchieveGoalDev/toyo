@@ -10,16 +10,20 @@
   class={`
             col-span-full
             row-span-full
-            whitespace-nowrap 
-            heading-outline-white
+            whitespace-nowrap
+            thin-heading-outline-white 
+            lg:heading-outline-white
+            text-3xl
             lg:text-6xl
             xl:text-7xl
             font-black 
             mx-auto 
             text-rose-700 
-            mb-10 
+            mb-3
+            lg:mb-10 
             drop-shadow-xl 
-            bg-sky-400/[.4] 
+            bg-sky-300
+            lg:bg-sky-400/[.4] 
             p-4
             rounded-full
             `}
