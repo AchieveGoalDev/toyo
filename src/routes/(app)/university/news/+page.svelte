@@ -6,7 +6,7 @@
 
   onMount(async () => {
     //@ts-ignore
-    data = getArticles();
+    data = await getArticles();
   });
 
   import HighlightTitle from "$lib/headers/HighlightTitle.svelte";
