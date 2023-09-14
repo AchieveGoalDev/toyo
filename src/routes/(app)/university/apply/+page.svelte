@@ -11,5 +11,5 @@
     themeColor="red"
   />
 
-  <!-- <ApplicationForm /> -->
+  <ApplicationForm />
 </div>

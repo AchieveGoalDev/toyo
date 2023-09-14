@@ -47,11 +47,15 @@ export class SingleTextInput {
 
     validate() {
         const validatorData = this.validator(this.value);
+
+        console.log(validatorData)
+
         if (validatorData.length === 0) {
             this.clearErrors()
             this.isValid = true
         } else {
             this.errors = validatorData
+            this.isValid = false
         }
     }
 

@@ -18,6 +18,5 @@ export function validate英字名First(name: string) {
     if (!name) {
         errors.push("必要項目です");
     }
-
     return errors;
 }
