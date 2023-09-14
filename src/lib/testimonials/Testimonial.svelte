@@ -79,7 +79,7 @@
           class="mx-auto text-center shadow-lg"
         >
           {#if display && currentData}
-            <Quote data={currentData}/>
+            <Quote data={currentData} />
           {/if}
         </div>
       {/key}
@@ -90,7 +90,7 @@
       >{expanded ? "閉じる" : "詳細を見る"}</button
     >
     {#if expanded}
-      <div transition:slide class="bg-orange-100">
+      <div transition:slide|local class="bg-orange-100">
         <Profile data={data[index]} />
       </div>
     {/if}

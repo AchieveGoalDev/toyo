@@ -11,7 +11,7 @@ export type ImgObj = {
 };
 
 const defaultSyle =
-  "absolute mx-auto left-0 right-0 bottom-20 w-auto drop-shadow-lg";
+  "mx-auto left-0 right-0 bottom-20 w-auto drop-shadow-lg col-span-full row-span-full";
 
 const defaultTransitionIn = {
   x: 100,

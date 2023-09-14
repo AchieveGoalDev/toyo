@@ -41,16 +41,16 @@
   }}
   tabindex="0"
   class={`
+    mx-auto
+    my-auto 
     select-none 
-    absolute bottom-1/2
-    top-1/2 
-    ${direction === "left" ? "left-[-50px]" : "right-[-50px]"}
     text-9xl 
-    z-[9] 
     transform 
     ease-in-out 
-    h-[50px]
-    w-[50px]
+    h-[40px]
+    w-[40px]
+    md:h-[50px]
+    md:w-[50px]
     rounded-full
     bg-slate-100
     transition

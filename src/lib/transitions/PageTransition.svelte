@@ -1,16 +1,20 @@
 <script lang="ts">
-    import {fly} from "svelte/transition"
-    import {cubicInOut} from "svelte/easing"
+  import { fade, fly } from "svelte/transition";
+  import { cubicInOut } from "svelte/easing";
 
-    export let pathname: string ;
+  export let url: string;
+
+  $: url = url;
 </script>
 
-{#if pathname}
-{#key pathname}
+{#if url}
+  {#key url}
     <div
-        transition:fly={{x:75, duration: 250, delay: 200, easing:cubicInOut}}
+      in:fly={{ x: -10, duration: 250, delay: 300, easing: cubicInOut }}
+      out:fade={{ duration: 250, easing: cubicInOut }}
+      class="w-full"
     >
-        <slot />
+      <slot />
     </div>
-{/key}
+  {/key}
 {/if}

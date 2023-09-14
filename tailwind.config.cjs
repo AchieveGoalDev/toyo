@@ -11,6 +11,7 @@ module.exports = {
         md: "768px",
         lg: "1080px",
         xl: "1600px",
+        xxl: "2000px",
         cardsmall: "275px",
         cardmed: "350px",
       },

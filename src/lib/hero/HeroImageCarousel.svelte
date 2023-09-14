@@ -7,6 +7,7 @@
   export let imgPaths: ImgObj[];
   export let cycleIndex: number;
   export let display: boolean;
+  export let isMobile: boolean;
 
   let imgData: CarouselImage[] = [];
 
@@ -18,17 +19,23 @@
 </script>
 
 <!--TODO simplify nesting here-->
-<div class="w-1/2 h-full">
+<div class="grid grid-rows-12 place-content-between grid-cols-1">
+  <div class="row-span-1" />
   <div
-    class="w-2/3 mx-auto flex flex-col justify-center contents-center relative h-full w-auto"
+    class=" row-span-8 mx-auto flex flex-col place-content-around relative w-auto my-auto"
   >
-    <div class="flex flex-col relative h-5/6 overflow-visible shrink">
+    <div class="grid grid-cols-1 grid-rows-1 my-auto gap-0 lg:p-10">
       {#each imgData as img, i}
         {#if display && cycleIndex === i}
           <HeroImage imageProps={img} />
         {/if}
       {/each}
+    </div>
+    <div class="row-span-1" />
+  </div>
+  {#if !isMobile}
+    <div class="row-span-2 col-span-1">
       <PipBox {imgPaths} index={cycleIndex} />
     </div>
-  </div>
+  {/if}
 </div>

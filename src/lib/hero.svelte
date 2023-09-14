@@ -1,37 +1,65 @@
 <script lang="ts">
-  import {PUBLIC_BUCKET_URL} from '$env/static/public'
+  import { PUBLIC_BUCKET_URL } from "$env/static/public";
+  import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
+
+  import HeroText from "$lib/hero/HeroText.svelte";
+  import HeroTextScroller from "$lib/hero/HeroTextScroller.svelte";
   import HeroImageCarousel from "$lib/hero/HeroImageCarousel.svelte";
   import HeroTitle from "$lib/hero/HeroTitle.svelte";
   import HeroScroller from "$lib/hero/HeroScroller.svelte";
 
   import CTA from "$lib/buttons/redCtaButton.svelte";
 
-  let url = PUBLIC_BUCKET_URL;
+  export let isMobile: boolean;
 
-  let scrollWords = ["各キャンパスで", "オンラインでも", "毎日にも"];
-  let imgPaths = [
-    url + "people/michelle-cutout.png",
-    url + "people/joy-cutout.png",
-    url + "people/teach-cutout.png",
+  let s3 = PUBLIC_IMAGE_BUCKET_URL;
+
+  let scrollWords = [
+    "全キャンパスで",
+    "オンラインでも",
+    "毎日受講可",
+    "受講スタイル",
+    "お得な値段で",
+  ];
+
+  let scrollText = [
+    "Toyo Achieve Englishは全キャンパスで開講中。空きコマに受講出来るので、時間を有効活用できます。",
+    "Toyo Achieve Englishのクオリティの高い授業はご自宅でも受講可能！帰宅後や外出前に受講出来ます。",
+    "グループレッスンは平日毎日、マンツーマンでも週に5コマまで受講可能。毎日英語を話すことによって、会話力が向上します。",
+    "マンツーマンとグループレッスン、自分に合った受講スタイルで、英語力がぐんぐん伸びる！",
+    "グループは1コマ850円、マンツーマンは3,500円と非常にお得に受講出来ます。リピーター受講生はさらに受講料20％オフ！",
   ];
 
   let imgData = [
     {
-      path: url + "people/michelle-cutout.png",
-      alt: "michelle",
-      size: "h-full",
+      path: s3 + "images/hero/AllCampus.png",
+      alt: "毎日",
+      size: "h-[480px] xxl:h-[720px]",
     },
-    { path: url + "people/joy-cutout.png", alt: "joy", size: "h-5/6" },
-    { path: url + "people/teach-cutout.png", alt: "teach", size: "h-[800px]" },
+    {
+      path: s3 + "images/hero/OnlineHero1080.webp",
+      alt: "毎日",
+      size: "h-[480px] xxl:h-[720px]",
+    },
+    {
+      path: s3 + "images/hero/Everyday1080.webp",
+      alt: "毎日",
+      size: "h-[550px] xxl:h-[720px]",
+    },
+    {
+      path: s3 + "images/hero/Style1080.webp",
+      alt: "joy",
+      size: "h-[550px] xxl:h-[720px]",
+    },
+    {
+      path: s3 + "images/hero/Reasonable1080.webp",
+      alt: "teach",
+      size: "h-[550px] xxl:h-[720px]",
+    },
   ];
 
   let display = true;
   $: index = 0;
-  $: imgPaths = [
-    url + "people/michelle-cutout.png",
-    url + "people/joy-cutout.png",
-    url + "people/teach-cutout.png",
-  ];
 
   const cycler = () => {
     display = false;
@@ -52,48 +80,63 @@
   $: interval = resetInterval(interval);
 </script>
 
-<div class="mx-auto relative w-4/5">
-  <div class="h-[80px] w-[full]" />
-  <HeroScroller
-    direction={"left"}
-    {interval}
-    {resetInterval}
-    bind:display
-    bind:cycleIndex={index}
-    arraySize={imgData.length}
-  />
-  <HeroScroller
-    direction={"right"}
-    bind:interval
-    {resetInterval}
-    bind:display
-    bind:cycleIndex={index}
-    arraySize={imgData.length}
-  />
+<svelte:head>
+  {#each imgData as image}
+    <link rel="preload" as="image" href={image.path} />
+  {/each}
+</svelte:head>
+
+<div class="mx-auto w-[90%] grid grid-cols-12 grid-rows-12">
+  <div class="col-span-1 row-span-12 flex">
+    <HeroScroller
+      direction={"left"}
+      {interval}
+      {resetInterval}
+      bind:display
+      bind:cycleIndex={index}
+      arraySize={imgData.length}
+    />
+  </div>
   <div
-    class="flex flex-row bg-logo bg-center bg-no-repeat h-screen px-32 mx-auto z-10"
+    class="flex flex-row bg-logo bg-center bg-no-repeat col-span-10 row-span-12"
   >
-    <div class="flex flex-col w-1/2 h-full justify-center contents-center">
-      <div
-        class="my-auto flex flex-col justify-center contents-center p-10 rounded-md"
-      >
-        <h1
-          class="xl:text-9xl lg:text-7xl md:text-6xl text-slate-700 text-center font-black mx-auto mb-10 drop-shadow"
+    <div class="grid grid-cols-12">
+      <div class="flex flex-col justify-center contents-center col-span-6">
+        <div
+          class="my-auto flex flex-col justify-center contents-center p-10 rounded-md"
         >
-          Achieve English Excellence
-        </h1>
-        <HeroTitle {scrollWords} cycleIndex={index} {display} />
-        <p
-          class="rounded-md text-slate-700 text-2xl inline-block mx-auto mb-10 w-2/3"
-        >
-          “English Only
-          Policy”の環境だからこそできるスピーキング・リスニングに焦点を当てたレッスン内容になっています。英会話スクールに行く時間が確保できなくてもキャンパス内留学だからこそ空いている時間でレッスンに取り組むことができ、大学の授業や部活、バイトなどとも両立することができます！
-        </p>
-        <div class="mx-auto">
-          <CTA text="今すぐ受講" />
+          <h1
+            class="xl:text-7xl lg:text-6xl md:text-5xl text-slate-700 text-center font-black mx-auto mb-10 drop-shadow"
+          >
+            Achieve English <span class="text-rose-800">Excellence</span>
+          </h1>
+          <HeroTextScroller {display}>
+            <HeroTitle {scrollWords} cycleIndex={index} />
+            <HeroText cycleIndex={index} {scrollText} />
+          </HeroTextScroller>
+          <div class="mx-auto">
+            <CTA text="今すぐ受講" href="/apply" />
+          </div>
         </div>
       </div>
+      <div class="col-span-6">
+        <HeroImageCarousel
+          cycleIndex={index}
+          imgPaths={imgData}
+          {display}
+          {isMobile}
+        />
+      </div>
     </div>
-    <HeroImageCarousel cycleIndex={index} imgPaths={imgData} {display} />
+  </div>
+  <div class="col-span-1 row-span-12 flex">
+    <HeroScroller
+      direction={"right"}
+      bind:interval
+      {resetInterval}
+      bind:display
+      bind:cycleIndex={index}
+      arraySize={imgData.length}
+    />
   </div>
 </div>
