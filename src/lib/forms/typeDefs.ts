@@ -1,8 +1,8 @@
 export type SingleInputValidator = (inputOne: string) => string[];
 export type DoubleInputValidator = (inputOne: string, inputTwo: string) => string[];
 export type InputSize = "short" | "medium" | "long"
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export class SingleTextInput {
     [key: string]: any;
     size: InputSize;
