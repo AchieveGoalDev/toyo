@@ -1,4 +1,8 @@
 import { writable } from "svelte/store"
-import { personal } from "$lib/forms/basic/basicDefs"
+import { personal, agree, campus, contact } from "$lib/forms/data/basicDefs"
 
-export const basicData = writable({ personal })
+
+export const dataCheck = writable({ campus })
+
+export const basicData = writable({ personal, agree, campus, contact })
+

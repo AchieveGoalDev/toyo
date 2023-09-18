@@ -1,39 +1,16 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import type { RadioInput } from "$lib/forms/ApplicationData";
-  import { onMount } from "svelte";
+  import type { RadioInput } from "$lib/forms/data/typeDefs";
 
   export let data: RadioInput;
 
-  export let isValid: boolean;
-  export let value: string;
-
-  let errorMessage: string[] = [];
-
-  onMount(() => {
-    checkValidity(value);
-  });
-
-  function checkValidity(value: string) {
-    if (!value) {
-      isValid = false;
-    } else {
-      isValid = true;
-    }
-  }
-
-  $: if (!isValid) {
-    errorMessage.push("必要項目です");
-  } else {
-    errorMessage = [];
-  }
-
-  $: checkValidity(value);
+  $: data = data;
+  $: data.validate();
 </script>
 
 <div class="my-2 w-full grid grid-cols-12 gap-0">
   <legend class="col-span-3 font-bold text-right pr-4 w-full h-full border-r">
-    {#if data.isNecessary}
+    {#if data.isRequired}
       <span class="text-red-500">*</span>
     {/if}
     {data.label}</legend
@@ -44,7 +21,7 @@
         <div class="flex flex-row my-1 sm:my-0">
           <label class="mr-1" for={choice}>{choice}</label>
           <input
-            bind:group={value}
+            bind:group={data.value}
             value={choice}
             id={choice}
             type="radio"
@@ -53,8 +30,8 @@
         </div>
       {/each}
     </fieldset>
-    {#if !isValid}
-      {#each errorMessage as error}
+    {#if !data.isValid}
+      {#each data.errors as error}
         <p transition:slide class="text-red-500">{error}</p>
       {/each}
     {/if}
