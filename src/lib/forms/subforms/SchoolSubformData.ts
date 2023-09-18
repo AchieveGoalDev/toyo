@@ -1,5 +1,5 @@
-import type { SelectInput, ImageSelectInput } from "../ApplicationData";
-import { ImageArrayItem } from "../ApplicationData";
+import type { SelectInput, ImageSelectInput } from "../old-forms/ApplicationData";
+import { ImageArrayItem } from "../old-forms/ApplicationData";
 
 export type Campus = {
   name: string;
@@ -87,6 +87,7 @@ export const campusSelector: ImageSelectInput = {
   options: campuses.map((campus) => campus.name),
   images: [
     new ImageArrayItem("images/images/Unselected.webp", "未選択", "未選択"),
+    new ImageArrayItem("images/images/Unselected.webp", "川越", "川越"),
     new ImageArrayItem("images/images/INIAD.webp", "INIAD", "INIAD"),
     new ImageArrayItem("images/images/WELLB.webp", "WELLB", "WELLB"),
     new ImageArrayItem("images/images/HAKUSAN.webp", "白山", "白山"),

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ApplciationForm from "$lib/forms/ApplciationForm.svelte";
+  import ApplicationForm from "$lib/forms/ApplicationForm.svelte";
   import HighlightTitle from "$lib/headers/HighlightTitle.svelte";
 </script>
 
@@ -11,5 +11,5 @@
     themeColor="red"
   />
 
-  <ApplciationForm />
+  <ApplicationForm />
 </div>

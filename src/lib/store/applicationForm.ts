@@ -5,6 +5,11 @@ import { campus } from "$lib/store/schoolSubform";
 type CampusCourse = "MTM" | "GROUP";
 type GroupLevel = "初級" | "初中級" | "中級" | "上級";
 
+export const subformHeight = writable(0);
+export const selectedSubform = writable("personal");
+export const formMode = writable("basic");
+
+
 type CampusOfferings = {
   name: string;
   courses: CampusCourse[];

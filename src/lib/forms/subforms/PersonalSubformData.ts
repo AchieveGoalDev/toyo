@@ -6,186 +6,56 @@ import type {
   PhoneInput,
   RadioInput,
   SelectInputWithLabel,
-  TextInput,
 } from "../ApplicationData";
 
-export const 学籍番号Data: TextInput = {
-  size: "short",
-  isNecessary: true,
-  label: "学籍番号",
-  desc: [
-    "アルファベット入力の際は大文字で入力してください。",
-    "学籍番号がアルファベットから始まることはありません。",
-  ],
-  alt: "学籍番号の入力",
-  placeholder: "",
-  length: 10,
-  isUpper: true,
-  trailText: "",
-  validator: (stNumber: string) => {
-    const letterRegex = new RegExp("^[a-zA-Z]+$");
-    const fullSpaceRegex = new RegExp("^[^ -~｡-ﾟ]+$");
 
-    const errors: string[] = [];
-    if (stNumber) {
-      const stringArray = stNumber.split("");
-      let hasFull = false;
+// export const 氏名Data = {
+//   size: "long",
+//   isNecessary: true,
+//   label: "氏名",
+//   desc: [],
+//   alt: "氏名の入力",
+//   placeholder: "山田　太郎",
+//   length: 100,
+//   isUpper: false,
+//   trailText: "",
+// };
 
-      stringArray.forEach((letter) => {
-        if (letter.match(fullSpaceRegex)) {
-          hasFull = true;
-        }
-      });
+// export const フリガナData = {
+//   size: "long",
+//   isNecessary: true,
+//   label: "フリガナ",
+//   desc: [],
+//   alt: "フリガナの入力",
+//   placeholder: "ヤマダ　タロウ",
+//   length: 30,
+//   isUpper: false,
+//   trailText: "",
+// };
 
-      if (hasFull) {
-        errors.push("半角文字で入力してください");
-      }
+// export const 英字名FirstData: TextInput = {
+//   size: "long",
+//   isNecessary: true,
+//   label: "英字名 First Name (名前)",
+//   desc: ["頭文字のみ大文字で入力してください。"],
+//   alt: "英字名で名前の入力",
+//   placeholder: "Taro",
+//   length: 30,
+//   isUpper: false,
+//   trailText: "",
+// }
 
-      if (stringArray[0].match(letterRegex)) {
-        errors.push("学籍番号はアルファベットから始まることはありません");
-      }
-
-      if (stringArray.length < 10 && stringArray.length > 0) {
-        errors.push("10文字以上にしてください");
-      }
-    } else if (!stNumber) {
-      errors.push("必要項目です");
-    }
-    return errors;
-  },
-};
-
-export const 氏名Data: TextInput = {
-  size: "long",
-  isNecessary: true,
-  label: "氏名",
-  desc: [],
-  alt: "氏名の入力",
-  placeholder: "山田　太郎",
-  length: 100,
-  isUpper: false,
-  trailText: "",
-  validator: (name: string) => {
-    const errors: string[] = [];
-    if (!name) {
-      errors.push("必要項目です");
-    }
-
-    return errors;
-  },
-};
-
-export const フリガナData: TextInput = {
-  size: "long",
-  isNecessary: true,
-  label: "フリガナ",
-  desc: [],
-  alt: "フリガナの入力",
-  placeholder: "ヤマダ　タロウ",
-  length: 30,
-  isUpper: false,
-  trailText: "",
-  validator: (name: string) => {
-    const errors: string[] = [];
-    const カタカナ = new RegExp("^[\u30A0-\u30FF]+$");
-    const space = new RegExp("　+");
-    let isKana = true;
-
-    if (name) {
-      const nameString = name.split("");
-
-      nameString.forEach((letter) => {
-        console.log(letter.match(カタカナ));
-        console.log(letter.match(space));
-        if (!letter.match(カタカナ) && !letter.match(space)) {
-          isKana = false;
-        }
-      });
-    }
-
-    if (!isKana) {
-      errors.push("全角カタカナで入力してください");
-    }
-
-    if (!name) {
-      errors.push("必要項目です");
-    }
-
-    return errors;
-  },
-};
-
-export const 英字名FirstData: TextInput = {
-  size: "long",
-  isNecessary: true,
-  label: "英字名 First Name (名前)",
-  desc: ["頭文字のみ大文字で入力してください。"],
-  alt: "英字名で名前の入力",
-  placeholder: "Taro",
-  length: 30,
-  isUpper: false,
-  trailText: "",
-  validator: (name: string) => {
-    const errors: string[] = [];
-    const letterRegex = new RegExp("^[a-zA-Z]+$");
-    let isLetters = true;
-
-    if (name) {
-      const nameArray = name.split("");
-      nameArray.forEach((letter) => {
-        if (!letter.match(letterRegex)) {
-          isLetters = false;
-        }
-      });
-    }
-
-    if (!isLetters) {
-      errors.push("半角ロマジで入力してください");
-    }
-
-    if (!name) {
-      errors.push("必要項目です");
-    }
-
-    return errors;
-  },
-};
-
-export const 英字名LastData: TextInput = {
-  size: "long",
-  isNecessary: true,
-  label: "英字名 Last Name (名字)",
-  desc: [],
-  alt: "英字名で名字の入力",
-  placeholder: "YAMADA",
-  length: 30,
-  isUpper: true,
-  trailText: "",
-  validator: (name: string) => {
-    const errors: string[] = [];
-    const letterRegex = new RegExp("^[a-zA-Z]+$");
-    let isLetters = true;
-
-    if (name) {
-      const nameArray = name.split("");
-      nameArray.forEach((letter) => {
-        if (!letter.match(letterRegex)) {
-          isLetters = false;
-        }
-      });
-    }
-
-    if (!isLetters) {
-      errors.push("半角ロマジで入力してください");
-    }
-
-    if (!name) {
-      errors.push("必要項目です");
-    }
-
-    return errors;
-  },
-};
+// export const 英字名LastData: TextInput = {
+//   size: "long",
+//   isNecessary: true,
+//   label: "英字名 Last Name (名字)",
+//   desc: [],
+//   alt: "英字名で名字の入力",
+//   placeholder: "YAMADA",
+//   length: 30,
+//   isUpper: true,
+//   trailText: "",
+// };
 
 export const 学年Data: TextInput = {
   size: "short",

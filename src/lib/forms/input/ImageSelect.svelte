@@ -1,46 +1,43 @@
 <script lang="ts">
-  import ChoiceScroller from "$lib/forms/ChoiceScroller.svelte";
-
-  import type { ImageSelectInput } from "$lib/forms/ApplicationData";
+  import { slide } from "svelte/transition";
+  import ChoiceScroller from "./ChoiceScroller.svelte";
+  import type { ImageSelectInput } from "$lib/forms/data/typeDefs";
   import { createEventDispatcher } from "svelte";
 
   let dispatch = createEventDispatcher();
 
-  export let value: string;
-  export let isValid: boolean;
   export let data: ImageSelectInput;
 
   function handleChange(payload: string) {
-    value = payload;
-    dispatch("updateSelect", value);
+    data.value = payload;
+    dispatch("updateSelect", data.value);
   }
 
-  $: if (!value) {
-    isValid = false;
-  } else {
-    isValid = true;
-  }
-
-  $: value;
-  $: console.log(value);
+  $: data = data;
+  $: data.validate();
 </script>
 
+<h1 class="text-2xl font-bold mb-2">{data.label}</h1>
 <div>
   <slot />
+  <ChoiceScroller choices={data.choices} selection={data.value} />
   <div
     class="flex mb-s2 justify-center items-center w-full place-content-between px-3"
   >
     <div class="mr-3" />
     <select
-      on:change={() => handleChange(value)}
-      bind:value
+      on:change={() => handleChange(data.value)}
+      bind:value={data.value}
       class="w-[250px] sm:w-[300px] text-xl my-4 mx-auto shadow-md bg-sky-50 p-1"
     >
-      <option value="">{data.placeholder}</option>
-      {#each data.options as option}
-        <option value={option}>{option}</option>
+      {#each data.choices as choice}
+        <option value={choice.value}>{choice.value}</option>
       {/each}
     </select>
+    {#if !data.isValid}
+      {#each data.errors as error}
+        <p transition:slide|local class="text-red-600 my-1">{error}</p>
+      {/each}
+    {/if}
   </div>
-  <ChoiceScroller selection={value} images={data.images} />
 </div>
