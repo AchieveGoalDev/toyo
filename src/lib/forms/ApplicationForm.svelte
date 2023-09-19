@@ -2,10 +2,11 @@
   import { slide } from "svelte/transition";
   import { dataCheck, basicData } from "$lib/store/basicPersonalSubform";
   import Subform from "./subforms/Subform.svelte";
+  import CheckIsStudent from "./subforms/CheckIsStudent.svelte";
   import ProgressBar from "./ProgressBar.svelte";
-  import YesNoRadioInput from "./input/YesNoRadioInput.svelte";
 
   let modes = ["campus", "basic", "schedule", "contact", "agree"];
+  let isStudent: null | boolean = null;
 
   let currentIndex = 0;
 
@@ -36,17 +37,22 @@
 </script>
 
 <div class="flex flex-col mx-auto grow-0 mt-[50px]">
-  {#if currentMode === "campus"}
-    <!-- <ProgressBar subformData={$dataCheck.campus} /> -->
-    <Subform bind:subformData={$dataCheck.campus} />
+  {#if isStudent === null}
+    <CheckIsStudent bind:isStudent />
   {/if}
 
-  {#if currentMode === "basic"}
-    <!-- <ProgressBar subformData={$basicData.personal} /> -->
-    <Subform bind:subformData={$basicData.personal} />
-  {/if}
+  {#if isStudent !== null}
+    {#if currentMode === "campus"}
+      <!-- <ProgressBar subformData={$dataCheck.campus} /> -->
+      <Subform bind:subformData={$dataCheck.campus} />
+    {/if}
 
-  {#if currentMode === "campus"}
+    {#if currentMode === "basic"}
+      <!-- <ProgressBar subformData={$basicData.personal} /> -->
+      <Subform bind:subformData={$basicData.personal} />
+    {/if}
+
+    <!-- {#if currentMode === "campus"}
     <div transition:slide class="flex flex-row place-content-center">
       <button
         on:click={handleSubmitCampus}
@@ -70,6 +76,6 @@
         次へ
       </button>
     </div>
+  {/if} -->
   {/if}
-  <YesNoRadioInput data={{ value1: false, value2: false }} />
 </div>

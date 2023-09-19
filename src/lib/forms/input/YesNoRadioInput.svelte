@@ -1,33 +1,28 @@
 <script lang="ts">
-  export let data: { value1: boolean; value2: boolean };
+  export let data: { yes: boolean; no: boolean };
 
   function handleToggleOne() {
-    data.value1 = true;
-    data.value2 = false;
+    data.yes = true;
+    data.no = false;
   }
 
   function handleToggleTwo() {
-    data.value1 = false;
-    data.value2 = true;
+    data.yes = false;
+    data.no = true;
   }
 
-  let selected = "bg-blue-700 text-white font-bold";
+  let selected =
+    "flex-shrink transition-all border-2 border-blue-700 text-white bg-blue-700 hover:text-white font-bold focus:bg-blue-600 focus:border-blue-600 focus:text-white rounded-md p-3 text-xl";
   let unselected =
-    "transition:all border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white font-bold";
+    "flex-shrink transition:all border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white font-bold rounded-md p-3 text-xl";
 </script>
 
-<div class="flex flex-col">
-  <button
-    on:click={handleToggleOne}
-    class={data.value1 ? selected : unselected}
-  >
+<div class="flex items-center h-[150px] place-content-around">
+  <button on:click={handleToggleOne} class={data.yes ? selected : unselected}>
     はい
   </button>
 
-  <button
-    on:click={handleToggleTwo}
-    class={data.value2 ? selected : unselected}
-  >
+  <button on:click={handleToggleTwo} class={data.no ? selected : unselected}>
     いいえ
   </button>
 </div>
