@@ -7,7 +7,6 @@
   import MediaWrapper from "$lib/wrappers/media-wrapper.svelte";
 
   import RedCtaButton from "$lib/buttons/redCtaButton.svelte";
-  import ApplciationForm from "$lib/forms/ApplciationForm.svelte";
 
   let width: number;
   let s3 = PUBLIC_IMAGE_BUCKET_URL;
