@@ -1,0 +1,15 @@
+<script lang="ts">
+  import ApplicationForm from "$lib/forms/ApplicationForm.svelte";
+  import HighlightTitle from "$lib/headers/HighlightTitle.svelte";
+</script>
+
+<div class="w-full sm:w-2/3 mx-auto pt-[100px] pb-[50px] h-full">
+  <HighlightTitle
+    pretext="Toyo Achieve Englishの"
+    highlight="申し込み"
+    posttext=""
+    themeColor="red"
+  />
+
+  <ApplicationForm />
+</div>
