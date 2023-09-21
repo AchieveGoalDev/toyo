@@ -32,7 +32,7 @@
   $: console.log(isValid);
 </script>
 
-<div transition:slide class="shadow-md w-1/3 mx-auto">
+<div transition:slide class="w-1/3 xl:w-1/2 mx-auto">
   <TextWrapper>
     <p class="font-bold">既にTAEで受講したことがありますか？</p>
   </TextWrapper>

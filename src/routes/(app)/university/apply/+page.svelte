@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { applicationData } from "$lib/store/apply";
   import ApplicationForm from "$lib/forms/ApplicationForm.svelte";
   import HighlightTitle from "$lib/headers/HighlightTitle.svelte";
 </script>

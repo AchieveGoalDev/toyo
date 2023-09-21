@@ -140,7 +140,6 @@ export function validateSchoolEmail(mailOne: string, mailTwo: string) {
 
     function checkToyo(input: string) {
         const regex = /^.*@toyo\.jp$/i;
-        console.log("regexTest", regex.test(input));
         return regex.test(input);
     }
 
@@ -190,3 +189,14 @@ export function validateSelect(input: string, defaultChoice: string) {
 
     return errors;
 }
+
+export function validateCheckbox(input: boolean) {
+    const errors = [];
+
+    if (input === false) {
+        errors.push("必要項目です");
+    }
+
+    return errors;
+}
+

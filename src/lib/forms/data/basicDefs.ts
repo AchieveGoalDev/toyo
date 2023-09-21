@@ -1,8 +1,10 @@
 import {
+  type FormFormatParams,
   type TextInputParams,
   type RadioInputParams,
   type ImageSelectChoiceParams,
   DoubleTextInput,
+  CheckboxInput,
 } from "$lib/forms/data/typeDefs";
 import {
   RadioInput,
@@ -199,13 +201,18 @@ export const campusImageSelectParams = {
 };
 //EndImageSelectParams
 
+//CheckboxParams
+//受講
+
+
 /***END PARAMS***/
 
-/***CONSTRUCTING DATA****/
+/***CONSTRUCTING INPUT DATA****/
 const campusData = {
   キャンパス: new ImageSelectInput(campusImageSelectParams),
   学籍番号: new SingleTextInput(validate学籍番号, 学籍番号Data),
   大学メール: new DoubleTextInput(validateSchoolEmail, 大学メールData),
+  すでに: new CheckboxInput("受講経験", ["Toyo Achieve Englishで受講したことあります。", "またはレベルチェックを完了しました。"], false)
 };
 
 const personalData = {
@@ -220,34 +227,38 @@ const contactData = {
   個人メール: new DoubleTextInput(validatePersonalEmail, 個人メールData),
 };
 
-const agreeData = {};
 
-/***END CONSTRUCTING DATA***/
+/***END CONSTRUCTING INPUT DATA***/
 
-export const campus = new SubformData(campusData);
-export const personal = new SubformData(personalData);
-export const contact = new SubformData(contactData);
-export const agree = new SubformData(agreeData);
+/*** FORMAT DATA***/
+const campusFormat: FormFormatParams = {
+  heading: "大学情報",
+  subheading: "",
+  description: ["通うキャンパスや学籍番号などの情報を入力してください"]
+}
 
-// 学籍番号 = writable("");
-// 氏名 = writable("");
-// フリガナ = writable("");
-// 英字名First = writable("");
-// 英字名Last = writable("");
-// 学年 = writable("");
-// 学部 = writable("");
-// 学科 = writable("");
-// 英検 = writable("");
-// TOEFL = writable("");
-// IELTS = writable("");
-// きっかけ = writable("");
-// 大学メール = writable("");
-// 個人メール = writable("");
-// 電話番号 = writable("");
-// その他 = writable("");
-// 備考 = writable("");
-// 住所 = writable("");
-// 性別 = writable("");
-// 種別 = writable("");
-// 試験 = writable(false);
-// TOEIC = writable("");
+const personalFormat: FormFormatParams = {
+  heading: "個人情報",
+  subheading: "",
+  description: ["下記の個人情報を入力してください。"]
+}
+
+const contactFormat: FormFormatParams = {
+  heading: "連絡情報",
+  subheading: "",
+  description: ["下記の連絡情報を入力してください。"]
+}
+
+// const agreeFormat: FormFormatParams = {
+//   heading: "連絡情報",
+//   subheading: "",
+//   description: ["下記の事項を承諾のうえ、全項目にチェックを入れてください。", "※必ず全てのボックスをチェックしてください。"]
+// }
+/*** FORMAT DATA ***/
+
+
+
+export const campus = new SubformData(campusData, campusFormat);
+export const personal = new SubformData(personalData, personalFormat);
+export const contact = new SubformData(contactData, contactFormat);
+// export const agree = new SubformData(agreeData, agreeFormat);

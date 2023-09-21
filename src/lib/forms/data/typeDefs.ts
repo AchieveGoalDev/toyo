@@ -1,5 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import { validateRadio, validateVoid, validateSelect } from "./validatorDefs";
+import { validateRadio, validateVoid, validateSelect, validateCheckbox } from "./validatorDefs";
 
 export type SelectValidator = (
   input: string,
@@ -10,13 +10,16 @@ export type DoubleInputValidator = (
   inputOne: string,
   inputTwo: string
 ) => string[];
+export type BooleanValidator = (input: boolean) => string[]
+
 
 export type InputSize = "short" | "medium" | "long";
 export type FormInput =
   | SingleTextInput
   | DoubleTextInput
   | RadioInput
-  | ImageSelectInput;
+  | ImageSelectInput
+  | CheckboxInput
 
 /*** PARAMETER DEFINITIONS ***/
 export type TextInputParams = {
@@ -147,8 +150,6 @@ export class DoubleTextInput {
   validate() {
     const validatorData = this.validator(this.valueOne, this.valueTwo);
 
-    console.log("validating");
-
     if (validatorData.length === 0) {
       this.clearErrors();
       this.isValid = true;
@@ -213,20 +214,44 @@ export class RadioInput {
   }
 }
 
-export class CheckboxInput {
+export class CheckboxInputGroup {
   [key: string]: any;
-  inputType: "image-select";
-  isRequired: boolean;
+  inputType: "checkbox-group";
   label: string;
   altText: string;
   description: string;
-  values: CheckboxChoice[];
+  values: CheckboxInput[];
 }
 
-export type CheckboxChoice = {
+export class CheckboxInput {
+  [key: string]: any;
+  inputType: "checkbox"
+  validator: BooleanValidator | SingleInputValidator;
   value: boolean;
+  label: string
   description: string[];
   isRequired: boolean;
+  isValid: boolean;
+  errors: string[]
+
+
+  constructor(label: string, description: string[], isRequired: boolean) {
+    this.inputType = "checkbox"
+    this.value = false;
+    this.label = label;
+    this.description = description;
+    this.isRequired = isRequired;
+    this.errors = [];
+
+    if (isRequired) {
+      this.isValid = false;
+      this.validator = validateCheckbox;
+    } else {
+      this.isValid = true;
+      this.validator = validateVoid;
+    }
+  }
+
 };
 
 export class ImageSelectInput {
@@ -297,39 +322,51 @@ export class ImageSelectChoice {
 //***END INPUT DEFINITIONS***/
 
 //***FORM DEFINITIONS***/
+
+export type FormFormatParams = {
+  heading: string;
+  subheading: string;
+  description: string[];
+}
+
 export class SubformData {
   meta: {
     percentComplete: number;
     allValid: boolean;
   };
-  data: {
+  inputs: {
     [key: string]: FormInput;
   };
+  format: FormFormatParams
 
-  constructor(data: { [key: string]: FormInput }) {
+  constructor(inputs: { [key: string]: FormInput }, format: FormFormatParams) {
     this.meta = {
       percentComplete: 0,
       allValid: false,
     };
-    this.data = data;
-  }
+    this.inputs = inputs;
+    this.format = format
+  };
 
   calculateValid() {
-    const dataKeys: string[] = Object.keys(this.data);
+    const dataKeys: string[] = Object.keys(this.inputs);
     let validCount = 0;
 
     dataKeys.forEach((key) => {
-      if (this.data[key].isValid === true) {
-        console.log(this.data[key].value, "is valid");
+      if (this.inputs[key].isValid === true) {
         validCount++;
       }
     });
 
     if (validCount / dataKeys.length === 1) {
       this.meta.allValid = true;
+    } else {
+      this.meta.allValid = false;
     }
 
     this.meta.percentComplete = validCount / dataKeys.length;
   }
 }
+
+
 //*** END FORM DEFINITIONS***/
