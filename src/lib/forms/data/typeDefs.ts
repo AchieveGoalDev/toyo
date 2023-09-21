@@ -1,5 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import { validateRadio, validateVoid, validateSelect, validateCheckbox } from "./validatorDefs";
+import { validateRadio, validateVoid, validateSelect, validateCheckbox, validatePhone } from "./validatorDefs";
 
 export type SelectValidator = (
   input: string,
@@ -11,6 +11,7 @@ export type DoubleInputValidator = (
   inputTwo: string
 ) => string[];
 export type BooleanValidator = (input: boolean) => string[]
+export type TripleInputValidator = (inputOne: string, inputTwo: string, inputThree: string) => string[]
 
 
 export type InputSize = "short" | "medium" | "long";
@@ -20,6 +21,7 @@ export type FormInput =
   | RadioInput
   | ImageSelectInput
   | CheckboxInput
+  | PhoneInput
 
 /*** PARAMETER DEFINITIONS ***/
 export type TextInputParams = {
@@ -319,11 +321,66 @@ export class ImageSelectChoice {
     this.isDefault = params.isDefault;
   }
 }
+
+export class PhoneInput {
+  [key: string]: any;
+  inputType: "phone";
+  size: InputSize;
+  label: string;
+  description: string[];
+  altText: string;
+  placeholder: string;
+  length: number;
+  trailText: string;
+  validator: TripleInputValidator;
+  isValid: boolean;
+  isRequired: boolean;
+  valueOne: string;
+  valueTwo: string;
+  valueThree: string;
+  value: string;
+  errors: string[];
+
+  constructor(params: TextInputParams) {
+    this.inputType = "phone";
+    this.label = params.label;
+    this.validator = validatePhone;
+    this.size = params.size;
+    this.altText = params.altText;
+    this.placeholder = params.placeholder;
+    this.length = params.length;
+    this.trailText = params.trailText;
+    this.description = params.description;
+    this.isRequired = params.isRequired;
+    this.isUpper = params.isUpper;
+    this.isValid = false;
+    this.value = "";
+    this.errors = [];
+  }
+
+  validate() {
+    const validatorData = this.validator(this.valueOne, this.valueTwo, this.valueThree);
+
+    if (validatorData.length === 0) {
+      this.clearErrors();
+      this.value = this.valueOne + this.valueTwo + this.valueThree
+      this.isValid = true;
+    } else {
+      this.errors = validatorData;
+      this.isValid = false;
+    }
+  }
+
+  clearErrors() {
+    this.errors = [];
+  }
+}
 //***END INPUT DEFINITIONS***/
 
 //***FORM DEFINITIONS***/
 
 export type FormFormatParams = {
+  id: string;
   heading: string;
   subheading: string;
   description: string[];
@@ -331,6 +388,7 @@ export type FormFormatParams = {
 
 export class SubformData {
   meta: {
+    id: string
     percentComplete: number;
     allValid: boolean;
   };
@@ -341,6 +399,7 @@ export class SubformData {
 
   constructor(inputs: { [key: string]: FormInput }, format: FormFormatParams) {
     this.meta = {
+      id: format.id,
       percentComplete: 0,
       allValid: false,
     };

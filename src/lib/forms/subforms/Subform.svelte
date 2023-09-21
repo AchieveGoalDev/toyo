@@ -8,9 +8,10 @@
   import RadioInput from "../input/RadioInput.svelte";
   import ImageSelect from "../input/ImageSelect.svelte";
   import CheckboxInput from "../input/CheckboxInput.svelte";
-  import { subformHeight } from "$lib/store/applicationForm";
   import { slide, fly } from "svelte/transition";
+  import PhoneInput from "../input/PhoneInput.svelte";
 
+  export let height = 0;
   export let subformData: SubformData;
 
   const subformKeys = Object.keys(subformData.inputs);
@@ -19,8 +20,9 @@
 </script>
 
 <form
-  in:slide
-  out:slide|local={{ x: -200, opacity: 0 }}
+  bind:clientHeight={height}
+  in:slide|local={{ delay: 400 }}
+  out:slide|local={{ duration: 300 }}
   class="bg-white col-span-full row-span-full top-0 inset-x-0"
 >
   <div
@@ -51,6 +53,9 @@
     {/if}
     {#if subformData.inputs[key].inputType === "checkbox"}
       <CheckboxInput bind:data={subformData.inputs[key]} />
+    {/if}
+    {#if subformData.inputs[key].inputType === "phone"}
+      <PhoneInput bind:data={subformData.inputs[key]} />
     {/if}
     <hr />
   {/each}

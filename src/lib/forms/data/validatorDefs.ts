@@ -200,3 +200,45 @@ export function validateCheckbox(input: boolean) {
     return errors;
 }
 
+export function validatePhone(inputOne: string, inputTwo: string, inputThree: string) {
+    const errors: string[] = []
+
+    const phoneOne = inputOne;
+    const phoneTwo = inputTwo;
+    const phoneThree = inputThree;
+
+    function checkDigits(input: string) {
+        if (!input) {
+            return true;
+        }
+        const regex = /^[0-9]*$/;
+        return regex.test(input);
+    }
+
+
+    if (phoneOne || phoneTwo || phoneThree) {
+        if (
+            !checkDigits(phoneOne) ||
+            !checkDigits(phoneTwo) ||
+            !checkDigits(phoneThree)
+        ) {
+            errors.push("半角数字で入力してください");
+        }
+    }
+
+    if (phoneOne) {
+        if (phoneOne.split("").length < 2) {
+            errors.push("有効な電話番号を入力してください");
+        } else if (!phoneTwo || phoneTwo.split("").length < 3) {
+            errors.push("有効な電話番号を入力してください");
+        } else if (!phoneThree || phoneThree.split("").length < 3) {
+            errors.push("有効な電話番号を入力してください");
+        }
+    }
+
+    if (!phoneOne && !phoneTwo && !phoneThree) {
+        errors.push("必要項目です");
+    }
+
+    return errors;
+}

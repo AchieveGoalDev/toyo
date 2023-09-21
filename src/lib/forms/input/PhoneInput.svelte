@@ -1,73 +1,12 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
 
-  import type { PhoneInput } from "$lib/forms/ApplicationData";
+  import type { PhoneInput } from "../data/typeDefs";
 
   export let data: PhoneInput;
 
-  let errorMessage: string[];
-
-  let phoneOne: string;
-  let phoneTwo: string;
-  let phoneThree: string;
-
-  export let isValid: boolean;
-  export let value: string;
-
-  function checkValidPhone(
-    phoneOne: string,
-    phoneTwo: string,
-    phoneThree: string
-  ) {
-    function checkDigits(input: string) {
-      if (!input) {
-        return true;
-      }
-      let regex = /^[0-9]*$/;
-      return regex.test(input);
-    }
-
-    let errorMessage: string[] = [];
-
-    if (phoneOne || phoneTwo || phoneThree) {
-      if (
-        !checkDigits(phoneOne) ||
-        !checkDigits(phoneTwo) ||
-        !checkDigits(phoneThree)
-      ) {
-        errorMessage.push("半角数字で入力してください");
-      }
-    }
-
-    if (phoneOne) {
-      if (phoneOne.split("").length < 2) {
-        errorMessage.push("有効な電話番号を入力してください");
-        console.log("one");
-      } else if (!phoneTwo || phoneTwo.split("").length < 3) {
-        console.log("two");
-        errorMessage.push("有効な電話番号を入力してください");
-      } else if (!phoneThree || phoneThree.split("").length < 3) {
-        console.log("three");
-        errorMessage.push("有効な電話番号を入力してください");
-      }
-    }
-
-    if (data.isNecessary && !value) {
-      errorMessage.push("必要項目です");
-    }
-
-    return errorMessage;
-  }
-
-  $: errorMessage = checkValidPhone(phoneOne, phoneTwo, phoneThree);
-
-  $: value = phoneOne + "-" + phoneTwo + "-" + phoneThree;
-
-  $: if (errorMessage.length > 0) {
-    isValid = false;
-  } else {
-    isValid = true;
-  }
+  $: data = data;
+  $: data.validate();
 </script>
 
 <div class="my-2 w-full grid grid-cols-12 gap-0">
@@ -75,7 +14,7 @@
     class="font-bold text-right col-span-3 border-r pr-4 w-full h-full"
     for={data.label}
   >
-    {#if data.isNecessary}
+    {#if data.isRequired}
       <span class="text-red-500">*</span>
     {/if}
     {data.label}
@@ -85,8 +24,8 @@
       <input
         name={data.label + "市外局番"}
         type="text"
-        style:background-color={isValid ? "white" : "#fef2f2"}
-        style:outline-color={isValid ? "" : "#b91c1c"}
+        style:background-color={data.isValid ? "white" : "#fef2f2"}
+        style:outline-color={data.isValid ? "" : "#b91c1c"}
         class={`shadow-md 
             rounded-sm 
             transitions-all 
@@ -102,15 +41,15 @@
             w-[75px]
           `}
         alt={"電話番号の市外局番"}
-        bind:value={phoneOne}
+        bind:value={data.valueOne}
         maxlength={4}
       />
       -
       <input
         name={data.label + "市内局番"}
         type="text"
-        style:background-color={isValid ? "white" : "#fef2f2"}
-        style:outline-color={isValid ? "" : "#b91c1c"}
+        style:background-color={data.isValid ? "white" : "#fef2f2"}
+        style:outline-color={data.isValid ? "" : "#b91c1c"}
         class={`shadow-md 
         rounded-sm 
         transitions-all 
@@ -126,15 +65,15 @@
         w-[75px]
       `}
         alt={"電話番号の市内局番"}
-        bind:value={phoneTwo}
+        bind:value={data.valueTwo}
         maxlength={4}
       />
       -
       <input
         name={data.label + "加入者番号"}
         type="text"
-        style:background-color={isValid ? "white" : "#fef2f2"}
-        style:outline-color={isValid ? "" : "#b91c1c"}
+        style:background-color={data.isValid ? "white" : "#fef2f2"}
+        style:outline-color={data.isValid ? "" : "#b91c1c"}
         class={`shadow-md 
       rounded-sm 
       transitions-all 
@@ -150,17 +89,17 @@
       w-[75px]
     `}
         alt={"電話番号の加入者番号"}
-        bind:value={phoneThree}
+        bind:value={data.valueThree}
         maxlength={4}
       />
     </span>
-    {#each data.desc as line}
+    {#each data.description as line}
       <p class="text-slate-600 text-sm my-1">
         {line}
       </p>
     {/each}
-    {#if !isValid}
-      {#each errorMessage as error}
+    {#if !data.isValid}
+      {#each data.errors as error}
         <p transition:slide|local class="text-red-600 my-2">{error}</p>
       {/each}
     {/if}

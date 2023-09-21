@@ -5,6 +5,7 @@ import {
   type ImageSelectChoiceParams,
   DoubleTextInput,
   CheckboxInput,
+  PhoneInput,
 } from "$lib/forms/data/typeDefs";
 import {
   RadioInput,
@@ -21,6 +22,7 @@ import {
   validateVoid,
   validateSchoolEmail,
   validatePersonalEmail,
+  validatePhone,
 } from "$lib/forms/data/validatorDefs";
 
 /***PARAMS***/
@@ -199,6 +201,19 @@ export const campusImageSelectParams = {
   description: [],
   isRequired: true,
 };
+
+export const 電話番号params: TextInputParams = {
+  size: "medium",
+  length: 4,
+  label: "電話番号",
+  description: ["携帯電話等、日中に連絡のとれる番号を入力ください"],
+  altText: "電話番号の入力",
+  placeholder: "",
+  trailText: "",
+  isUpper: false,
+  isRequired: true
+
+}
 //EndImageSelectParams
 
 //CheckboxParams
@@ -225,6 +240,7 @@ const personalData = {
 
 const contactData = {
   個人メール: new DoubleTextInput(validatePersonalEmail, 個人メールData),
+  電話番号: new PhoneInput(電話番号params)
 };
 
 
@@ -232,18 +248,21 @@ const contactData = {
 
 /*** FORMAT DATA***/
 const campusFormat: FormFormatParams = {
+  id: "campus",
   heading: "大学情報",
   subheading: "",
   description: ["通うキャンパスや学籍番号などの情報を入力してください"]
 }
 
 const personalFormat: FormFormatParams = {
+  id: "personal",
   heading: "個人情報",
   subheading: "",
   description: ["下記の個人情報を入力してください。"]
 }
 
 const contactFormat: FormFormatParams = {
+  id: "contact",
   heading: "連絡情報",
   subheading: "",
   description: ["下記の連絡情報を入力してください。"]

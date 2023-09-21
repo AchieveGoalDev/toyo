@@ -3,11 +3,14 @@
   import { onMount } from "svelte";
   import { applicationData } from "$lib/store/apply";
   import Subform from "./subforms/Subform.svelte";
+  import { buildTween } from "$lib/tweens/buildTween";
   import CheckIsStudent from "./subforms/CheckIsStudent.svelte";
   import ProgressBar from "./ProgressBar.svelte";
 
   import type { FormSetItem, FormSet } from "$lib/store/apply";
   import type { SubformData } from "./data/typeDefs";
+
+  let subformHeight: number;
 
   // function handleMode() {}
   // $: $dataCheck.campus = $dataCheck.campus;
@@ -23,15 +26,22 @@
   // }
 
   function handleNext() {
-    ++$applicationData.meta.currentIndex;
+    let currentIndex = $applicationData.meta.currentIndex;
+    console.log(currentIndex + 1);
+    $applicationData.meta.resetCurrentForm(currentIndex + 1);
+    $applicationData = $applicationData;
   }
 
   function handlePrevious() {
-    --$applicationData.meta.currentIndex;
+    let currentIndex = $applicationData.meta.currentIndex;
+    $applicationData.meta.resetCurrentForm(currentIndex - 1);
+    $applicationData = $applicationData;
   }
 
   $: $applicationData = $applicationData;
+  $: $applicationData.meta.currentIndex = $applicationData.meta.currentIndex;
   $: $applicationData.meta.checkIsAllValid();
+  $: console.log($applicationData.meta.currentIndex);
 
   // $: currentMode = modes[currentIndex];
   // $: console.log(currentMode);
@@ -39,7 +49,12 @@
 </script>
 
 <div class="flex flex-col mx-auto grow-0 mt-[50px] shadow-lg">
-  <Subform bind:subformData={$applicationData.meta.currentForm} />
+  {#key $applicationData.meta.currentForm.meta.id}
+    <Subform
+      bind:subformData={$applicationData.meta.currentForm}
+      bind:height={subformHeight}
+    />
+  {/key}
   <!--{#if isStudent === null}
     <CheckIsStudent bind:isStudent />
   {/if}
@@ -82,8 +97,12 @@
     >
       送信
     </button>
+    <!-- disabled={!$applicationData.meta.canProgress} -->
     <button
-      disabled={!$applicationData.meta.canProgress}
+      style:visibility={$applicationData.meta.currentIndex ===
+      $applicationData.meta.indexMax
+        ? "hidden"
+        : "visible"}
       on:click={handleNext}
       class="disabled:bg-gray-600 disabled:cursor-not-allowed flex-shrink p-4 font-bold bg-blue-700 text-white rounded-md transition-all hover:bg-blue-500"
     >

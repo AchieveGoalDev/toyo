@@ -94,8 +94,12 @@ export const meta = {
     },
 
     resetCurrentForm(index: number) {
+        console.log(index)
         this.currentForm = this.currentFormset[index].data
         this.canProgress = this.currentFormset[index].isAllValid
+        this.currentIndex = index
+        this.indexMax = this.currentFormset.length - 1
+        console.log(this)
     }
 
 }
