@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { handleAPIPost } from "$lib/api/RESTFunctions";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
   import { applicationData } from "$lib/store/apply";
@@ -27,7 +28,6 @@
 
   function handleNext() {
     let currentIndex = $applicationData.meta.currentIndex;
-    console.log(currentIndex + 1);
     $applicationData.meta.resetCurrentForm(currentIndex + 1);
     $applicationData = $applicationData;
   }
@@ -38,10 +38,18 @@
     $applicationData = $applicationData;
   }
 
+  function handleSubmit() {
+    handleAPIPost(
+      $applicationData.parsed,
+      "https://api.achieve-english.jp/apply"
+    );
+  }
+
   $: $applicationData = $applicationData;
   $: $applicationData.meta.currentIndex = $applicationData.meta.currentIndex;
   $: $applicationData.meta.checkIsAllValid();
-  $: console.log($applicationData.meta.currentIndex);
+  $: $applicationData.meta.checkCanSubmit();
+  $: $applicationData.parseFormData();
 
   // $: currentMode = modes[currentIndex];
   // $: console.log(currentMode);
@@ -92,6 +100,7 @@
       前へ
     </button>
     <button
+      on:click={handleSubmit}
       disabled={!$applicationData.meta.canSubmit}
       class="disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-200 w-1/3 p-4 font-bold bg-blue-800 text-white rounded-md transition-all hover:bg-blue-500"
     >

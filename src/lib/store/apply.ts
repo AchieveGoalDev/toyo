@@ -1,6 +1,6 @@
 import { writable } from "svelte/store"
 import { personal, campus, contact } from "$lib/forms/data/basicDefs"
-import type { SubformData } from "$lib/forms/data/typeDefs"
+import type { SubformData, FormInput } from "$lib/forms/data/typeDefs"
 
 export type FormSet = FormSetItem[]
 
@@ -82,8 +82,6 @@ export const meta = {
     },
 
     checkIsAllValid() {
-        console.log(this.currentForm.meta.allValid)
-
         if (this.currentForm.meta.allValid) {
             this.currentFormset[this.currentIndex].isAllValid = true;
             this.resetCurrentForm(this.currentIndex)
@@ -94,23 +92,37 @@ export const meta = {
     },
 
     resetCurrentForm(index: number) {
-        console.log(index)
         this.currentForm = this.currentFormset[index].data
         this.canProgress = this.currentFormset[index].isAllValid
         this.currentIndex = index
         this.indexMax = this.currentFormset.length - 1
-        console.log(this)
-    }
+    },
 
+    checkCanSubmit() {
+        let validCount = 0;
+
+        this.currentFormset.forEach(form => {
+            if (form.data.meta.allValid) {
+                validCount++
+            }
+        })
+
+        if (validCount / this.currentFormset.length === 1) {
+            this.canSubmit = true
+        } else {
+            this.canSubmit = false
+        }
+    }
 }
 
-export const parsedApplicationData = {
+export const parsed = {
 
 }
 
 export const applicationData = writable({
     forms,
     meta,
+    parsed,
 
     setCurrentForm(formLabel: string) {
         this.meta.currentForm = this.getFormData(formLabel, this.meta.currentFormset)
@@ -123,5 +135,34 @@ export const applicationData = writable({
             }
         });
         return this.forms.campus;
-    }
+    },
+
+    parseInput(input: FormInput, keyString: string) {
+        const value = input.value
+        const parsedInput = { [keyString]: value }
+        return parsedInput
+    },
+
+    parseSubForm(subform: SubformData) {
+        let returnData = {}
+        const keys = Object.keys(subform.inputs)
+
+        keys.forEach(key => {
+            const inputData = subform.inputs[key]
+            const parsedInput = this.parseInput(inputData, key)
+            returnData = { ...returnData, ...parsedInput }
+        })
+
+        return returnData
+    },
+
+    parseFormData() {
+        let formData = {}
+
+        this.meta.currentFormset.forEach(subform => {
+            formData = { ...formData, ...this.parseSubForm(subform.data) }
+        })
+
+        this.parsed = formData
+    },
 })

@@ -365,6 +365,7 @@ export class PhoneInput {
       this.clearErrors();
       this.value = this.valueOne + this.valueTwo + this.valueThree
       this.isValid = true;
+
     } else {
       this.errors = validatorData;
       this.isValid = false;
@@ -375,11 +376,26 @@ export class PhoneInput {
     this.errors = [];
   }
 }
+
+export class AddressInput {
+  inputType: "address";
+  label: string;
+  validator: TripleInputValidator;
+  size: string;
+
+
+  constructor(params: TextInputParams) {
+    this.inputType = "address",
+      this.label = params.label,
+      this.validator
+  }
+}
 //***END INPUT DEFINITIONS***/
 
 //***FORM DEFINITIONS***/
 
 export type FormFormatParams = {
+
   id: string;
   heading: string;
   subheading: string;
