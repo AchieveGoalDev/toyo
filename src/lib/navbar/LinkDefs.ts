@@ -85,7 +85,7 @@ export const specialNav = {
   navText: "特別講座",
   links: [
     {
-      href: "/special",
+      href: "/special.html",
       jpText: "特別講座ホーム",
       enText: "Home",
       icon: s3 + "images/Icons/home.svg",

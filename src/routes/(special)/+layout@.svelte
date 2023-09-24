@@ -25,19 +25,36 @@
 
 <svelte:window bind:innerWidth={width} bind:scrollY={scroll} />
 
-{#if width > 900}
+<!-- {#if width > 900}
   <Navbar data={specialNav} />
 {:else if width <= 900}
   <Hamburger data={specialNav} />
-{/if}
+{/if} -->
 
 <PageTransition url={data.pathname}>
   <main
     id="special"
     class="flex flex-col justify-center pb-5 w-2xl bg-slate-50 mx-auto px-3 shadow-md"
   >
-    <slot />
-    <Social />
+    <div class="text-2xl mx-auto h-[95vh]">
+      <div class="flex flex-col h-full place-content-center justify-center">
+        申し訳ございません。現在、こちらのページが開発中です。
+        <span class="text-xl">
+          <a
+            class="underline text-blue-800 transition-all hover:text-blue-600"
+            href="http://old.achieve-english.jp/special"
+            target="_blank"
+          >
+            こちら
+          </a>でご覧ください、または<a
+            class="underline text-blue-800 transition-all hover:text-blue-600"
+            href="https://www.achieve-english.jp">ホームページに</a
+          >戻る。
+        </span>
+      </div>
+    </div>
+    <!-- <slot />
+    <Social /> -->
   </main>
 </PageTransition>
 <footer class="w-full flex flex-col justify-center content-center">
