@@ -6,6 +6,7 @@
   export let data: DoubleTextInput;
 
   $: data = data;
+  $: data.value = data.valueOne;
   $: data.validate();
 </script>
 

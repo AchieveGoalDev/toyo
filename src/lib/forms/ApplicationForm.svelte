@@ -50,6 +50,7 @@
   $: $applicationData.meta.checkIsAllValid();
   $: $applicationData.meta.checkCanSubmit();
   $: $applicationData.parseFormData();
+  $: console.log($applicationData.parsed);
 
   // $: currentMode = modes[currentIndex];
   // $: console.log(currentMode);
