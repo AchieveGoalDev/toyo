@@ -62,13 +62,13 @@
         <h3 class="font-bold text-md">サイトのナビゲーション</h3>
         <div class="ml-3 underline">
           <a href="/" class="block">トップページ</a>
-          <a href="#" class="block">新着情報</a>
-          <a href="#" class="block">キャンパス内留学とは?</a>
-          <a href="#" class="block">講座情報</a>
-          <a href="#" class="block">オンライン申込み</a>
+          <!-- <a href="#" class="block">新着情報</a> -->
+          <a href="/university/about" class="block">キャンパス内留学とは?</a>
+          <a href="/university/details" class="block">講座情報</a>
+          <a href="/university/apply" class="block">オンライン申込み</a>
         </div>
       </div>
-      <div>
+      <!-- <div>
         <h3 class="font-bold text-md">各キャンパスの申込みに</h3>
         <div class="ml-3 underline">
           <a href="#" class="block">白山キャンパス</a>
@@ -77,7 +77,7 @@
           <a href="#" class="block">INIADキャンパス</a>
           <a href="#" class="block">WELLBキャンパス</a>
         </div>
-      </div>
+      </div> -->
     </div>
     <hr class="md:hidden my-5" />
     <div class="flex flex-row place-content-around mb-5">
@@ -128,4 +128,3 @@
     </div>
   </div>
 </div>
-

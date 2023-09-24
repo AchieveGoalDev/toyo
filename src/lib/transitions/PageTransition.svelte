@@ -10,8 +10,8 @@
 {#if url}
   {#key url}
     <div
-      in:fly={{ x: -10, duration: 250, delay: 300, easing: cubicInOut }}
-      out:fade={{ duration: 250, easing: cubicInOut }}
+      in:fly|local={{ x: -10, duration: 250, delay: 300, easing: cubicInOut }}
+      out:fade|local={{ duration: 250, easing: cubicInOut }}
       class="w-full"
     >
       <slot />

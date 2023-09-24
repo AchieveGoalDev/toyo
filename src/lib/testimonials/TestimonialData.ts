@@ -2,8 +2,6 @@ import { PUBLIC_IMAGE_BUCKET_URL } from "$env/static/public";
 
 const s3 = PUBLIC_IMAGE_BUCKET_URL;
 
-console.log(s3 + "images/images/UCHIJIMAT.webp");
-
 export type TestimonialProfile = {
   img: string;
   imgAlt: string;

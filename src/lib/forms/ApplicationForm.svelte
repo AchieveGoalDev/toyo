@@ -43,6 +43,7 @@
       $applicationData.parsed,
       "https://api.achieve-english.jp/apply"
     );
+    $applicationData.meta.isSubmitted = true;
   }
 
   $: $applicationData = $applicationData;
@@ -50,73 +51,61 @@
   $: $applicationData.meta.checkIsAllValid();
   $: $applicationData.meta.checkCanSubmit();
   $: $applicationData.parseFormData();
-  $: console.log($applicationData.parsed);
-
-  // $: currentMode = modes[currentIndex];
-  // $: console.log(currentMode);
-  // $: console.log(currentIndex);
 </script>
 
 <div class="flex flex-col mx-auto grow-0 mt-[50px] shadow-lg">
-  {#key $applicationData.meta.currentForm.meta.id}
-    <Subform
-      bind:subformData={$applicationData.meta.currentForm}
-      bind:height={subformHeight}
-    />
-  {/key}
-  <!--{#if isStudent === null}
-    <CheckIsStudent bind:isStudent />
-  {/if}
-
-  {#if isStudent !== null}
-  {#if currentMode === "campus"}
-
-    {/if}
-
-    {#if currentMode === "basic"}
-      <ProgressBar subformData={$basicData.personal} />
-      <Subform bind:subformData={$basicData.personal} />
-    {/if}
-
-    {#if currentMode === "campus"}
-    <div transition:slide class="flex flex-row place-content-center">
+  {#if !$applicationData.meta.isSubmitted}
+    {#key $applicationData.meta.currentForm.meta.id}
+      <Subform
+        bind:subformData={$applicationData.meta.currentForm}
+        bind:height={subformHeight}
+      />
+    {/key}
+    <div class="flex flex-row place-content-between px-4 py-5 bg-rose-500">
       <button
-        on:click={handleSubmitCampus}
-        class="place-content-center p-5 font-bold bg-blue-700 text-white rounded-md transition-all hover:bg-blue-500"
+        style:visibility={$applicationData.meta.currentIndex === 0
+          ? "hidden"
+          : "visible"}
+        on:click={handlePrevious}
+        class="flex-shrink p-5 font-bold bg-blue-700 text-white rounded-md transition-all hover:bg-blue-500"
       >
-        情報を確認
+        前へ
+      </button>
+      <button
+        on:click={handleSubmit}
+        disabled={!$applicationData.meta.canSubmit}
+        class="disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-200 w-1/3 p-4 font-bold bg-blue-800 text-white rounded-md transition-all hover:bg-blue-500"
+      >
+        送信
+      </button>
+      <!-- disabled={!$applicationData.meta.canProgress} -->
+      <button
+        style:visibility={$applicationData.meta.currentIndex ===
+        $applicationData.meta.indexMax
+          ? "hidden"
+          : "visible"}
+        on:click={handleNext}
+        class="disabled:bg-gray-600 disabled:cursor-not-allowed flex-shrink p-4 font-bold bg-blue-700 text-white rounded-md transition-all hover:bg-blue-500"
+      >
+        次へ
       </button>
     </div>
-  {:else}
   {/if}
-  {/if} -->
-  <div class="flex flex-row place-content-between px-4 py-5 bg-rose-500">
-    <button
-      style:visibility={$applicationData.meta.currentIndex === 0
-        ? "hidden"
-        : "visible"}
-      on:click={handlePrevious}
-      class="flex-shrink p-5 font-bold bg-blue-700 text-white rounded-md transition-all hover:bg-blue-500"
+
+  {#if $applicationData.meta.isSubmitted}
+    <div
+      class="text-2xl p-10 flex-col border-blue-800 border-4 place-content-between"
     >
-      前へ
-    </button>
-    <button
-      on:click={handleSubmit}
-      disabled={!$applicationData.meta.canSubmit}
-      class="disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-200 w-1/3 p-4 font-bold bg-blue-800 text-white rounded-md transition-all hover:bg-blue-500"
-    >
-      送信
-    </button>
-    <!-- disabled={!$applicationData.meta.canProgress} -->
-    <button
-      style:visibility={$applicationData.meta.currentIndex ===
-      $applicationData.meta.indexMax
-        ? "hidden"
-        : "visible"}
-      on:click={handleNext}
-      class="disabled:bg-gray-600 disabled:cursor-not-allowed flex-shrink p-4 font-bold bg-blue-700 text-white rounded-md transition-all hover:bg-blue-500"
-    >
-      次へ
-    </button>
-  </div>
+      <p class="mb-5">
+        お申し込みありがとうございます。申込内容を確認した上、学校メールにメッセージを送ります。
+      </p>
+      <p>
+        メールが届かない場合、<a
+          href="mailto:info@achieve-english.jp"
+          class="underline transition-all text-blue-800 hover:text-blue-600"
+          >info@achieve-english.jp</a
+        >に問い合わせください。
+      </p>
+    </div>
+  {/if}
 </div>

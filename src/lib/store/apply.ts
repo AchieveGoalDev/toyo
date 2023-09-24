@@ -71,6 +71,7 @@ export const meta = {
     indexMax: 0,
     canSubmit: false,
     canProgress: false,
+    isSubmitted: false,
 
     setIndexData() {
         this.indexMax = this.currentFormset.length - 1;
