@@ -11,7 +11,24 @@
   let redirect = "http://old.achieve-english.jp/entry/cat/";
   let selected = "未選択";
 
-  $: selected = select.value.toLowerCase();
+  function parseSelection(selection: string) {
+    switch (selection) {
+      case "白山":
+        return "hakusan";
+      case "INIAD":
+        return "iniad";
+      case "WELLB":
+        return "wellb";
+      case "川越":
+        return "kawagoe";
+      case "板倉":
+        return "itakura";
+      default:
+        return "未選択";
+    }
+  }
+
+  $: selected = parseSelection(select.value);
 </script>
 
 <div>

@@ -190,7 +190,7 @@ export const campusImageSelectChoices = [
   new ImageSelectChoice(WELLB),
   new ImageSelectChoice(板倉),
   new ImageSelectChoice(川越),
-  new ImageSelectChoice(オンライン),
+  // new ImageSelectChoice(オンライン),
 ];
 
 export const campusImageSelectParams = {
@@ -211,14 +211,12 @@ export const 電話番号params: TextInputParams = {
   placeholder: "",
   trailText: "",
   isUpper: false,
-  isRequired: true
-
-}
+  isRequired: true,
+};
 //EndImageSelectParams
 
 //CheckboxParams
 //受講
-
 
 /***END PARAMS***/
 
@@ -227,7 +225,14 @@ const campusData = {
   キャンパス: new ImageSelectInput(campusImageSelectParams),
   学籍番号: new SingleTextInput(validate学籍番号, 学籍番号Data),
   大学メール: new DoubleTextInput(validateSchoolEmail, 大学メールData),
-  すでに: new CheckboxInput("受講経験", ["Toyo Achieve Englishで受講したことあります。", "またはレベルチェックを完了しました。"], false)
+  すでに: new CheckboxInput(
+    "受講経験",
+    [
+      "Toyo Achieve Englishで受講したことあります。",
+      "またはレベルチェックを完了しました。",
+    ],
+    false
+  ),
 };
 
 const personalData = {
@@ -240,9 +245,8 @@ const personalData = {
 
 const contactData = {
   個人メール: new DoubleTextInput(validatePersonalEmail, 個人メールData),
-  電話番号: new PhoneInput(電話番号params)
+  電話番号: new PhoneInput(電話番号params),
 };
-
 
 /***END CONSTRUCTING INPUT DATA***/
 
@@ -251,22 +255,22 @@ const campusFormat: FormFormatParams = {
   id: "campus",
   heading: "大学情報",
   subheading: "",
-  description: ["通うキャンパスや学籍番号などの情報を入力してください"]
-}
+  description: ["通うキャンパスや学籍番号などの情報を入力してください"],
+};
 
 const personalFormat: FormFormatParams = {
   id: "personal",
   heading: "個人情報",
   subheading: "",
-  description: ["下記の個人情報を入力してください。"]
-}
+  description: ["下記の個人情報を入力してください。"],
+};
 
 const contactFormat: FormFormatParams = {
   id: "contact",
   heading: "連絡情報",
   subheading: "",
-  description: ["下記の連絡情報を入力してください。"]
-}
+  description: ["下記の連絡情報を入力してください。"],
+};
 
 // const agreeFormat: FormFormatParams = {
 //   heading: "連絡情報",
@@ -274,8 +278,6 @@ const contactFormat: FormFormatParams = {
 //   description: ["下記の事項を承諾のうえ、全項目にチェックを入れてください。", "※必ず全てのボックスをチェックしてください。"]
 // }
 /*** FORMAT DATA ***/
-
-
 
 export const campus = new SubformData(campusData, campusFormat);
 export const personal = new SubformData(personalData, personalFormat);
